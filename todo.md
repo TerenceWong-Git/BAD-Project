@@ -34,11 +34,6 @@
     $$
     $$
 
-$$
-
-
-$$
-
 # Text RPG
 
 ## Monster Action
@@ -84,11 +79,6 @@ $$
   $$
   $$
 
-$$
-
-
-$$
-
 # 健身環 (認動作)
 
 ## 判斷玩家做既動作屬於邊一種: 用圖片
@@ -109,8 +99,3 @@ $$
 - https://blog.tensorflow.org/2018/05/real-time-human-pose-estimation-in.html
   $$
   $$
-
-$$
-
-
-$$
