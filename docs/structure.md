@@ -57,3 +57,6 @@
   - Generate 禁區
   - 點點需要離開禁區
   - Erase 禁區
+
+ERD link:
+https://drawsql.app/teams/jeffrey-pangs-team/diagrams/c23-bad-gp2-tw
