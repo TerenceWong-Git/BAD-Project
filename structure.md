@@ -38,7 +38,7 @@
 
   - 入 Game 前 / 完 Game 後打名
   - 有 Login function
-  - Login 完
+  - Extra: 成就系統 (如果整 login)
 
 - 整左 Express template 就整 Deployment
 
