@@ -1,10 +1,14 @@
 import type { Knex } from "knex";
+import dotenv from "dotenv";
+
+dotenv.config();
 
 // Update with your config settings.
 
 const config: { [key: string]: Knex.Config } = {
 	development: {
 		client: "postgresql",
+		debug: true,
 		connection: {
 			database: process.env.DB_NAME,
 			user: process.env.DB_USER,
