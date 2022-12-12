@@ -12,17 +12,27 @@ export class PlayersController {
 	};
 	register = async (req: Request, res: Response) => {
 		const { name, email, password } = req.body;
-		console.log("name = ", name);
-		console.log("email = ", email);
-		console.log("password = ", password);
+		logger.info("name = ", name);
+		logger.info("email = ", email);
+		logger.info("password = ", password);
 		if (!email || !password) {
 			throw new InvalidInfoError();
 		}
-		const id = await this.playersService.checkExistingAcc(email, password);
+		const id = await this.playersService.checkRegister(email, password);
 		logger.info("hello", { message: `This is player ${id}` });
 		req.session.playerId = id;
 		logger.info(req.session.playerId);
 		res.json({ message: "success" });
 	};
-	login = async (req: Request, res: Response) => {};
+	login = async (req: Request, res: Response) => {
+		const { email, password } = req.body;
+		if (!email || !password) {
+			throw new InvalidInfoError();
+		}
+		const player = await this.playersService.checkLogin(email, password);
+		// logger.info("welcome back", player);
+		req.session.playerId = player.id;
+		logger.info(req.session.playerId);
+		res.json({ message: "success" });
+	};
 }

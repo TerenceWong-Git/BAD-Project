@@ -1,6 +1,7 @@
 import { Knex } from "knex";
+import { InvalidInfoError } from "../utils/error";
 // import { AccountExistError } from "../utils/error";
-import { hashPassword } from "../utils/hash";
+import { checkPassword, hashPassword } from "../utils/hash";
 import { logger } from "../utils/logger";
 import { table } from "../utils/table";
 import { Player } from "./model";
@@ -13,7 +14,7 @@ export class PlayersService {
 		return result;
 	}
 
-	async checkExistingAcc(email: string, password: string) {
+	async checkRegister(email: string, password: string) {
 		logger.info(`This is email from service ${email}`);
 		logger.info(`This is password from service ${password}`);
 		logger.info(`This is table ${table.PLAYERS}`);
@@ -37,5 +38,17 @@ export class PlayersService {
 			return result[0].id;
 		}
 		// throw new AccountExistError();
+	}
+
+	async checkLogin(email: string, password: string) {
+		const player = await this.knex<Player>(table.PLAYERS)
+			.where("email", "=", email)
+			.select(["id", "email", "password"])
+			.first();
+
+		if (player && (await checkPassword(password, player.password))) {
+			return player;
+		}
+		throw new InvalidInfoError();
 	}
 }

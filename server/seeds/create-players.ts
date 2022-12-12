@@ -7,7 +7,7 @@ export async function seed(knex: Knex): Promise<void> {
 	// Inserts seed entries
 	await knex("players").insert([
 		{
-			email: " alex@tecky.io",
+			email: "alex@tecky.io",
 			password: "$2a$10$pn4/K78nHhJ38yWjog.JzuYD7QnH24/fFEEGhucG0g1.2QnfKXWTO"
 		},
 		// alex plain pass: alex
