@@ -37,4 +37,9 @@ export class PlayersController {
 		logger.info(req.session.playerId);
 		res.json({ message: "success" });
 	};
+	getProfile = async (req: Request, res: Response) => {
+		const data = await this.playersService.showProfile(req.session.playerId);
+		return data;
+	};
+	updateProfile = async (req: Request, res: Response) => {};
 }
