@@ -1,0 +1,12 @@
+body {
+    background-color: black;
+}
+
+#logo-name {
+    color: lightgreen;
+    font-size: 10vw;
+    font-family: 'Orbitron', serif;
+    margin: 20vh 0 0 0;
+    text-align: center;
+
+}
