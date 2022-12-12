@@ -12,7 +12,7 @@ export class InternalServerError extends ApplicationError {
 	}
 }
 
-export class InvalidLoginError extends ApplicationError {
+export class InvalidInfoError extends ApplicationError {
 	constructor() {
 		super("invalid username or password", 400);
 		Object.setPrototypeOf(this, ApplicationError.prototype);
@@ -22,6 +22,13 @@ export class InvalidLoginError extends ApplicationError {
 export class UnauthorizedError extends ApplicationError {
 	constructor() {
 		super("Unauthorized", 401);
+		Object.setPrototypeOf(this, ApplicationError.prototype);
+	}
+}
+
+export class AccountExistError extends ApplicationError {
+	constructor() {
+		super("This account already exist", 400);
 		Object.setPrototypeOf(this, ApplicationError.prototype);
 	}
 }

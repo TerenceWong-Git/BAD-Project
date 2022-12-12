@@ -34,6 +34,12 @@ const sessionMiddleware = expressSession({
 	saveUninitialized: true,
 	cookie: { secure: false }
 });
+declare module "express-session" {
+	interface SessionData {
+		// To save more items along with cookie
+		playerId?: number;
+	}
+}
 
 app.use(sessionMiddleware);
 
