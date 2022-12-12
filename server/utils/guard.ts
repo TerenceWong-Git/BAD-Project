@@ -18,7 +18,7 @@ export const isLoggedInStatic = (
 	next: NextFunction
 ) => {
 	if (!req.session.playerId) {
-		res.redirect("/login.html");
+		res.redirect("/playerLogin.html");
 		return;
 	}
 	next();

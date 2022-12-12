@@ -25,13 +25,12 @@ function playerLogin() {
 			});
 
 			const data = await resp.json();
-
+			console.log(resp.status)
 			if (resp.status !== 201) {
 				document.querySelector(
 					"#login-error-msg"
 				).innerHTML = `${data.message}`;
-			} else {
-				window.location.href = "/userMainPage.html";
+				window.location.href = "/playerMainPage.html";
 			}
 		});
 }
@@ -77,8 +76,7 @@ function playerRegister() {
 					document.querySelector(
 						"#register-error-msg"
 					).innerHTML = `${data.message}`;
-				} else {
-					window.location.href = "/";
+					window.location.href = "/playerMainPage.html";
 				}
 			}
 		});
