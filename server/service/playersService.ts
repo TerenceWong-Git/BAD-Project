@@ -51,4 +51,11 @@ export class PlayersService {
 		}
 		throw new InvalidInfoError();
 	}
+	async showProfile(id: number | undefined) {
+		const player = await this.knex<Player>(table.PLAYERS)
+			.where(id)
+			.select(["name", "email", "image", "age", "gender"])
+			.first();
+		return player;
+	}
 }
