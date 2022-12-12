@@ -1,5 +1,5 @@
 import type { Request, Response } from "express";
-// import { Player } from "../service/model";
+import { Player } from "../service/model";
 import { PlayersService } from "../service/playersService";
 import { InvalidInfoError } from "../utils/error";
 import { logger } from "../utils/logger";
@@ -41,5 +41,9 @@ export class PlayersController {
 		const data = await this.playersService.showProfile(req.session.playerId);
 		return data;
 	};
-	updateProfile = async (req: Request, res: Response) => {};
+	updateProfile = async (req: Request, res: Response) => {
+		const data: Player = req.body;
+		await this.playersService.insertProfile(data);
+		res.json({ message: "success" });
+	};
 }
