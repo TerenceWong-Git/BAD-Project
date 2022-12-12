@@ -9,3 +9,11 @@ body {
 	margin: 20vh 0 0 0;
 	text-align: center;
 }
+
+#start {
+	color: aliceblue;
+	font-size: 5vw;
+	font-family: "Orbitron", serif;
+	margin: 20vh 0 0 0;
+	text-align: center;
+}

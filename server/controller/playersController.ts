@@ -26,6 +26,8 @@ export class PlayersController {
 	};
 	login = async (req: Request, res: Response) => {
 		const { email, password } = req.body;
+		logger.info("email = ", email);
+		logger.info("password = ", password);
 		if (!email || !password) {
 			throw new InvalidInfoError();
 		}
