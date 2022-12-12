@@ -57,10 +57,11 @@ app.use((req, res, next) => {
 
 import { routes } from "./routes";
 import { ApplicationError } from "./utils/error";
+import { isLoggedInStatic } from "./utils/guard";
 app.use(routes);
 
 app.use(express.static(path.join(__dirname, "public")));
-app.use(express.static(path.join(__dirname, "private")));
+app.use(isLoggedInStatic, express.static(path.join(__dirname, "private")));
 
 // 404 Not Found
 app.use((req, res) => {
