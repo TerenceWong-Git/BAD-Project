@@ -37,6 +37,12 @@ export class PlayersController {
 		logger.info(req.session.playerId);
 		res.json({ message: "success" });
 	};
+	logout = async (req: Request, res: Response) => {
+		delete req.session.playerId;
+    	res.status(200).json({ message: "logout success" });
+		console.log(res.status);
+	};
+
 	getProfile = async (req: Request, res: Response) => {
 		const data = await this.playersService.showProfile(req.session.playerId);
 		return data;

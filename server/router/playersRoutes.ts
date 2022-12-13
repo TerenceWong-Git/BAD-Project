@@ -6,6 +6,7 @@ import { asyncWrapper } from "../utils/wrapper";
 export const playersRoutes = express.Router();
 playersRoutes.post("/register", asyncWrapper(playersController.register));
 playersRoutes.post("/login", asyncWrapper(playersController.login));
+playersRoutes.put("/logout", asyncWrapper(playersController.logout));
 playersRoutes.get("/profile", isLoggedInAPI, playersController.getProfile);
 playersRoutes.post(
 	"/profile",

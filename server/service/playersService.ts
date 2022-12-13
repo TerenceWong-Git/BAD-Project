@@ -53,7 +53,7 @@ export class PlayersService {
 	}
 	async showProfile(id: number | undefined) {
 		const player = await this.knex<Player>(table.PLAYERS)
-			.where(id)
+			.where("id",id)
 			.select(["name", "email", "image", "age", "gender"])
 			.first();
 		return player;
