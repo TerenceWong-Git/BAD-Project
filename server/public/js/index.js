@@ -3,8 +3,10 @@
 // End
 
 
-const start = document.querySelector('section');
+const start = document.querySelector('body');
 
 start.addEventListener('keypress', (e) => {
-    window.location.href = "/"
+    e.preventDefault();
+    console.log("active")
+    window.location = "/playerLogin.html"
 })

@@ -39,8 +39,8 @@ export class PlayersController {
 	};
 	logout = async (req: Request, res: Response) => {
 		delete req.session.playerId;
-    	res.status(200).json({ message: "logout success" });
-		console.log(res.status);
+    	res.json({ message: "logout success" });
+		// console.log(res.status);
 	};
 
 	getProfile = async (req: Request, res: Response) => {

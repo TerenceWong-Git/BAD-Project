@@ -1,19 +1,57 @@
+@import url("https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css");
+
+
 body {
 	background-color: black;
+	
 }
 
 #logo-name {
 	color: lightgreen;
 	font-size: 10vw;
 	font-family: "Orbitron", serif;
-	margin: 20vh 0 0 0;
+	margin: 15vh 0 0 0;
 	text-align: center;
 }
 
 #start {
 	color: aliceblue;
-	font-size: 5vw;
+	font-size: 3vw;
 	font-family: "Orbitron", serif;
 	margin: 20vh 0 0 0;
 	text-align: center;
+}
+
+
+footer {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    background-color: darkslategrey;
+    margin: 0%;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+}
+
+.footer-container {
+    display: flex;
+    width: 95%;
+    justify-content: space-between;
+    align-items: center;
+}
+
+h4 {
+	color: white;
+	font-family: 'Orbitron', serif;
+}
+
+
+
+.bx-cog:before {
+    content: "\ea6e";
+    font-size: xxx-large;
+    color: white;
 }
