@@ -16,13 +16,14 @@ export class RoomsController {
 		const roomPass = Math.random().toString().slice(2, 10);
 		logger.info("Room Pass = ", roomPass);
 		logger.info("Length = ", roomPass.length);
-		await this.roomsService.createRoom(
+		const result = await this.roomsService.createRoom(
 			req.session.playerId,
 			roomName,
 			roomPass,
 			gameMode
 		);
-		res.status(200).json({ message: "create room success" });
+		logger.info("match id is ", result);
+		res.status(200).json(result);
 	};
 	updateRoom = async (req: Request, res: Response) => {};
 	checkPlayerNum = async (req: Request, res: Response) => {};

@@ -21,8 +21,7 @@ export class PlayersService {
 		// email = `'${email}'`;
 		const player = await this.knex<Player>(table.PLAYERS)
 			.where("email", "=", email)
-			.select(["id", "name", "email", "password"])
-			.first();
+			.first(["id", "name", "email", "password"]);
 		// logger.info(`This is player from service ${player}`);
 		if (!player) {
 			password = await hashPassword(password);
@@ -43,8 +42,7 @@ export class PlayersService {
 	async checkLogin(email: string, password: string) {
 		const player = await this.knex<Player>(table.PLAYERS)
 			.where("email", "=", email)
-			.select(["id", "email", "password"])
-			.first();
+			.first(["id", "email", "password"]);
 
 		if (player && (await checkPassword(password, player.password))) {
 			return player;
@@ -54,8 +52,7 @@ export class PlayersService {
 	async showProfile(id: number | undefined) {
 		const player = await this.knex<Player>(table.PLAYERS)
 			.where("id", id)
-			.select(["name", "email", "image", "age", "gender"])
-			.first();
+			.first(["name", "email", "image", "age", "gender"]);
 		return player;
 	}
 	async insertProfile(data: Player) {
@@ -67,8 +64,7 @@ export class PlayersService {
 				image: data.image,
 				age: data.age,
 				gender: data.gender
-			})
-			.first();
+			});
 		return player;
 	}
 }

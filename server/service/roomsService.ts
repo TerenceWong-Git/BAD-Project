@@ -1,4 +1,6 @@
 import { Knex } from "knex";
+import { logger } from "../utils/logger";
+import { table } from "../utils/table";
 
 export class RoomsService {
 	constructor(private knex: Knex) {}
@@ -16,19 +18,18 @@ export class RoomsService {
 	) {
 		const newRoom = await this.knex.transaction();
 		try {
-			const rooms = await newRoom
-				.insert([{ name: name, password: pass, game_mode_id: game_mode }])
-				.into("room")
-				.returning("id")
+			const rooms = await newRoom(table.ROOMS)
+				.insert([{ name: name, password: pass, game_mode_id: game_mode }], "id")
 				.transacting(newRoom);
+			logger.info(rooms[0].id);
 
-			const result = await newRoom
+			const result = await newRoom(table.MATCHES_LIVE)
+				.transacting(newRoom)
 				.insert({
 					rooms_id: rooms[0].id,
 					players_id: playerId,
 					is_spectator: false
 				})
-				.into("matches_live")
 				.returning("id");
 
 			await newRoom.commit();
