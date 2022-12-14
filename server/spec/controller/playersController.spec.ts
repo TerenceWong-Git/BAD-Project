@@ -60,7 +60,6 @@ describe("playersController Test Case", () => {
 		const inputPassword = "1234";
 		req.body = { email: inputEmail, password: inputPassword };
 		service.checkLogin = jest.fn(() => Promise.reject(new InvalidInfoError()));
-
 		try {
 			await controller.login(req, res);
 		} catch (err) {}
