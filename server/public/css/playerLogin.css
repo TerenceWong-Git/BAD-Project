@@ -2,37 +2,37 @@
 @import url("https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css");
 
 * {
-    font-family: 'Orbitron', serif;
+	font-family: "Orbitron", serif;
 }
 
 body {
-    background: #111;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    overflow: hidden;
+	background: #111;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	height: 100vh;
+	overflow: hidden;
 }
 
 .tabs {
-    display: flex;
-    flex-wrap: wrap;
+	display: flex;
+	flex-wrap: wrap;
 }
 
 .tabs-label {
-    padding: 0px 18px;
-    margin-bottom: 60px;
-    color: var(--gray-color);
-    cursor: pointer;
+	padding: 0px 18px;
+	margin-bottom: 60px;
+	color: var(--gray-color);
+	cursor: pointer;
 }
 
 .tabs-radio {
-    display: none;
+	display: none;
 }
 
 .tabs-radio:checked + .tabs-label {
-    color: var(--main-color);
+	color: var(--main-color);
 }
 
 /* .section-box {
@@ -41,70 +41,68 @@ body {
     order: 1;
 } */
 
-
 .bx-envelope:before {
-    content: "\eac1";
-    color: white;
+	content: "\eac1";
+	color: white;
 }
 
 .bxs-key:before {
-    content: "\edfa";
-    color: white;
+	content: "\edfa";
+	color: white;
 }
 
 .bxs-user:before {
-    content: "\eee1";
-    color: white;
+	content: "\eee1";
+	color: white;
 }
 
 h1 {
-    color: white;
-    font-family: "Orbitron", sans-serif;
-    font-size: var(--font-size-64);
-    font-weight: normal;
-    text-align: center;
+	color: white;
+	font-family: "Orbitron", sans-serif;
+	font-size: var(--font-size-64);
+	font-weight: normal;
+	text-align: center;
 }
 
 form {
-    width: 100%;
+	width: 100%;
 }
 
-
 .input-box {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    width: 100%;
-    padding: 16px 24px;
-    border: var(--border-style);
-    border-radius: 8px;
+	display: flex;
+	align-items: center;
+	gap: 12px;
+	width: 100%;
+	padding: 16px 24px;
+	border: var(--border-style);
+	border-radius: 8px;
 }
 
 .input-box:not(:last-child) {
-    margin-bottom: 24px;
+	margin-bottom: 24px;
 }
 
 .input-box i {
-    font-size: 24px;
+	font-size: 24px;
 }
 
 .input-box input {
-    width: 100%;
-    padding: 4px;
-    border: 0;
+	width: 100%;
+	padding: 4px;
+	border: 0;
 }
 
 .input-box input::placeholder {
-    color: var(--main-color);
+	color: var(--main-color);
 }
 
 .error-msg {
-    width: 100%;
-    margin: -12px 0 12px;
-    text-align: center;
-    color: #ef476f;
-    font-size: var(--font-size-18);
-    font-weight: bold;
-    text-transform: uppercase;
-    letter-spacing: 1px;
+	width: 100%;
+	margin: -12px 0 12px;
+	text-align: center;
+	color: #ef476f;
+	font-size: var(--font-size-18);
+	font-weight: bold;
+	text-transform: uppercase;
+	letter-spacing: 1px;
 }

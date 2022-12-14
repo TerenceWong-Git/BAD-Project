@@ -39,7 +39,7 @@ export class PlayersController {
 	};
 	logout = async (req: Request, res: Response) => {
 		delete req.session.playerId;
-    	res.json({ message: "logout success" });
+		res.json({ message: "logout success" });
 		// console.log(res.status);
 	};
 
@@ -51,5 +51,10 @@ export class PlayersController {
 		const data: Player = req.body;
 		await this.playersService.insertProfile(data);
 		res.json({ message: "success" });
+	};
+	checkLoggedInAPI = async (req: Request, res: Response) => {
+		if (req.session.playerId) {
+			res.json({ isLoggedIn: true });
+		}
 	};
 }

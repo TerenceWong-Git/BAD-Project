@@ -25,7 +25,7 @@ function playerLogin() {
 			});
 
 			const data = await resp.json();
-			console.log(resp.status)
+			console.log(resp.status);
 			if (resp.status !== 201) {
 				document.querySelector(
 					"#login-error-msg"
