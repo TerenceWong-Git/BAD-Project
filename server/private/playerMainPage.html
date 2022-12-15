@@ -9,23 +9,26 @@
 			rel="stylesheet"
 			href="https://fonts.googleapis.com/css2?family=Orbitron"
 		/>
-		<script src="../public/components/footer.js"></script>
-		<title>Document</title>
+		<script src="./components/header.js"></script>
+		<script src="./components/footer.js"></script>
+		<title>Main Page</title>
 	</head>
 	<body>
-		<header>
+		<!-- <header>
 			<span><ul><li><a href="" id="logout">LOGOUT</a></li></ul></span>
-		</header>
+		</header> -->
+		<header-component></header-component>
+
 		<div class="container">
 			<div class="carousel">
-				<div class="image"><span>Solo</span></div>
-				<div class="image"><span>Duo</span></div>
-				<div class="image"><span>Ranking</span></div>
-				<div class="image"><span>Profile</span></div>
-				<div class="image"><span>Achievements</span></div>
+				<div class="image" id="reaction"><span>GAME: Reaction</span></div>
+				<div class="image" id="laser"><span>GAME: Laser</span></div>
+				<div class="image" id="ranking"><span>Ranking</span></div>
+				<div class="image" id="profile"><span>Profile</span></div>
+				<div class="image" id="achi"><span>Achievements</span></div>
 			</div>
 		</div>
-
+		<footer-component></footer-component>
 		<script src="./js/playerMainPage.js"></script>
 	</body>
 </html>

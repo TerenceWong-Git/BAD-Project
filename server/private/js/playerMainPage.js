@@ -1,4 +1,5 @@
 onload();
+reaction();
 
 async function onload() {
     document
@@ -12,3 +13,12 @@ async function onload() {
     }
 })
 }
+
+reaction() {
+    document.querySelector("#reaction")
+    .addEventListener("click", async (e) => {
+        e.preventDefault();
+        const res = await fetch("/ballBall")
+    })
+}
+

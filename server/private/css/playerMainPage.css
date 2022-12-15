@@ -1,4 +1,4 @@
-@import url("../../public/components/footer.js");
+@import url("index.css");
 @import url("https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css");
 
 
@@ -10,10 +10,43 @@ body {
 	color: #fefefe;
 }
 
+header,
+header span,
+header span ul {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+header {
+    border-bottom: var(--border-style);
+    padding-bottom: 0;
+}
+
+header i {
+    margin-right: 16px;
+    font-size: 40px;
+}
+
+header h1 {
+    margin-right: 64px;
+}
+
+header h1 a {
+    text-decoration: none;
+	font-size: xxx-large;
+}
+
+header span ul {
+    list-style: none;
+    gap: 40px;
+}
+
+
 .container {
 	position: relative;
 	width: 320px;
-	margin: 30vh auto 0 auto;
+	margin: 5vh auto 0 auto;
 	perspective: 1000px;
 }
 
