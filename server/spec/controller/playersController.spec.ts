@@ -2,7 +2,7 @@ import { InvalidInfoError } from "../../utils/error";
 import type { Request, Response } from "express";
 import { PlayersController } from "../../controller/playersController";
 import { PlayersService } from "../../service/playersService";
-import { getMockRequest, getMockResponse } from "./utils";
+import { getMockRequest, getMockResponse } from "../utils";
 import { Player } from "../../service/model";
 
 jest.mock("../../service/playersService");
@@ -22,7 +22,16 @@ describe("playersController Test Case", () => {
 		service = new PlayersService({} as any);
 		service.checkRegister = jest.fn(() => Promise.resolve(accounts.length + 1));
 		service.checkLogin = jest.fn(() => Promise.resolve(accounts[i]));
-		service.showProfile = jest.fn(() => Promise.resolve(accounts[i]));
+		service.showProfile = jest.fn(() =>
+			Promise.resolve({
+				name: accounts[i].name,
+				email: accounts[i].email,
+				image: accounts[i].image,
+				age: accounts[i].age,
+				gender: accounts[i].gender
+			})
+		);
+		service.updateProfile = jest.fn(() => Promise.resolve(accounts[i].id));
 		req = getMockRequest();
 		res = getMockResponse();
 		controller = new PlayersController(service);
@@ -164,9 +173,9 @@ describe("playersController Test Case", () => {
 		);
 		expect(req.session.playerId).not.toEqual(accounts[i].id);
 		expect(res.status).toHaveBeenCalledWith(201);
-		expect(res.json).toHaveBeenCalledWith({ message: "success" });
-		expect(res.status).lastCalledWith(205);
-		expect(res.json).lastCalledWith({ message: "logout success" });
+		expect(res.json).toHaveBeenNthCalledWith(1, { message: "success" });
+		expect(res.status).toHaveBeenNthCalledWith(2, 205);
+		expect(res.json).toHaveBeenNthCalledWith(2, { message: "logout success" });
 		expect(res.json).toBeCalledTimes(2);
 	});
 
@@ -183,35 +192,78 @@ describe("playersController Test Case", () => {
 		expect(req.session.playerId).not.toEqual(accounts[i].id);
 		expect(res.status).toHaveBeenCalledWith(200);
 		expect(res.json).toHaveBeenCalledWith({ message: "success" });
-		expect(res.status).lastCalledWith(205);
-		expect(res.json).lastCalledWith({ message: "logout success" });
+		expect(res.status).toHaveBeenNthCalledWith(2, 205);
+		expect(res.json).toHaveBeenNthCalledWith(2, { message: "logout success" });
 		expect(res.json).toBeCalledTimes(2);
 	});
 
-	// it("getProfile should be success after login", async () => {
-	// 	const inputEmail = accounts[i].email;
-	// 	const inputPassword = accounts[i].password;
-	// 	req.body = { email: inputEmail, password: inputPassword };
-	// 	accounts[i]["image"] = "happyMeal.jpg";
-	// 	accounts[i]["age"] = parseInt((Math.random() * 100).toString());
-	// 	accounts[i]["gender"] = parseInt(Math.round(Math.random()).toString());
+	it("getProfile should be success after login", async () => {
+		const inputEmail = accounts[i].email;
+		const inputPassword = accounts[i].password;
+		req.body = { email: inputEmail, password: inputPassword };
 
-	// 	// Stage 2 - Execute Test Subject
-	// 	await controller.login(req, res);
-	// 	await controller.getProfile(req);
+		// Stage 2 - Execute Test Subject
+		await controller.login(req, res);
+		accounts[i]["image"] = "happyMeal.jpg";
+		accounts[i]["age"] = parseInt((Math.random() * 100).toString());
+		accounts[i]["gender"] = parseInt(Math.round(Math.random()).toString());
+		await controller.getProfile(req, res);
 
-	// 	expect(service.checkLogin).toBeCalledWith(inputEmail, inputPassword);
-	// 	expect(req.session.playerId).toEqual(accounts[i].id);
-	// 	expect(res.status).toHaveBeenCalledWith(200);
-	// 	expect(res.json).toHaveBeenCalledWith({ message: "success" });
-	// 	expect(res.json).toBeCalledWith({
-	// 		message: "success",
-	// 		name: accounts[i].name,
-	// 		email: accounts[i].email,
-	// 		image: accounts[i].image,
-	// 		age: accounts[i].age,
-	// 		gender: accounts[i].gender
-	// 	});
-	// 	expect(res.json).toBeCalledTimes(1);
-	// });
+		expect(service.checkLogin).toBeCalledWith(inputEmail, inputPassword);
+		expect(req.session.playerId).toEqual(accounts[i].id);
+		expect(res.status).toHaveBeenNthCalledWith(1, 200);
+		expect(res.json).toHaveBeenNthCalledWith(1, { message: "success" });
+		expect(res.status).lastCalledWith(200);
+		expect(res.json).lastCalledWith({
+			name: accounts[i].name,
+			email: accounts[i].email,
+			image: accounts[i].image,
+			age: accounts[i].age,
+			gender: accounts[i].gender
+		});
+		expect(res.json).toBeCalledTimes(2);
+	});
+
+	it("getProfile should be success after login and updateProfile", async () => {
+		const inputEmail = accounts[i].email;
+		const inputPassword = accounts[i].password;
+		req.body = { email: inputEmail, password: inputPassword };
+
+		// Stage 2 - Execute Test Subject
+		await controller.login(req, res);
+		accounts[i]["image"] = "happyMeal.jpg";
+		accounts[i]["age"] = parseInt((Math.random() * 100).toString());
+		accounts[i]["gender"] = parseInt(Math.round(Math.random()).toString());
+		await controller.getProfile(req, res);
+		let deepCopy = JSON.parse(JSON.stringify(accounts[i]));
+		deepCopy["image"] = "happyMeal2.jpg";
+		deepCopy["age"] = parseInt((Math.random() * 100).toString());
+		deepCopy["gender"] = parseInt(Math.round(Math.random()).toString());
+		await controller.updateProfile(req, res);
+		// await controller.getProfile(req, res);
+
+		expect(service.checkLogin).toBeCalledWith(inputEmail, inputPassword);
+		expect(req.session.playerId).toEqual(accounts[i].id);
+		expect(res.status).toHaveBeenNthCalledWith(1, 200);
+		expect(res.json).toHaveBeenNthCalledWith(1, { message: "success" });
+		expect(res.status).toHaveBeenNthCalledWith(2, 200);
+		expect(res.json).toHaveBeenNthCalledWith(2, {
+			name: accounts[i].name,
+			email: accounts[i].email,
+			image: accounts[i].image,
+			age: accounts[i].age,
+			gender: accounts[i].gender
+		});
+		expect(res.status).toHaveBeenNthCalledWith(3, 200);
+		expect(res.json).toHaveBeenNthCalledWith(3, { message: "success" });
+		// expect(res.status).toHaveBeenNthCalledWith(4, 200);
+		// expect(res.json).toHaveBeenNthCalledWith(4, {
+		// 	name: accounts[i].name,
+		// 	email: accounts[i].email,
+		// 	image: accounts[i].image,
+		// 	age: accounts[i].age,
+		// 	gender: accounts[i].gender
+		// });
+		// expect(res.json).toBeCalledTimes(4);
+	});
 });

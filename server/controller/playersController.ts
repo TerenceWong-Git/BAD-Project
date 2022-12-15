@@ -1,7 +1,7 @@
 import type { Request, Response } from "express";
 import { Player } from "../service/model";
 import { PlayersService } from "../service/playersService";
-import { InvalidInfoError } from "../utils/error";
+import { InternalServerError, InvalidInfoError } from "../utils/error";
 // import { logger } from "../utils/logger";
 
 export class PlayersController {
@@ -33,7 +33,7 @@ export class PlayersController {
 			throw new InvalidInfoError();
 		}
 		const player = await this.playersService.checkLogin(email, password);
-		// logger.info("welcome back", player);
+		// logger.info(player);
 		req.session.playerId = player.id;
 		// logger.info(req.session.playerId);
 		res.status(200).json({ message: "success" });
@@ -44,13 +44,16 @@ export class PlayersController {
 		// console.log(res.status);
 	};
 
-	getProfile = async (req: Request) => {
+	getProfile = async (req: Request, res: Response) => {
 		const data = await this.playersService.showProfile(req.session.playerId);
-		return data;
+		res.status(200).json(data);
 	};
 	updateProfile = async (req: Request, res: Response) => {
 		const data: Player = req.body;
-		await this.playersService.insertProfile(data);
+		const result = await this.playersService.updateProfile(data);
+		if (!result) {
+			throw new InternalServerError();
+		}
 		res.status(200).json({ message: "success" });
 	};
 	checkLoggedInAPI = async (req: Request, res: Response) => {
