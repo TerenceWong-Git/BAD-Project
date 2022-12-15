@@ -13,7 +13,7 @@ export class PlayersService {
 		return result;
 	}
 
-	async checkRegister(email: string, password: string) {
+	async checkRegister(name: string, email: string, password: string) {
 		logger.info(`This is email from service ${email}`);
 		logger.info(`This is password from service ${password}`);
 		logger.info(`This is table ${table.PLAYERS}`);
@@ -23,7 +23,7 @@ export class PlayersService {
 		if (!player) {
 			password = await hashPassword(password);
 			logger.info(`hashed = ${password}`);
-			const insertData = { email, password };
+			const insertData = { name, email, password };
 			const result = await this.knex(table.PLAYERS)
 				.insert(insertData)
 				// .onConflict("email")
