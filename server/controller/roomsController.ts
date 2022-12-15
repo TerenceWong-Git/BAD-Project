@@ -9,7 +9,7 @@ export class RoomsController {
 		res.json(data);
 	};
 	createRoom = async (req: Request, res: Response) => {
-		const gameMode = +req.params.game;
+		const gameMode = parseInt(req.params.game);
 		const roomName = Math.random().toString(32).slice(2, 12);
 		logger.info("Room Name = ", roomName);
 		logger.info("Length = ", roomName.length);
@@ -22,11 +22,21 @@ export class RoomsController {
 			roomPass,
 			gameMode
 		);
-		logger.info("match id is ", result);
+		logger.info("room id is ", result?.rooms_id);
+		logger.info("match id is ", result?.matches_live_id);
 		res.status(200).json(result);
 	};
-	updateRoom = async (req: Request, res: Response) => {};
-	checkPlayerNum = async (req: Request, res: Response) => {};
+	updateRoom = async (req: Request, res: Response) => {
+		const roomId = parseInt(req.params.room);
+		const gameMode = parseInt(req.params.game);
+		const { roomName, roomPass } = req.body;
+		await this.roomsService.updateRoom(roomId, roomName, roomPass, gameMode);
+		res.status(200).json({ message: "update success" });
+	};
+	checkPlayerNum = async (req: Request, res: Response) => {
+		// select * from matchlive where room id
+		// if row count >2 => is spectator = true
+	};
 	joinRoom = async (req: Request, res: Response) => {};
 	deleteRoom = async (req: Request, res: Response) => {};
 	roleChange = async (req: Request, res: Response) => {};

@@ -1,6 +1,7 @@
 import { Knex } from "knex";
 import { logger } from "../utils/logger";
 import { table } from "../utils/table";
+import { MatchesLive, Room, RoomMatch } from "./model";
 
 export class RoomsService {
 	constructor(private knex: Knex) {}
@@ -18,25 +19,31 @@ export class RoomsService {
 	) {
 		const newRoom = await this.knex.transaction();
 		try {
-			const rooms = await newRoom(table.ROOMS)
-				.insert([{ name: name, password: pass, game_mode_id: game_mode }], "id")
+			const rooms = await newRoom<Room>(table.ROOMS)
+				.insert({ name: name, password: pass, game_mode_id: game_mode }, "id")
 				.transacting(newRoom);
 			logger.info(rooms[0].id);
 
-			const result = await newRoom(table.MATCHES_LIVE)
-				.transacting(newRoom)
-				.insert({
-					rooms_id: rooms[0].id,
-					players_id: playerId,
-					is_spectator: false
-				})
-				.returning("id");
-
+			const match = await newRoom<MatchesLive>(table.MATCHES_LIVE)
+				.insert(
+					{ rooms_id: rooms[0].id, players_id: playerId, is_spectator: false },
+					"id"
+				)
+				.transacting(newRoom);
+			const result: RoomMatch = {
+				rooms_id: rooms[0].id,
+				matches_live_id: match[0].id
+			};
 			await newRoom.commit();
-			return result[0];
+			return result;
 		} catch (e) {
 			await newRoom.rollback();
 			return;
 		}
+	}
+	async updateRoom(id: number, name: string, pass: string, mode: number) {
+		await this.knex<Room>(table.ROOMS)
+			.update({ id: id, name: name, password: pass, game_mode_id: mode })
+			.where("id", id);
 	}
 }

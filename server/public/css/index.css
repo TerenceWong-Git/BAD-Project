@@ -1,9 +1,7 @@
 @import url("https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css");
 
-
 body {
 	background-color: black;
-	
 }
 
 #logo-name {
@@ -22,36 +20,33 @@ body {
 	text-align: center;
 }
 
-
 footer {
-    position: fixed;
-    left: 0;
-    bottom: 0;
-    width: 100%;
-    background-color: darkslategrey;
-    margin: 0%;
-    display: flex;
-    align-items: center;
-    text-align: center;
-    justify-content: center;
+	position: fixed;
+	left: 0;
+	bottom: 0;
+	width: 100%;
+	background-color: darkslategrey;
+	margin: 0%;
+	display: flex;
+	align-items: center;
+	text-align: center;
+	justify-content: center;
 }
 
 .footer-container {
-    display: flex;
-    width: 95%;
-    justify-content: space-between;
-    align-items: center;
+	display: flex;
+	width: 95%;
+	justify-content: space-between;
+	align-items: center;
 }
 
 h4 {
 	color: white;
-	font-family: 'Orbitron', serif;
+	font-family: "Orbitron", serif;
 }
 
-
-
 .bx-cog:before {
-    content: "\ea6e";
-    font-size: xxx-large;
-    color: white;
+	content: "\ea6e";
+	font-size: xxx-large;
+	color: white;
 }

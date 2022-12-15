@@ -1,12 +1,11 @@
 @import url("index.css");
 @import url("https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css");
 
-
 body {
 	margin: 0;
 	background: black;
 	text-align: center;
-	font-family: 'Orbitron', serif;
+	font-family: "Orbitron", serif;
 	color: #fefefe;
 }
 
