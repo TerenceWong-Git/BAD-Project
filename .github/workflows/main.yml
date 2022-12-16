@@ -17,6 +17,8 @@ jobs:
     runs-on: ubuntu-latest
     container: node:latest
     services:
+      playwright:
+        image: mcr.microsoft.com/playwright:focal
       postgres:
         image: postgres
         env:
@@ -25,7 +27,6 @@ jobs:
         ports:
           - 5432:5432
     steps:
-      # - uses: microsoft/playwright-github-action@v1
       - uses: actions/checkout@v3
       - name: testing
         run: |

@@ -33,16 +33,16 @@ describe("Testing for playersService", () => {
 	let i: number = parseInt((Math.random() * accounts.length).toString());
 
 	beforeAll(async () => {
-		await knex.schema.createTable(table.PLAYERS, (table) => {
-			table.increments();
-			table.string("name");
-			table.string("email").notNullable();
-			table.string("password").notNullable();
-			table.string("image");
-			table.integer("age");
-			table.integer("gender");
-			table.timestamps(true, true);
-		});
+		// await knex.schema.createTable(table.PLAYERS, (table) => {
+		// 	table.increments();
+		// 	table.string("name");
+		// 	table.string("email").notNullable();
+		// 	table.string("password").notNullable();
+		// 	table.string("image");
+		// 	table.integer("age");
+		// 	table.integer("gender");
+		// 	table.timestamps(true, true);
+		// });
 		for (let j = 0; j < accounts.length; j++) {
 			finalAccounts[j].password = newPassword[j];
 		}
