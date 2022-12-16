@@ -4,9 +4,26 @@
 		<meta charset="UTF-8" />
 		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<title>Document</title>
+		<link
+		rel="stylesheet"
+		href="https://fonts.googleapis.com/css2?family=Orbitron"
+		/>
+		<script src="./components/header.js"></script>
+		<script src="./components/footer.js"></script>
+		<title>Profile</title>
 	</head>
 	<body>
-		<h1>This is user Profile.</h1>
+		<div>
+			<label>
+			  Profile Picture:
+			  <input type="file" name="profile" />
+			</label>
+		</div>
+		<div>
+			<input type="submit" value="Submit" />
+			<input type="reset" value="Clear" />
+		</div>
+
+		<footer-component></footer-component>
 	</body>
 </html>

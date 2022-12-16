@@ -14,3 +14,6 @@ roomsRoutes.patch(
 	isLoggedInAPI,
 	asyncWrapper(roomsController.updateRoom)
 );
+// roomsRoutes.get(
+// 	"/game/:game/room"
+// )

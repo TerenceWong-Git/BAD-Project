@@ -38,7 +38,8 @@ export class RoomsService {
 			return result;
 		} catch (e) {
 			await newRoom.rollback();
-			return;
+			console.log(e);
+			throw e;
 		}
 	}
 	async updateRoom(id: number, name: string, pass: string, mode: number) {

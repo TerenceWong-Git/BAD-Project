@@ -9,17 +9,15 @@ body {
 	color: #fefefe;
 }
 
-header,
-header span,
-header span ul {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
+
 
 header {
     border-bottom: var(--border-style);
     padding-bottom: 0;
+	background-color: darkslategrey;
+	display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
 header i {
@@ -29,16 +27,28 @@ header i {
 
 header h1 {
     margin-right: 64px;
+	display: flex;
+    align-items: center;
+	height: 5vh;
 }
 
 header h1 a {
     text-decoration: none;
-	font-size: xxx-large;
+	font-size: 5vh;
 }
 
-header span ul {
+.header-container{
+	display: flex;
+}
+
+/* header span ul {
     list-style: none;
     gap: 40px;
+} */
+
+#left {
+	display: flex;
+	align-items: center;
 }
 
 
@@ -93,6 +103,8 @@ span {
 .image:nth-child(5) {
 	transform: rotateY(288deg) translateZ(430px);
 }
+
+
 
 @keyframes rotate360 {
 	from {

@@ -1,4 +1,5 @@
 import type { Request, Response } from "express";
+// import { Room } from "../service/model";
 import { RoomsService } from "../service/roomsService";
 import { logger } from "../utils/logger";
 
@@ -9,7 +10,8 @@ export class RoomsController {
 		res.json(data);
 	};
 	createRoom = async (req: Request, res: Response) => {
-		const gameMode = parseInt(req.params.game);
+		const gameMode = req.params.game;
+		console.log(gameMode)
 		const roomName = Math.random().toString(32).slice(2, 12);
 		logger.info("Room Name = ", roomName);
 		logger.info("Length = ", roomName.length);
@@ -20,10 +22,11 @@ export class RoomsController {
 			req.session.playerId,
 			roomName,
 			roomPass,
-			gameMode
+			Number(gameMode)
 		);
-		logger.info("room id is ", result?.rooms_id);
-		logger.info("match id is ", result?.matches_live_id);
+		console.log(result);
+		logger.info( result?.rooms_id);
+		logger.info( result?.matches_live_id);
 		res.status(200).json(result);
 	};
 	updateRoom = async (req: Request, res: Response) => {
@@ -37,7 +40,9 @@ export class RoomsController {
 		// select * from matchlive where room id
 		// if row count >2 => is spectator = true
 	};
-	joinRoom = async (req: Request, res: Response) => {};
+	joinRoom = async (req: Request, res: Response) => {
+		
+	};
 	deleteRoom = async (req: Request, res: Response) => {};
 	roleChange = async (req: Request, res: Response) => {};
 }
