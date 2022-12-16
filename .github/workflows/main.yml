@@ -36,7 +36,8 @@ jobs:
         run: |
           cd server
           yarn install 
-          yarn knex migrate:latest --env test
+          yarn test playersController.spec.ts
+          yarn test playersService.spec.ts
       - uses: actions/upload-artifact@v3
         if: always()
         with:
@@ -44,7 +45,7 @@ jobs:
           path: playwright-report/
           retention-days: 30
       - name: testing
-        run: yarn test
+        run: yarn test login.spec.ts
   deploy:
     if: github.ref_name == 'production'
     runs-on: ubuntu-latest
