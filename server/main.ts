@@ -80,5 +80,5 @@ app.use(
 	}
 );
 
-const PORT = process.env.PORT ?? 8080;
+export const PORT = process.env.PORT ?? 8080;
 server.listen(PORT, () => logger.info(`Listening to http://localhost:${PORT}`));

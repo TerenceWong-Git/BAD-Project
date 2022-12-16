@@ -17,7 +17,7 @@ describe("playersController Test Case", () => {
 		{ id: 2, email: "abc@tecky.io", password: "abcabc" },
 		{ id: 3, email: "david@abc.io", password: "david" }
 	];
-	let i: number = parseInt((Math.random() * 3).toString());
+	let i: number = parseInt((Math.random() * accounts.length).toString());
 	beforeEach(() => {
 		service = new PlayersService({} as any);
 		service.checkRegister = jest.fn(() => Promise.resolve(accounts.length + 1));

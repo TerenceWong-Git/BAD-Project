@@ -26,8 +26,6 @@ export class PlayersService {
 			const insertData = { name, email, password };
 			const result = await this.knex(table.PLAYERS)
 				.insert(insertData)
-				// .onConflict("email")
-				// .ignore()
 				.returning("id");
 			// logger.info(result instanceof Array);
 			// logger.info(Object.keys(result[0]));
@@ -41,7 +39,6 @@ export class PlayersService {
 			.first(["id", "email", "password"]);
 
 		if (player && (await checkPassword(password, player.password))) {
-			// console.log(Object.keys(player));
 			return player;
 		}
 		throw new InvalidInfoError();
