@@ -1,7 +1,7 @@
 import { Knex } from "knex";
 import { InvalidInfoError } from "../utils/error";
 import { checkPassword, hashPassword } from "../utils/hash";
-import { logger } from "../utils/logger";
+// import { logger } from "../utils/logger";
 import { table } from "../utils/table";
 import { Player } from "./model";
 
@@ -14,23 +14,23 @@ export class PlayersService {
 	}
 
 	async checkRegister(name: string, email: string, password: string) {
-		logger.info(`This is email from service ${email}`);
-		logger.info(`This is password from service ${password}`);
-		logger.info(`This is table ${table.PLAYERS}`);
+		// logger.info(`This is email from service ${email}`);
+		// logger.info(`This is password from service ${password}`);
+		// logger.info(`This is table ${table.PLAYERS}`);
 		const player = await this.knex<Player>(table.PLAYERS)
 			.where("email", "=", email)
 			.first(["id", "name", "email", "password"]);
 		if (!player) {
 			password = await hashPassword(password);
-			logger.info(`hashed = ${password}`);
+			// logger.info(`hashed = ${password}`);
 			const insertData = { name, email, password };
 			const result = await this.knex(table.PLAYERS)
 				.insert(insertData)
 				// .onConflict("email")
 				// .ignore()
 				.returning("id");
-			logger.info(result instanceof Array);
-			logger.info(Object.keys(result[0]));
+			// logger.info(result instanceof Array);
+			// logger.info(Object.keys(result[0]));
 			return result[0].id;
 		}
 	}
@@ -41,6 +41,7 @@ export class PlayersService {
 			.first(["id", "email", "password"]);
 
 		if (player && (await checkPassword(password, player.password))) {
+			// console.log(Object.keys(player));
 			return player;
 		}
 		throw new InvalidInfoError();
@@ -51,13 +52,21 @@ export class PlayersService {
 			.first(["name", "email", "image", "age", "gender"]);
 		return player;
 	}
-	async insertProfile(data: Player) {
-		await this.knex<Player>(table.PLAYERS).where("id", data.id).update({
-			name: data.name,
-			email: data.email,
-			image: data.image,
-			age: data.age,
-			gender: data.gender
-		});
+	async updateProfile(data: Player) {
+		const player = await this.knex<{ id: number }[] | { id: number } | Player>(
+			table.PLAYERS
+		)
+			.where("id", data.id)
+			.update(
+				{
+					name: data.name,
+					email: data.email,
+					image: data.image,
+					age: data.age,
+					gender: data.gender
+				},
+				"id"
+			);
+		return player[0];
 	}
 }
