@@ -25,10 +25,3 @@ export class UnauthorizedError extends ApplicationError {
 		Object.setPrototypeOf(this, ApplicationError.prototype);
 	}
 }
-
-export class AccountExistError extends ApplicationError {
-	constructor() {
-		super("This account already exist", 400);
-		Object.setPrototypeOf(this, ApplicationError.prototype);
-	}
-}
