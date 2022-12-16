@@ -5,6 +5,7 @@ import knexConfig from "../../knexfile";
 import { Player } from "../../service/model";
 import { table } from "../../utils/table";
 import { checkPassword, hashPassword } from "../../utils/hash";
+// import { InvalidInfoError } from "../../utils/error";
 
 jest.mock("../../utils/hash");
 
@@ -26,7 +27,7 @@ describe("Testing for playersService", () => {
 	for (let j = 0; j < accounts.length; j++) {
 		newPassword.push(Math.random().toString(32).slice(2, 32));
 	}
-	let i: number = parseInt((Math.random() * 3).toString());
+	let i: number = parseInt((Math.random() * accounts.length).toString());
 
 	beforeAll(async () => {
 		await knex.schema.createTable(table.PLAYERS, (table) => {
@@ -45,8 +46,6 @@ describe("Testing for playersService", () => {
 		playerIds = (
 			await knex<Player>(table.PLAYERS).insert(finalAccounts, "id")
 		).map((row) => row.id);
-
-		// console.log(playerIds);
 	});
 
 	beforeEach(async () => {
@@ -56,20 +55,8 @@ describe("Testing for playersService", () => {
 			Promise.resolve(true)
 		);
 		(hashPassword as jest.Mock).mockImplementation(() =>
-			Promise.resolve("IAmGod")
+			Promise.resolve(finalAccounts[i].password)
 		);
-	});
-
-	it("Login should be success", async () => {
-		const inputEmail = accounts[i].email;
-		const hash = newPassword[i];
-		const result = await service.checkLogin(inputEmail, hash);
-
-		expect(result).toEqual({
-			id: playerIds[i],
-			email: inputEmail,
-			password: newPassword[i]
-		});
 	});
 
 	it("Register should be success", async () => {
@@ -81,14 +68,54 @@ describe("Testing for playersService", () => {
 			inputEmail,
 			inputPassword
 		);
+		playerIds.push(playerIds.length + 1);
+		newPassword.push(Math.random().toString(32).slice(2, 32));
 
 		expect(result).toEqual(finalAccounts.length + 1);
 	});
 
-	afterEach(async () => {
-		// Removed inserted data to keep testing database clean
-		await knex(table.PLAYERS).whereIn("id", playerIds).del();
+	it("Register should be fail - player exist in DB", async () => {
+		const inputName = "happyGuy";
+		const inputEmail = "alex@tecky.io";
+		const inputPassword = "";
+		const result = await service.checkRegister(
+			inputName,
+			inputEmail,
+			inputPassword
+		);
+
+		expect(result).toBeUndefined();
 	});
+
+	it("Login should be success", async () => {
+		const inputEmail = accounts[i].email;
+		const hash = newPassword[i];
+		const result = await service.checkLogin(inputEmail, hash);
+
+		expect(result).toEqual({
+			id: playerIds[i],
+			email: inputEmail,
+			password: hash
+		});
+	});
+
+	// it("Login should be fail - invalid email", async () => {
+	// 	const inputEmail = "randomEmail";
+	// 	const hash = "";
+	// 	await service.checkLogin(inputEmail, hash);
+	// 	expect(service.checkLogin).toThrowError(InvalidInfoError);
+	// });
+
+	// it("Login should be fail - invalid password", async () => {
+	// 	const inputEmail = accounts[i].email;
+	// 	const inputPassword = "wrongPassword";
+	// 	(checkPassword as jest.Mock).mockImplementation(() =>
+	// 		Promise.resolve(false)
+	// 	);
+	// 	await service.checkLogin(inputEmail, inputPassword);
+
+	// 	expect(service.checkLogin).toThrowError(InvalidInfoError);
+	// });
 	afterAll(async () => {
 		await knex.schema.dropTable(table.PLAYERS);
 		await knex.destroy();
