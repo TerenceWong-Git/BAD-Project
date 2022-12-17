@@ -36,7 +36,7 @@ jobs:
         run: |
           cd server
           yarn install
-          yarn knex migrate:up 20221209162721_create-players.ts
+          yarn knex migrate:up 20221209162721_create-players.ts --env test
           yarn test playersController.spec.ts
           yarn test playersService.spec.ts
       - uses: actions/upload-artifact@v3
