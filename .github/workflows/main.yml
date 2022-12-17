@@ -46,7 +46,9 @@ jobs:
           path: playwright-report/
           retention-days: 30
       - name: testing
-        run: yarn test login.spec.ts --runInBand --forceExit
+        run: |
+          cd server
+          yarn test login.spec.ts --runInBand --forceExit
   deploy:
     if: github.ref_name == 'production'
     runs-on: ubuntu-latest
