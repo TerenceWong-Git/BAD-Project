@@ -35,7 +35,8 @@ jobs:
       - name: Install dependencies and knex migration
         run: |
           cd server
-          yarn install 
+          yarn install
+          yarn knex migrate:up 20221209162721_create-players.ts
           yarn test playersController.spec.ts
           yarn test playersService.spec.ts
       - uses: actions/upload-artifact@v3
