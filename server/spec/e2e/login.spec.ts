@@ -3,6 +3,8 @@ import Playwright from "playwright";
 import "../../main";
 import { PORT } from "../../main";
 
+jest.setTimeout(35 * 1000);
+
 describe("Login", () => {
 	let page: Playwright.Page;
 	let browser: Playwright.Browser;
