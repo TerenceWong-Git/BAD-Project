@@ -6,7 +6,7 @@ import { InternalServerError, InvalidInfoError } from "../utils/error";
 
 export class PlayersController {
 	constructor(private playersService: PlayersService) {}
-	dummy = async (req: Request, res: Response) => {
+	dummy = async (_req: Request, res: Response) => {
 		const data = await this.playersService.dummy();
 		res.json(data);
 	};
@@ -60,5 +60,14 @@ export class PlayersController {
 		if (req.session.playerId) {
 			res.status(200).json({ isLoggedIn: true });
 		}
+	};
+	individualRanking = async (req: Request, res: Response) => {
+		const player = req.session.playerId;
+		const data = await this.playersService.individualRanking(player);
+		res.status(200).json(data);
+	};
+	getRanking = async (_req: Request, res: Response) => {
+		const data = await this.playersService.getRanking();
+		res.status(200).json(data);
 	};
 }

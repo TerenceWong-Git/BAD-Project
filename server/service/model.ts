@@ -26,3 +26,13 @@ export interface RoomMatch {
 	rooms_id: number;
 	matches_live_id: number;
 }
+
+export interface MatchesRecord {
+	id: number;
+	player_id: number;
+	points: number;
+	game_mode_id: number;
+	matches_live_id: number;
+	played_at: string;
+	// Maybe Date
+}

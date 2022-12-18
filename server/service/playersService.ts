@@ -3,7 +3,7 @@ import { InvalidInfoError } from "../utils/error";
 import { checkPassword, hashPassword } from "../utils/hash";
 // import { logger } from "../utils/logger";
 import { table } from "../utils/table";
-import { Player } from "./model";
+import { MatchesRecord, Player } from "./model";
 
 export class PlayersService {
 	constructor(private knex: Knex) {}
@@ -65,5 +65,36 @@ export class PlayersService {
 				"id"
 			);
 		return player[0];
+	}
+	async individualRanking(id: number | undefined) {
+		const result = await this.knex<MatchesRecord>(table.MATCHES_RECORD)
+			.select([
+				"id",
+				"player_id",
+				"points",
+				"game_mode_id",
+				"matches_live_id",
+				"played_at"
+			])
+			.where("player_id", id)
+			.orderBy("points")
+			.limit(5);
+		return result;
+	}
+	async getRanking() {
+		const result = await this.knex<MatchesRecord>(table.MATCHES_RECORD)
+			.select([
+				"matches_record.id",
+				"matches_record.player_id",
+				"players.name",
+				"matches_record.points",
+				"matches_record.game_mode_id",
+				"matches_record.matches_live_id",
+				"matches_record.played_at"
+			])
+			.innerJoin(table.PLAYERS, "matches_record.player_id", "players.id")
+			.orderBy("points")
+			.limit(5);
+		return result;
 	}
 }

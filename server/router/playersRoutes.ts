@@ -22,3 +22,13 @@ playersRoutes.patch(
 	asyncWrapper(playersController.updateProfile)
 );
 playersRoutes.get("/check", asyncWrapper(playersController.checkLoggedInAPI));
+playersRoutes.get(
+	"/my_ranking",
+	isLoggedInAPI,
+	asyncWrapper(playersController.individualRanking)
+);
+playersRoutes.get(
+	"/ranking",
+	isLoggedInAPI,
+	asyncWrapper(playersController.getRanking)
+);
