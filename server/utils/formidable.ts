@@ -1,17 +1,16 @@
 import fs from "fs";
 import formidable from "formidable";
 
-
 declare global {
 	namespace Express {
-	  export interface Request {
-		form: {
-		  fields: formidable.Fields;
-		  files: formidable.Files;
-		};
-	  }
+		export interface Request {
+			form: {
+				fields: formidable.Fields;
+				files: formidable.Files;
+			};
+		}
 	}
-  }
+}
 
 const uploadDir = "uploads";
 fs.mkdirSync(uploadDir, { recursive: true });
@@ -21,7 +20,6 @@ export const form = formidable({
 	maxFiles: 1,
 	maxFileSize: 200 * 1024 ** 2, // the default limit is 200KB
 	filter: (part) => part.mimetype?.startsWith("image/") || false
-
 });
 
 // const app = express();
@@ -32,7 +30,6 @@ export const form = formidable({
 // 		res.redirect("/");
 // 	});
 // });
-
 
 // export const uploadMiddleware = (
 // 	req: Request,

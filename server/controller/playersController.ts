@@ -1,5 +1,5 @@
 import type { Request, Response } from "express";
-import { Player } from "../service/model";
+// import { Player } from "../service/model";
 import { PlayersService } from "../service/playersService";
 import { InternalServerError, InvalidInfoError } from "../utils/error";
 // import { logger } from "../utils/logger";
@@ -45,12 +45,20 @@ export class PlayersController {
 	};
 
 	getProfile = async (req: Request, res: Response) => {
+		console.log("hi");
 		const data = await this.playersService.showProfile(req.session.playerId);
 		res.status(200).json(data);
 	};
 	updateProfile = async (req: Request, res: Response) => {
-		const data: Player = req.body;
-		const result = await this.playersService.updateProfile(data);
+		const { name, email, image, age, gender } = req.body;
+		const result = await this.playersService.updateProfile(
+			req.session.playerId,
+			name,
+			email,
+			image,
+			age,
+			gender
+		);
 		if (!result) {
 			throw new InternalServerError();
 		}

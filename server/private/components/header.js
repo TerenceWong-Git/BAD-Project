@@ -1,14 +1,14 @@
-
-
+window.onload = async () => {
+	await loadInfo();
+};
 
 class Header extends HTMLElement {
-    constructor() {
-        super();
-    }
-    
+	constructor() {
+		super();
+	}
 
-    connectedCallback() {
-        this.innerHTML =  `
+	connectedCallback() {
+		this.innerHTML = `
             <header>
                 <nav >
                     <div class="header-container">
@@ -27,20 +27,29 @@ class Header extends HTMLElement {
                 </nav>
             </header>
         `;
-    }
+	}
 }
-            
-customElements.define("header-component", Header);
-            
-async function onload() {
-    document.querySelector("#logout").addEventListener("click", async () => {
-// e.preventDefault();
-        console.log("logout");
-        const res = await fetch("/players/logout", { method: "DELETE" });
-        if (res.status === 200) {
-            window.location.reload("/");
-        }
-    })
-};
-onload();
 
+customElements.define("header-component", Header);
+
+document.querySelector("#logout").addEventListener("click", async () => {
+	// e.preventDefault();
+	console.log("logout");
+	const res = await fetch("/players/logout", { method: "DELETE" });
+	if (res.status === 200) {
+		window.location.reload("/");
+	}
+});
+
+async function loadInfo() {
+	const resp = await fetch("/players/profile");
+	const infos = await resp.json();
+	console.log("hi");
+	console.log(infos.name);
+
+	// let htmlStr = ``;
+	// for (const info of infos){
+
+	//         htmlStr = `<div id="player-name">${info.name}</div>`;
+	//     }
+}

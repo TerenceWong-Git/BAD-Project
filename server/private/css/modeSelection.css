@@ -3,31 +3,30 @@
 
 @import url("https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css");
 
-
 button#DUO {
-    position: relative;
-    width: 20vw;
-    height: 40vh;
-    background-color: cadetblue;
-    border-radius: 10px;
-    font-family: 'Orbitron';
-    font-size: xx-large;
-    font-weight: bold;
+	position: relative;
+	width: 20vw;
+	height: 40vh;
+	background-color: cadetblue;
+	border-radius: 10px;
+	font-family: "Orbitron";
+	font-size: xx-large;
+	font-weight: bold;
 }
 
 button#SOLO {
-    position: relative;
-    width: 20vw;
-    height: 40vh;
-    background-color: cadetblue;
-    border-radius: 10px;
-    font-family: 'Orbitron';
-    font-size: xx-large;
-    font-weight: bold;
+	position: relative;
+	width: 20vw;
+	height: 40vh;
+	background-color: cadetblue;
+	border-radius: 10px;
+	font-family: "Orbitron";
+	font-size: xx-large;
+	font-weight: bold;
 }
 
-.container{
-    display: flex;
-    justify-content: space-around;
-    width: 80%;
+.container {
+	display: flex;
+	justify-content: space-around;
+	width: 80%;
 }
