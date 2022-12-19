@@ -43,9 +43,11 @@ jobs:
         if: always()
         with:
           name: playwright-report
+          path: playwright-report/
           run: |
             cd server
             yarn test login.spec.ts --runInBand --forceExit
+          retention-days: 30
   deploy:
     if: github.ref_name == 'production'
     runs-on: ubuntu-latest
