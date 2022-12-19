@@ -67,3 +67,4 @@ jobs:
           host: cam-sport.me
           user: ubuntu
           key: ${{secrets.SSH_PRIVATE_KEY}}
+          args: "-tt -vvv"
