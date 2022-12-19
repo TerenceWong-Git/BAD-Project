@@ -298,6 +298,7 @@ function onResults(results) {
 				}
 			}
 
+<<<<<<< HEAD
 			// 判斷body parts有冇掂到波波
 			// 整走Type A Ball Ball
 			for (let coord of arrayOfBallBallA) {
@@ -554,6 +555,146 @@ function onResults(results) {
 		p.stroke();
 	}
 	canvasCtx.restore();
+=======
+      // 判斷body parts有冇掂到波波
+      // 整走Type A Ball Ball
+      for (let coord of arrayOfBallBallA) {
+        if (arraySaveBodyCoordinate.length >= 2) {
+          let leftHand1 = arraySaveBodyCoordinate[0];
+          let leftHand2 = arraySaveBodyCoordinate[2];
+          let rightHand1 = arraySaveBodyCoordinate[1];
+          let rightHand2 = arraySaveBodyCoordinate[3];
+          let leftFoot = arraySaveBodyCoordinate[4];
+          let rightFoot = arraySaveBodyCoordinate[5];
+
+          if (
+            checkBodyCoordinate(coord[0], leftHand1[1], coord[1], leftHand1[2], 60) &&
+            checkBodyCoordinate(coord[0], leftHand2[1], coord[1], leftHand2[2], 60)
+          ) {
+            // console.log("leftHand");
+            for (let i = 0; i < ballArrayA.length; i++) {
+              ballArrayA[i].notYetKilled = false;
+            }
+          } else if (
+            checkBodyCoordinate(coord[0], rightHand1[1], coord[1], rightHand1[2], 60) &&
+            checkBodyCoordinate(coord[0], rightHand2[1], coord[1], rightHand2[2], 60)
+          ) {
+            // console.log("rightHand");
+            for (let i = 0; i < ballArrayA.length; i++) {
+              ballArrayA[i].notYetKilled = false;
+            }
+          } 
+          // else if (checkBodyCoordinate(coord[0], leftFoot[1], coord[1], leftFoot[2], 60)) {
+          //   // console.log("leftFoot");
+          //   for (let i = 0; i < ballArrayA.length; i++) {
+          //     ballArrayA[i].notYetKilled = false;
+          //   }
+          // } 
+          // else if (checkBodyCoordinate(coord[0], rightFoot[1], coord[1], rightFoot[2], 60)) {
+          //   // console.log("rightFoot");
+          //   for (let i = 0; i < ballArrayA.length; i++) {
+          //     ballArrayA[i].notYetKilled = false;
+          //   }
+          // }
+        }
+      }
+
+      for (let coord of arrayOfBallBallB) {
+        if (arraySaveBodyCoordinate.length >= 2) {
+          let leftHand1 = arraySaveBodyCoordinate[0];
+          let leftHand2 = arraySaveBodyCoordinate[2];
+          let rightHand1 = arraySaveBodyCoordinate[1];
+          let rightHand2 = arraySaveBodyCoordinate[3];
+          let leftFoot = arraySaveBodyCoordinate[4];
+          let rightFoot = arraySaveBodyCoordinate[5];
+
+          if (
+            checkBodyCoordinate(coord[0], leftHand1[1], coord[1], leftHand1[2], 60) &&
+            checkBodyCoordinate(coord[0], leftHand2[1], coord[1], leftHand2[2], 60)
+          ) {
+            // console.log("leftHand");
+            for (let i = 0; i < ballArrayB.length; i++) {
+              ballArrayB[i].notYetKilled = false;
+            }
+          } else if (
+            checkBodyCoordinate(coord[0], rightHand1[1], coord[1], rightHand1[2], 60) &&
+            checkBodyCoordinate(coord[0], rightHand2[1], coord[1], rightHand2[2], 60)
+          ) {
+            // console.log("rightHand");
+            for (let i = 0; i < ballArrayB.length; i++) {
+              ballArrayB[i].notYetKilled = false;
+            }
+          } 
+          // else if (checkBodyCoordinate(coord[0], leftFoot[1], coord[1], leftFoot[2], 60)) {
+          //   // console.log("leftFoot");
+          //   for (let i = 0; i < ballArrayB.length; i++) {
+          //     ballArrayB[i].notYetKilled = false;
+          //   }
+          // } 
+          // else if (checkBodyCoordinate(coord[0], rightFoot[1], coord[1], rightFoot[2], 60)) {
+          //   // console.log("rightFoot");
+          //   for (let i = 0; i < ballArrayB.length; i++) {
+          //     ballArrayB[i].notYetKilled = false;
+          //   }
+          // }
+        }
+      }
+
+      for (let coord of arrayOfBallBallC) {
+        if (arraySaveBodyCoordinate.length >= 2) {
+          let leftHand1 = arraySaveBodyCoordinate[0];
+          let leftHand2 = arraySaveBodyCoordinate[2];
+          let rightHand1 = arraySaveBodyCoordinate[1];
+          let rightHand2 = arraySaveBodyCoordinate[3];
+          let leftFoot = arraySaveBodyCoordinate[4];
+          let rightFoot = arraySaveBodyCoordinate[5];
+
+          if (
+            checkBodyCoordinate(coord[0], leftHand1[1], coord[1], leftHand1[2], 60) &&
+            checkBodyCoordinate(coord[0], leftHand2[1], coord[1], leftHand2[2], 60)
+          ) {
+            // console.log("leftHand");
+            for (let i = 0; i < ballArrayC.length; i++) {
+              ballArrayC[i].notYetKilled = false;
+            }
+          } else if (
+            checkBodyCoordinate(coord[0], rightHand1[1], coord[1], rightHand1[2], 60) &&
+            checkBodyCoordinate(coord[0], rightHand2[1], coord[1], rightHand2[2], 60)
+          ) {
+            // console.log("rightHand");
+            for (let i = 0; i < ballArrayC.length; i++) {
+              ballArrayC[i].notYetKilled = false;
+            }
+          } 
+          // else if (checkBodyCoordinate(coord[0], leftFoot[1], coord[1], leftFoot[2], 60)) {
+          //   // console.log("leftFoot");
+          //   for (let i = 0; i < ballArrayC.length; i++) {
+          //     ballArrayC[i].notYetKilled = false;
+          //   }
+          // } 
+          // else if (checkBodyCoordinate(coord[0], rightFoot[1], coord[1], rightFoot[2], 60)) {
+          //   // console.log("rightFoot");
+          //   for (let i = 0; i < ballArrayC.length; i++) {
+          //     ballArrayC[i].notYetKilled = false;
+          //   }
+          // }
+        }
+      }
+    }
+  }
+  // Detect唔到足夠body parts就會暫停倒數 & BGM & Show Pause
+  else if (arraySaveBodyCoordinate.length < 2 && bigTimer < 1815 && bigTimer > 15) {
+    audioPlayer.pause();
+    p.lineWidth = 10;
+    p.arc(200, 200, 180, 0, 2 * Math.PI);
+    p.fillStyle = "white";
+    p.fillRect(140, 115, 30, 180);
+    p.fillRect(240, 115, 30, 180);
+    p.strokeStyle = "white";
+    p.stroke();
+  }
+  canvasCtx.restore();
+>>>>>>> c557708 (update game starting requirements for test)
 }
 
 // Load model
