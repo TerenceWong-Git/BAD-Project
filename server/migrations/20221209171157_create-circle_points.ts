@@ -1,7 +1,8 @@
 import { Knex } from "knex";
+import { table } from "../utils/table";
 
 export async function up(knex: Knex): Promise<void> {
-	await knex.schema.createTable("circle_points", (table) => {
+	await knex.schema.createTable(table.CIRCLE_POINTS, (table) => {
 		table.increments();
 		table.string("color").notNullable();
 		table.string("size").notNullable();
@@ -10,5 +11,5 @@ export async function up(knex: Knex): Promise<void> {
 }
 
 export async function down(knex: Knex): Promise<void> {
-	await knex.schema.dropTable("circle_points");
+	await knex.schema.dropTable(table.CIRCLE_POINTS);
 }
