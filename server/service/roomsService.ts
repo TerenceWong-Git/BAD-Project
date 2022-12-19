@@ -26,7 +26,12 @@ export class RoomsService {
 
 			const match = await newRoom<MatchesLive>(table.MATCHES_LIVE)
 				.insert(
-					{ rooms_id: rooms[0].id, players_id: playerId, is_spectator: false },
+					{
+						rooms_id: rooms[0].id,
+						players_id: playerId,
+						is_spectator: false,
+						is_host: true
+					},
 					"id"
 				)
 				.transacting(newRoom);

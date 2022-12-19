@@ -11,7 +11,7 @@ export class RoomsController {
 	};
 	createRoom = async (req: Request, res: Response) => {
 		const gameMode = req.params.game;
-		console.log(gameMode)
+		console.log(gameMode);
 		const roomName = Math.random().toString(32).slice(2, 12);
 		logger.info("Room Name = ", roomName);
 		logger.info("Length = ", roomName.length);
@@ -25,8 +25,8 @@ export class RoomsController {
 			Number(gameMode)
 		);
 		console.log(result);
-		logger.info( result?.rooms_id);
-		logger.info( result?.matches_live_id);
+		logger.info(result?.rooms_id);
+		logger.info(result?.matches_live_id);
 		res.status(200).json(result);
 	};
 	updateRoom = async (req: Request, res: Response) => {
@@ -40,9 +40,7 @@ export class RoomsController {
 		// select * from matchlive where room id
 		// if row count >2 => is spectator = true
 	};
-	joinRoom = async (req: Request, res: Response) => {
-		
-	};
+	joinRoom = async (req: Request, res: Response) => {};
 	deleteRoom = async (req: Request, res: Response) => {};
 	roleChange = async (req: Request, res: Response) => {};
 }

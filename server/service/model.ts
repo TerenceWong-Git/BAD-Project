@@ -20,6 +20,7 @@ export interface MatchesLive {
 	rooms_id: number;
 	players_id: number;
 	is_spectator: boolean;
+	is_host: boolean;
 }
 
 export interface RoomMatch {
