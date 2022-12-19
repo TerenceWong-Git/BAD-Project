@@ -57,6 +57,7 @@ jobs:
         with:
           command: |
             cd BAD-Project
+            ls
             git checkout production
             git pull origin production
             cd server
@@ -66,4 +67,4 @@ jobs:
             forever restart 0
           host: cam-sport.me
           user: ubuntu
-          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          key: ${{secrets.SSH_PRIVATE_KEY}}

@@ -11,46 +11,69 @@ body {
 
 
 
-header {
-    border-bottom: var(--border-style);
+nav {
     padding-bottom: 0;
 	background-color: darkslategrey;
 	display: flex;
     justify-content: space-between;
     align-items: center;
+	height: 3rem;
+}
+
+.header-container {
+	width: 100%;
+}
+
+.bx-home-smile:before {
+    content: "\eb16";
+    font-size: x-large;
 }
 
 header i {
     margin-right: 16px;
-    font-size: 40px;
+   
 }
 
 header h1 {
     margin-right: 64px;
 	display: flex;
     align-items: center;
-	height: 5vh;
+	
 }
 
 header h1 a {
     text-decoration: none;
-	font-size: 5vh;
+	font-size: x-large;
+	color: white;
 }
 
-.header-container{
-	display: flex;
+a#logout {
+    font-size: x-large;
+	color: white;
 }
 
-/* header span ul {
-    list-style: none;
-    gap: 40px;
-} */
+#right {
+    font-size: x-large;
+}
+
+
 
 #left {
 	display: flex;
 	align-items: center;
+	justify-content: space-around;
 }
 
+#home{
+	display: flex;
+	align-items: center;
+}
+
+.players{
+	font-size: x-large;
+	display: flex;
+	
+}
 
 .container {
 	position: relative;
@@ -77,9 +100,10 @@ header h1 a {
 	background-size: cover;
 	box-shadow: inset 0 0 0 2000px rgba(135, 53, 12, 0.5);
 	display: flex;
+	color: navajowhite;
 }
 
-span {
+.slides {
 	margin: auto;
 	font-size: 2rem;
 }

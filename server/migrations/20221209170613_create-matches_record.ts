@@ -1,7 +1,8 @@
 import { Knex } from "knex";
+import { table } from "../utils/table";
 
 export async function up(knex: Knex): Promise<void> {
-	await knex.schema.createTable("matches_record", (table) => {
+	await knex.schema.createTable(table.MATCHES_RECORD, (table) => {
 		table.increments();
 		table.integer("players_id").unsigned();
 		table.foreign("players_id").references("players.id");
@@ -15,5 +16,5 @@ export async function up(knex: Knex): Promise<void> {
 }
 
 export async function down(knex: Knex): Promise<void> {
-	await knex.schema.dropTable("matches_record");
+	await knex.schema.dropTable(table.MATCHES_RECORD);
 }
