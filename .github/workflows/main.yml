@@ -63,6 +63,7 @@ jobs:
             cd server
             yarn install
             yarn knex migrate:latest --env production
+            yarn knex seed:run
             yarn build
             forever restart 0
           host: cam-sport.me
