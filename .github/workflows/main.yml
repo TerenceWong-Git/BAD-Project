@@ -36,17 +36,16 @@ jobs:
         run: |
           cd server
           yarn install
+          npx playwright install --with-deps
           yarn knex migrate:up 20221209162721_create-players.ts --env test
           yarn test playersController.spec.ts
           yarn test playersService.spec.ts
+          yarn test login.spec.ts --runInBand --forceExit
       - uses: actions/upload-artifact@v3
         if: always()
         with:
           name: playwright-report
           path: playwright-report/
-          run: |
-            cd server
-            yarn test login.spec.ts --runInBand --forceExit
           retention-days: 30
   deploy:
     if: github.ref_name == 'production'
