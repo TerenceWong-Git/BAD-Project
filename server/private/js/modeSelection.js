@@ -1,18 +1,5 @@
-onload();
 solo();
 duo();
-
-async function onload() {
-
-	document.querySelector("#logout").addEventListener("click", async (e) => {
-		e.preventDefault();
-		console.log("logout");
-		const res = await fetch("/players/logout", { method: "PUT" });
-		if (res.status === 200) {
-			window.location.href = `/`;
-		}
-	});
-};
 
 
 function solo() {
@@ -24,8 +11,9 @@ function solo() {
 		if (res.status === 200){
 			window.location.href = `/PreStart.html?matchId=matchId`
 			console.log('window location:', window.location.search);
-			
-			}
+			} else {
+				window.location.reload("/")
+			};
 		});
 };
 
