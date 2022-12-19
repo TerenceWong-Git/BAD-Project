@@ -57,6 +57,7 @@ jobs:
         with:
           command: |
             cd BAD-Project
+            ls
             git checkout production
             git pull origin production
             cd server
