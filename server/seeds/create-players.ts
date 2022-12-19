@@ -1,11 +1,12 @@
 import { Knex } from "knex";
+import { table } from "../utils/table";
 
 export async function seed(knex: Knex): Promise<void> {
 	// Deletes ALL existing entries
-	await knex("players").del();
+	await knex(table.PLAYERS).del();
 
 	// Inserts seed entries
-	await knex("players").insert([
+	await knex(table.PLAYERS).insert([
 		{
 			email: "alex@tecky.io",
 			password: "$2a$10$pn4/K78nHhJ38yWjog.JzuYD7QnH24/fFEEGhucG0g1.2QnfKXWTO"
