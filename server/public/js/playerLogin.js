@@ -41,7 +41,6 @@ function playerRegister() {
 		.addEventListener("submit", async (e) => {
 			e.preventDefault();
 
-			console.log(`hello`);
 			const form = e.target;
 			const email = form.register_email.value;
 			const username = form.register_username.value;
@@ -76,8 +75,8 @@ function playerRegister() {
 					document.querySelector(
 						"#register-error-msg"
 					).innerHTML = `${data.message}`;
-					window.location.href = "/playerMainPage.html";
 				}
+				window.location.href = "/playerMainPage.html";
 			}
 		});
 }
