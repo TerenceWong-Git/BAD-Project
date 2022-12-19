@@ -26,12 +26,14 @@ function playerLogin() {
 
 			const data = await resp.json();
 			console.log(resp.status);
-			if (resp.status !== 201) {
+			if (resp.status !== 200) {
 				document.querySelector(
 					"#login-error-msg"
 				).innerHTML = `${data.message}`;
+			}else {
 				window.location.href = "/playerMainPage.html";
 			}
+			
 		});
 }
 
@@ -71,12 +73,14 @@ function playerRegister() {
 
 				const data = await resp.json();
 
-				if (resp.status !== 201) {
+				if (resp.status !== 200) {
 					document.querySelector(
 						"#register-error-msg"
 					).innerHTML = `${data.message}`;
+				}else{
+					window.location.href = "/playerMainPage.html";
 				}
-				window.location.href = "/playerMainPage.html";
+				
 			}
 		});
 }

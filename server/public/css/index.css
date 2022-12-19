@@ -38,6 +38,7 @@ footer {
 	width: 95%;
 	justify-content: space-between;
 	align-items: center;
+	height: 2rem;
 }
 
 h4 {
@@ -47,6 +48,6 @@ h4 {
 
 .bx-cog:before {
 	content: "\ea6e";
-	font-size: xxx-large;
+	font-size: x-large;
 	color: white;
 }
