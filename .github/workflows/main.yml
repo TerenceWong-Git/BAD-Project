@@ -66,4 +66,4 @@ jobs:
             forever restart 0
           host: cam-sport.me
           user: ubuntu
-          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          key: ${{secrets.SSH_PRIVATE_KEY}}
