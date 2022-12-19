@@ -30,10 +30,9 @@ function playerLogin() {
 				document.querySelector(
 					"#login-error-msg"
 				).innerHTML = `${data.message}`;
-			}else {
+			} else {
 				window.location.href = "/playerMainPage.html";
 			}
-			
 		});
 }
 
@@ -77,10 +76,9 @@ function playerRegister() {
 					document.querySelector(
 						"#register-error-msg"
 					).innerHTML = `${data.message}`;
-				}else{
+				} else {
 					window.location.href = "/playerMainPage.html";
 				}
-				
 			}
 		});
 }

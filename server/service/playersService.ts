@@ -49,18 +49,25 @@ export class PlayersService {
 			.first(["name", "email", "image", "age", "gender"]);
 		return player;
 	}
-	async updateProfile(data: Player) {
+	async updateProfile(
+		id: number | undefined,
+		name: string,
+		email: string,
+		image: string,
+		age: number,
+		gender: number
+	) {
 		const player = await this.knex<{ id: number }[] | { id: number } | Player>(
 			table.PLAYERS
 		)
-			.where("id", data.id)
+			.where("id", id)
 			.update(
 				{
-					name: data.name,
-					email: data.email,
-					image: data.image,
-					age: data.age,
-					gender: data.gender
+					name: name,
+					email: email,
+					image: image,
+					age: age,
+					gender: gender
 				},
 				"id"
 			);
