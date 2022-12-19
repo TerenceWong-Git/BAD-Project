@@ -52,8 +52,8 @@ function playerRegister() {
 				document.querySelector(
 					"#register-error-msg"
 				).innerHTML = `please input value`;
-			}else if (!/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email)){
-				alert("You have entered an invalid email address!")
+			} else if (!/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email)) {
+				alert("You have entered an invalid email address!");
 			} else if (password !== confirm_password) {
 				document.querySelector(
 					"#register-error-msg"
@@ -78,6 +78,8 @@ function playerRegister() {
 					document.querySelector(
 						"#register-error-msg"
 					).innerHTML = `${data.message}`;
+				} else {
+					window.location.href = "/playerMainPage.html";
 				}
 				window.location.replace("/playerMainPage.html");
 			}
