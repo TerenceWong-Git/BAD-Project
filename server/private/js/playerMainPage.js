@@ -3,7 +3,6 @@ reaction();
 laser();
 profile();
 
-
 // async function onload() {
 // 	document.querySelector("#logout").addEventListener("click", async (e) => {
 // 		e.preventDefault();
@@ -16,25 +15,21 @@ profile();
 // };
 
 function reaction() {
-    document.querySelector("#reaction")
-    .addEventListener("click", async (e) => {
-        e.preventDefault();
-			window.location.href = `/modeSelection.html?game=1`;
-		});
-};
+	document.querySelector("#reaction").addEventListener("click", async (e) => {
+		e.preventDefault();
+		window.location.href = `/modeSelection.html?game=1`;
+	});
+}
 
 function laser() {
-    document.querySelector("#laser")
-    .addEventListener("click", async (e) => {
-        e.preventDefault();
-			window.location.href = `/modeSelection.html?game=2`;
-		});
-};
+	document.querySelector("#laser").addEventListener("click", async (e) => {
+		e.preventDefault();
+		window.location.href = `/modeSelection.html?game=2`;
+	});
+}
 function profile() {
-    document.querySelector("#profile")
-    .addEventListener("click", async (e) => {
-        e.preventDefault();
+	document.querySelector("#profile").addEventListener("click", async (e) => {
+		e.preventDefault();
 		window.location.href = `/playerProfile.html`;
-		});
-};
-
+	});
+}

@@ -1,4 +1,3 @@
-
 const start = document.querySelector("body");
 
 start.addEventListener("keypress", (e) => {

@@ -9,14 +9,12 @@ body {
 	color: #fefefe;
 }
 
-
-
 nav {
-    padding-bottom: 0;
+	padding-bottom: 0;
 	background-color: darkslategrey;
 	display: flex;
-    justify-content: space-between;
-    align-items: center;
+	justify-content: space-between;
+	align-items: center;
 	height: 3rem;
 }
 
@@ -25,38 +23,34 @@ nav {
 }
 
 .bx-home-smile:before {
-    content: "\eb16";
-    font-size: x-large;
+	content: "\eb16";
+	font-size: x-large;
 }
 
 header i {
-    margin-right: 16px;
-   
+	margin-right: 16px;
 }
 
 header h1 {
-    margin-right: 64px;
+	margin-right: 64px;
 	display: flex;
-    align-items: center;
-	
+	align-items: center;
 }
 
 header h1 a {
-    text-decoration: none;
+	text-decoration: none;
 	font-size: x-large;
 	color: white;
 }
 
 a#logout {
-    font-size: x-large;
+	font-size: x-large;
 	color: white;
 }
 
 #right {
-    font-size: x-large;
+	font-size: x-large;
 }
-
-
 
 #left {
 	display: flex;
@@ -64,15 +58,14 @@ a#logout {
 	justify-content: space-around;
 }
 
-#home{
+#home {
 	display: flex;
 	align-items: center;
 }
 
-.players{
+.players {
 	font-size: x-large;
 	display: flex;
-	
 }
 
 .container {
@@ -127,8 +120,6 @@ a#logout {
 .image:nth-child(5) {
 	transform: rotateY(288deg) translateZ(430px);
 }
-
-
 
 @keyframes rotate360 {
 	from {

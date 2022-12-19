@@ -11,13 +11,9 @@ playersRoutes.delete(
 	isLoggedInAPI,
 	asyncWrapper(playersController.logout)
 );
-playersRoutes.get(
-	"/profile/:profile",
-	isLoggedInAPI,
-	playersController.getProfile
-);
+playersRoutes.get("/profile", isLoggedInAPI, playersController.getProfile);
 playersRoutes.patch(
-	"/profile/:profile",
+	"/profile",
 	isLoggedInAPI,
 	asyncWrapper(playersController.updateProfile)
 );
