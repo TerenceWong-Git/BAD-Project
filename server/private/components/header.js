@@ -19,8 +19,8 @@ class Header extends HTMLElement {
                             </div>
                             <ul><a href="" id="logout">LOGOUT</a></ul>
                             <div class="players">
-                                <i class='bx bx-user'></i>Hello, 
-                                <div id="player-name">Player</div>
+                                <i class='bx bx-user'></i>
+                                <div id="player-name"></div>
                             </div>
                         </span>
                     </div>
@@ -46,10 +46,7 @@ async function loadInfo() {
 	const infos = await resp.json();
 	console.log("hi");
 	console.log(infos.name);
-
-	// let htmlStr = ``;
-	// for (const info of infos){
-
-	//         htmlStr = `<div id="player-name">${info.name}</div>`;
-	//     }
+	console.log(typeof(infos.name));
+	let	 htmlStr = `<ul style="color: white;">Hello, ${infos.name}</ul>`;
+	document.querySelector("#player-name").innerHTML = htmlStr;
 }
