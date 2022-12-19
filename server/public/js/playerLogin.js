@@ -60,7 +60,7 @@ function playerRegister() {
 				const formBody = {
 					email: email,
 					password: password,
-					username: username
+					name: username
 				};
 				const resp = await fetch("/players/register", {
 					method: "POST",
@@ -76,9 +76,8 @@ function playerRegister() {
 					document.querySelector(
 						"#register-error-msg"
 					).innerHTML = `${data.message}`;
-				} else {
-					window.location.href = "/playerMainPage.html";
-				}
+				} window.location.replace("/playerMainPage.html");
+
 			}
 		});
 }
