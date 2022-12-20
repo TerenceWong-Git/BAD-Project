@@ -2,39 +2,32 @@ window.onload = async () => {
 	await loadInfo();
 };
 
-async function loadInfo() {
-	const resp = await fetch("/players/profile");
-	const infos = await resp.json();
-	console.log("hi");
-	console.log(infos.name);
-	console.log(typeof(infos.name));
-	let	 htmlStr = /*html*/ `<ul style="color: white;">Hello, ${infos.name}</ul>`;
-	document.querySelector("#player-name").innerHTML = htmlStr;
-}
 class Header extends HTMLElement {
 	constructor() {
 		super();
 	}
 
 	connectedCallback() {
-		this.innerHTML = `
-            <header>
-                <nav >
-                    <div class="header-container">
-                        <span id="left">
-                            <div id="home">
-                                <i class="bx bx-home-smile"></i>
-                                <h1><a href="/playerMainPage.html">CAM-SPORT</a></h1>
-                            </div>
-                            <ul><a href="" id="logout">LOGOUT</a></ul>
-                            <div class="players">
-                                <i class='bx bx-user'></i>
-                                <div id="player-name"></div>
-                            </div>
-                        </span>
-                    </div>
-                </nav>
-            </header>
+		this.innerHTML =
+			/*html*/
+			`
+		<header>
+			<nav>
+				<div class="header-container">
+					<span id="left">
+						<div id="home">
+							<i class="bx bx-home-smile"></i>
+							<h1><a href="/playerMainPage.html">CAM-SPORT</a></h1>
+						</div>
+						<ul><a href="" id="logout">LOGOUT</a></ul>
+						<div class="players">
+							<i class='bx bx-user'></i>
+							<div id="player-name"></div>
+						</div>
+					</span>
+				</div>
+			</nav>
+		</header>
         `;
 	}
 }
@@ -49,4 +42,3 @@ document.querySelector("#logout").addEventListener("click", async () => {
 		window.location.reload("/");
 	}
 });
-
