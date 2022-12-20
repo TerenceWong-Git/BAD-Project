@@ -40,3 +40,40 @@ td {
 }
 
 @import url("https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css");
+
+.score-board {
+	text-align: center;
+}
+
+h5 {
+	margin: 2% 0 1% 0;
+	font-size: x-large;
+}
+
+table {
+	display: flex;
+	justify-content: space-between;
+
+	border: solid 2px white;
+	margin: 0 30%;
+	font-size: xx-large;
+}
+
+tr {
+	width: 100%;
+}
+
+tbody {
+	width: 100%;
+}
+
+th {
+	text-align: end;
+	width: 30%;
+	padding: 3% 0;
+}
+
+td {
+	width: 40%;
+	text-align: center;
+}
