@@ -83,7 +83,7 @@ export class PlayersService {
 				"played_at"
 			])
 			.where("players_id", id)
-			.orderBy("points")
+			.orderBy("points", "desc")
 			.limit(5);
 		return result;
 	}
@@ -98,7 +98,7 @@ export class PlayersService {
 				"matches_record.played_at"
 			])
 			.innerJoin(table.PLAYERS, "matches_record.players_id", "players.id")
-			.orderBy("points")
+			.orderBy("points", "desc")
 			.limit(5);
 		return result;
 	}
