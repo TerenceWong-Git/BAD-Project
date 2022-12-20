@@ -335,7 +335,7 @@ function onResults(results) {
 					) {
 						// console.log("leftHand");
 						for (let i = 0; i < ballArrayA.length; i++) {
-							ballArrayA[i].notYetKilled = false;
+							ballArrayA[ballArrayA.length - 1].notYetKilled = false;
 						}
 					} else if (
 						checkBodyCoordinate(
@@ -355,7 +355,7 @@ function onResults(results) {
 					) {
 						// console.log("rightHand");
 						for (let i = 0; i < ballArrayA.length; i++) {
-							ballArrayA[i].notYetKilled = false;
+							ballArrayA[ballArrayA.length - 1].notYetKilled = false;
 						}
 					}
 					// else if (
@@ -369,7 +369,7 @@ function onResults(results) {
 					// ) {
 					// 	// console.log("leftFoot");
 					// 	for (let i = 0; i < ballArrayA.length; i++) {
-					// 		ballArrayA[i].notYetKilled = false;
+					// ballArrayA[ballArrayA.length - 1].notYetKilled = false;
 					// 	}
 					// } else if (
 					// 	checkBodyCoordinate(
@@ -382,7 +382,7 @@ function onResults(results) {
 					// ) {
 					// 	// console.log("rightFoot");
 					// 	for (let i = 0; i < ballArrayA.length; i++) {
-					// 		ballArrayA[i].notYetKilled = false;
+					// ballArrayA[ballArrayA.length - 1].notYetKilled = false;
 					// 	}
 					// }
 				}
@@ -415,7 +415,7 @@ function onResults(results) {
 					) {
 						// console.log("leftHand");
 						for (let i = 0; i < ballArrayB.length; i++) {
-							ballArrayB[i].notYetKilled = false;
+							ballArrayB[ballArrayB.length - 1].notYetKilled = false;
 						}
 					} else if (
 						checkBodyCoordinate(
@@ -435,7 +435,7 @@ function onResults(results) {
 					) {
 						// console.log("rightHand");
 						for (let i = 0; i < ballArrayB.length; i++) {
-							ballArrayB[i].notYetKilled = false;
+							ballArrayB[ballArrayB.length - 1].notYetKilled = false;
 						}
 					}
 					// else if (
@@ -449,7 +449,7 @@ function onResults(results) {
 					// ) {
 					// 	// console.log("leftFoot");
 					// 	for (let i = 0; i < ballArrayB.length; i++) {
-					// 		ballArrayB[i].notYetKilled = false;
+					// 		ballArrayB[ballArrayB.length - 1].notYetKilled = false;
 					// 	}
 					// } else if (
 					// 	checkBodyCoordinate(
@@ -462,7 +462,7 @@ function onResults(results) {
 					// ) {
 					// 	// console.log("rightFoot");
 					// 	for (let i = 0; i < ballArrayB.length; i++) {
-					// 		ballArrayB[i].notYetKilled = false;
+					// 		ballArrayB[ballArrayB.length - 1].notYetKilled = false;
 					// 	}
 					// }
 				}
@@ -495,7 +495,7 @@ function onResults(results) {
 					) {
 						// console.log("leftHand");
 						for (let i = 0; i < ballArrayC.length; i++) {
-							ballArrayC[i].notYetKilled = false;
+							ballArrayC[ballArrayC.length - 1].notYetKilled = false;
 						}
 					} else if (
 						checkBodyCoordinate(
@@ -515,7 +515,7 @@ function onResults(results) {
 					) {
 						// console.log("rightHand");
 						for (let i = 0; i < ballArrayC.length; i++) {
-							ballArrayC[i].notYetKilled = false;
+							ballArrayC[ballArrayC.length - 1].notYetKilled = false;
 						}
 					}
 					// else if (
@@ -529,7 +529,7 @@ function onResults(results) {
 					// ) {
 					// 	// console.log("leftFoot");
 					// 	for (let i = 0; i < ballArrayC.length; i++) {
-					// 		ballArrayC[i].notYetKilled = false;
+					// 		ballArrayC[ballArrayC.length - 1].notYetKilled = false;
 					// 	}
 					// } else if (
 					// 	checkBodyCoordinate(
@@ -542,7 +542,7 @@ function onResults(results) {
 					// ) {
 					// 	// console.log("rightFoot");
 					// 	for (let i = 0; i < ballArrayC.length; i++) {
-					// 		ballArrayC[i].notYetKilled = false;
+					// 		ballArrayC[ballArrayC.length - 1].notYetKilled = false;
 					// 	}
 					// }
 				}
