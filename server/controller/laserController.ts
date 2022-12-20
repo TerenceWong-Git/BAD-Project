@@ -3,7 +3,7 @@ import { LaserService } from "../service/laserService";
 
 export class LaserController {
 	constructor(private laserService: LaserService) {}
-	dummy = async (req: Request, res: Response) => {
+	dummy = async (_req: Request, res: Response) => {
 		const data = await this.laserService.dummy();
 		res.json(data);
 	};

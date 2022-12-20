@@ -9,40 +9,62 @@ body {
 	color: #fefefe;
 }
 
-header {
-	border-bottom: var(--border-style);
+nav {
 	padding-bottom: 0;
 	background-color: darkslategrey;
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
+	height: 3rem;
+}
+
+.header-container {
+	width: 100%;
+}
+
+.bx-home-smile:before {
+	content: "\eb16";
+	font-size: x-large;
 }
 
 header i {
 	margin-right: 16px;
-	font-size: 40px;
 }
 
 header h1 {
 	margin-right: 64px;
-	margin-right: 64px;
 	display: flex;
 	align-items: center;
-	height: 5vh;
 }
 
 header h1 a {
 	text-decoration: none;
-	font-size: 5vh;
+	font-size: x-large;
+	color: white;
 }
 
-.header-container {
+a#logout {
+	font-size: x-large;
+	color: white;
+}
+
+#right {
+	font-size: x-large;
+}
+
+#left {
 	display: flex;
 	align-items: center;
 	justify-content: space-around;
 }
 
 #home {
+	display: flex;
+	align-items: center;
+}
+
+.players {
+	font-size: x-large;
 	display: flex;
 	align-items: center;
 }

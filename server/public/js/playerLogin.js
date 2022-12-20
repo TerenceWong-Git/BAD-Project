@@ -76,8 +76,8 @@ function playerRegister() {
 					document.querySelector(
 						"#register-error-msg"
 					).innerHTML = `${data.message}`;
-				} window.location.replace("/playerMainPage.html");
-
+				}
+				window.location.replace("/playerMainPage.html");
 			}
 		});
 }
