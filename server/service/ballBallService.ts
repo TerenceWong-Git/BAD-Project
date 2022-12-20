@@ -21,4 +21,15 @@ export class BallBallService {
 			.where("matches_live_id", id);
 		return data;
 	}
+	async providePoints(
+		players_id: number,
+		points: number,
+		matches_live_id: number
+	) {
+		const importResult = { players_id, points, matches_live_id };
+		const resultOfTheGame = await this.knex(table.MATCHES_RECORD).insert(
+			importResult
+		);
+		return resultOfTheGame;
+	}
 }
