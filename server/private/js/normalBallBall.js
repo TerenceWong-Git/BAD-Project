@@ -13,7 +13,9 @@ let timerWidth = 0;
 let ballArrayA = [];
 let ballArrayB = [];
 let ballArrayC = [];
-let result = [];
+let gameResult = [];
+let turnOn = true;
+let points = 0;
 
 /////////////////////////////////////   Run in each frame   /////////////////////////////////////
 function onResults(results) {
@@ -819,6 +821,29 @@ function onResults(results) {
 		p.fillRect(240, 115, 30, 180);
 		p.strokeStyle = "white";
 		p.stroke();
+	} else if (bigTimer == 14) {
+		if (turnOn) {
+			for (let killedOrNot of ballArrayA) {
+				let plus = 0;
+				let minus = 0;
+				gameResult.push(killedOrNot.notYetKilled);
+				for (let trueOrFalse of gameResult) {
+					if (trueOrFalse === true) {
+						minus++;
+					} else {
+						plus++;
+					}
+					points = 10 * plus - 10 * minus;
+				}
+			}
+			console.log(gameResult);
+			console.log(points);
+
+			/////////////////////////////////   Provide points of the game to database   /////////////////////////////////
+			// providePointsOfTheGame();
+
+			turnOn = false;
+		}
 	}
 	canvasCtx.restore();
 }
@@ -892,12 +917,17 @@ function calculateYCoordinate(y) {
 }
 
 //////////////////////////////////   React with Database   //////////////////////////////////
-// for (let ballInfo of ballArrayA) {
-// 	let i = 0;
-// 	if (ballInfo.notYetKilled) {
-// 		i++;
-// 		console.log(i);
-// 		return i;
-// 	}
+// async function providePointsOfTheGame() {
+// 	const pointsOfTheGame = line 578;
+// 	const formBody = {
+// 		points: line 578;
+// 	};
+// 	const resp = await fetch("/reaction", {
+// 		method: "POST",
+// 		headers: {
+// 			"content-type": "application/json; charset=utf-8"
+// 		},
+// 		body: JSON.stringify(formBody)
+// 	});
 // }
 //////////////////////////////////   React with Database   //////////////////////////////////
