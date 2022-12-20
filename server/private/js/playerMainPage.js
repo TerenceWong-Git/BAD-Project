@@ -3,16 +3,21 @@ reaction();
 laser();
 profile();
 
-// async function onload() {
-// 	document.querySelector("#logout").addEventListener("click", async (e) => {
-// 		e.preventDefault();
-// 		console.log("logout");
-// 		const res = await fetch("/players/logout", { method: "PUT" });
-// 		if (res.status === 200) {
-// 			window.location.replace("/");
-// 		}
-// 	});
-// };
+async function onload() {
+	// const urlParams = new URL(document.location).searchParams;
+	// console.log("hi")
+	// console.log(urlParams)
+	// const gameId = urlParams.get(game)
+	// console.log(gameId)
+	document.querySelector("#logout").addEventListener("click", async (e) => {
+		e.preventDefault();
+		console.log("logout");
+		const res = await fetch("/players/logout", { method: "PUT" });
+		if (res.status === 200) {
+			window.location.href = `/`;
+		}
+	});
+}
 
 function reaction() {
 	document.querySelector("#reaction").addEventListener("click", async (e) => {
