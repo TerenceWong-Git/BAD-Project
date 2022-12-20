@@ -1,5 +1,6 @@
 import type { Request, Response } from "express";
 import { BallBallService } from "../service/ballBallService";
+import { logger } from "../utils/logger";
 
 export class BallBallController {
 	constructor(private ballBallService: BallBallService) {}
@@ -8,10 +9,12 @@ export class BallBallController {
 		res.json(data);
 	};
 	providePoints = async (req: Request, res: Response) => {
-		const { players_id, points, matches_live_id } = req.body;
+		const { points, matches_live_id } = req.body;
+		logger.info(points);
+		logger.info(matches_live_id);
 		const id = await this.ballBallService.providePoints(
-			players_id,
 			points,
+			req.session.playerId,
 			matches_live_id
 		);
 		res.status(201).json({ id });
