@@ -1,5 +1,6 @@
 loadInfo();
 
+<<<<<<< HEAD
 async function loadInfo() {
 	const resp = await fetch("/players/profile");
 	const infos = await resp.json();
@@ -10,6 +11,8 @@ async function loadInfo() {
 	document.querySelector("#player-name").innerHTML = htmlStr;
 }
 
+=======
+>>>>>>> b835112 (update match record seed for id issue)
 class Header extends HTMLElement {
 	constructor() {
 		super();
@@ -49,8 +52,11 @@ document.querySelector("#logout").addEventListener("click", async () => {
 		window.location.reload("/");
 	}
 });
+<<<<<<< HEAD
 
 document.querySelector(".players").addEventListener("click", async (e) => {
 	e.preventDefault();
 	window.location.href = "/playerProfile.html";
 });
+=======
+>>>>>>> b835112 (update match record seed for id issue)

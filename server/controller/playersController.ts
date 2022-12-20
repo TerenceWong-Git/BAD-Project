@@ -37,7 +37,13 @@ export class PlayersController {
 			req.session.playerId,
 			name,
 			email,
+<<<<<<< HEAD
 			Number(age)
+=======
+			image,
+			Number(age),
+			Number(gender)
+>>>>>>> b835112 (update match record seed for id issue)
 		);
 		if (!result) {
 			throw new InternalServerError();
