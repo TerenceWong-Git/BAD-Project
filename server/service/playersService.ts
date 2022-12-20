@@ -77,13 +77,12 @@ export class PlayersService {
 		const result = await this.knex<MatchesRecord>(table.MATCHES_RECORD)
 			.select([
 				"id",
-				"player_id",
+				"players_id",
 				"points",
-				"game_mode_id",
 				"matches_live_id",
 				"played_at"
 			])
-			.where("player_id", id)
+			.where("players_id", id)
 			.orderBy("points")
 			.limit(5);
 		return result;
@@ -92,14 +91,13 @@ export class PlayersService {
 		const result = await this.knex<MatchesRecord>(table.MATCHES_RECORD)
 			.select([
 				"matches_record.id",
-				"matches_record.player_id",
+				"matches_record.players_id",
 				"players.name",
 				"matches_record.points",
-				"matches_record.game_mode_id",
 				"matches_record.matches_live_id",
 				"matches_record.played_at"
 			])
-			.innerJoin(table.PLAYERS, "matches_record.player_id", "players.id")
+			.innerJoin(table.PLAYERS, "matches_record.players_id", "players.id")
 			.orderBy("points")
 			.limit(5);
 		return result;
