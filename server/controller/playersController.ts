@@ -56,8 +56,8 @@ export class PlayersController {
 			name,
 			email,
 			image,
-			age,
-			gender
+			Number(age),
+			Number(gender)
 		);
 		if (!result) {
 			throw new InternalServerError();

@@ -1,8 +1,6 @@
-
 reaction();
 laser();
 profile();
-
 
 function reaction() {
 	document.querySelector("#reaction").addEventListener("click", async (e) => {
