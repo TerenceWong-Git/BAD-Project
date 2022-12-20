@@ -30,9 +30,14 @@ export interface RoomMatch {
 
 export interface MatchesRecord {
 	id: number;
-	player_id: number;
+	players_id: number;
 	points: number;
 	matches_live_id: number;
 	played_at: string;
 	// Maybe Date
+}
+
+export interface GameMode {
+	id: number;
+	name?: string;
 }
