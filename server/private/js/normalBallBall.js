@@ -577,7 +577,7 @@ function onResults(results) {
 			console.log(points);
 
 			/////////////////////////////////   Provide points of the game to database   /////////////////////////////////
-			// providePointsOfTheGame();
+			providePointsOfTheGame(points);
 
 			turnOn = false;
 		}
@@ -654,17 +654,18 @@ function calculateYCoordinate(y) {
 }
 
 //////////////////////////////////   React with Database   //////////////////////////////////
-// async function providePointsOfTheGame() {
-// 	const pointsOfTheGame = line 578;
-// 	const formBody = {
-// 		points: line 578;
-// 	};
-// 	const resp = await fetch("/reaction", {
-// 		method: "POST",
-// 		headers: {
-// 			"content-type": "application/json; charset=utf-8"
-// 		},
-// 		body: JSON.stringify(formBody)
-// 	});
-// }
+async function providePointsOfTheGame(numberP) {
+	// const pointsOfTheGame = line 578;
+	const formBody = {
+		points: numberP,
+		matches_live_id: 1
+	};
+	const resp = await fetch("/ballBall/reaction", {
+		method: "POST",
+		headers: {
+			"content-type": "application/json; charset=utf-8"
+		},
+		body: JSON.stringify(formBody)
+	});
+}
 //////////////////////////////////   React with Database   //////////////////////////////////

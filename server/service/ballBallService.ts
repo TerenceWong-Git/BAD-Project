@@ -22,11 +22,11 @@ export class BallBallService {
 		return data;
 	}
 	async providePoints(
-		players_id: number,
 		points: number,
+		players_id: number | undefined,
 		matches_live_id: number
 	) {
-		const importResult = { players_id, points, matches_live_id };
+		const importResult = { points, players_id, matches_live_id };
 		const resultOfTheGame = await this.knex(table.MATCHES_RECORD).insert(
 			importResult
 		);
