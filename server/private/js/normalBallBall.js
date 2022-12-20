@@ -13,6 +13,7 @@ let timerWidth = 0;
 let ballArrayA = [];
 let ballArrayB = [];
 let ballArrayC = [];
+let result = [];
 
 /////////////////////////////////////   Run in each frame   /////////////////////////////////////
 function onResults(results) {
@@ -152,6 +153,11 @@ function onResults(results) {
 				// console.log(timerWidth);
 			}
 
+			if (bigTimer == 14) {
+				let smallTimer = bigTimer;
+				return smallTimer;
+			}
+
 			// Display Timer (60s countdown)
 			b.clearRect(0, 0, 1534, 746);
 			b.fillStyle = "#fcba03";
@@ -180,9 +186,9 @@ function onResults(results) {
 					lineWidth: 7
 				};
 				ballArrayA.push(ballObjectTemplate);
-				// console.log("-- ballArrayA --");
-				// console.log(ballArrayA);
-				console.log(ballObjectTemplate.radius);
+				console.log("-- ballArrayA --");
+				console.log(ballArrayA);
+				// console.log(ballObjectTemplate.radius);
 			}
 
 			// B組
@@ -201,7 +207,7 @@ function onResults(results) {
 				ballArrayB.push(ballObjectTemplate);
 				// console.log("-- ballArrayB --");
 				// console.log(ballArrayB);
-				console.log(ballObjectTemplate.radius);
+				// console.log(ballObjectTemplate.radius);
 			}
 
 			// C組
@@ -220,7 +226,7 @@ function onResults(results) {
 				ballArrayC.push(ballObjectTemplate);
 				// console.log("-- ballArrayC --");
 				// console.log(ballArrayC);
-				console.log(ballObjectTemplate.radius);
+				// console.log(ballObjectTemplate.radius);
 			}
 
 			bigTimer -= 1;
@@ -247,7 +253,7 @@ function onResults(results) {
 						canvasCtx.stroke();
 						arrayOfBallBallA.push([ball.xCoordinate, ball.yCoordinate]);
 						// console.log("ballA");
-						// console.log(bigTimer);
+						// console.log(arrayOfBallBallA);
 					}
 				}
 			}
@@ -270,7 +276,7 @@ function onResults(results) {
 						canvasCtx.stroke();
 						arrayOfBallBallB.push([ball.xCoordinate, ball.yCoordinate]);
 						// console.log("ballB");
-						// console.log(ball.startTime);
+						// console.log(arrayOfBallBallB);
 					}
 				}
 			}
@@ -293,149 +299,270 @@ function onResults(results) {
 						canvasCtx.stroke();
 						arrayOfBallBallC.push([ball.xCoordinate, ball.yCoordinate]);
 						// console.log("ballC");
-						// console.log(ball.startTime);
+						// console.log(arrayOfBallBallC);
 					}
 				}
 			}
 
-      // 判斷body parts有冇掂到波波
-      // 整走Type A Ball Ball
-      for (let coord of arrayOfBallBallA) {
-        if (arraySaveBodyCoordinate.length >= 2) {
-          let leftHand1 = arraySaveBodyCoordinate[0];
-          let leftHand2 = arraySaveBodyCoordinate[2];
-          let rightHand1 = arraySaveBodyCoordinate[1];
-          let rightHand2 = arraySaveBodyCoordinate[3];
-          let leftFoot = arraySaveBodyCoordinate[4];
-          let rightFoot = arraySaveBodyCoordinate[5];
+			// 判斷body parts有冇掂到波波
+			// 整走Type A Ball Ball
+			for (let coord of arrayOfBallBallA) {
+				if (arraySaveBodyCoordinate.length == 4) {
+					let leftHand1 = arraySaveBodyCoordinate[0];
+					let leftHand2 = arraySaveBodyCoordinate[2];
+					let rightHand1 = arraySaveBodyCoordinate[1];
+					let rightHand2 = arraySaveBodyCoordinate[3];
+					let leftFoot = arraySaveBodyCoordinate[4];
+					let rightFoot = arraySaveBodyCoordinate[5];
 
-          if (
-            checkBodyCoordinate(coord[0], leftHand1[1], coord[1], leftHand1[2], 60) &&
-            checkBodyCoordinate(coord[0], leftHand2[1], coord[1], leftHand2[2], 60)
-          ) {
-            // console.log("leftHand");
-            for (let i = 0; i < ballArrayA.length; i++) {
-              ballArrayA[i].notYetKilled = false;
-            }
-          } else if (
-            checkBodyCoordinate(coord[0], rightHand1[1], coord[1], rightHand1[2], 60) &&
-            checkBodyCoordinate(coord[0], rightHand2[1], coord[1], rightHand2[2], 60)
-          ) {
-            // console.log("rightHand");
-            for (let i = 0; i < ballArrayA.length; i++) {
-              ballArrayA[i].notYetKilled = false;
-            }
-          } 
-          // else if (checkBodyCoordinate(coord[0], leftFoot[1], coord[1], leftFoot[2], 60)) {
-          //   // console.log("leftFoot");
-          //   for (let i = 0; i < ballArrayA.length; i++) {
-          //     ballArrayA[i].notYetKilled = false;
-          //   }
-          // } 
-          // else if (checkBodyCoordinate(coord[0], rightFoot[1], coord[1], rightFoot[2], 60)) {
-          //   // console.log("rightFoot");
-          //   for (let i = 0; i < ballArrayA.length; i++) {
-          //     ballArrayA[i].notYetKilled = false;
-          //   }
-          // }
-        }
-      }
+					if (
+						checkBodyCoordinate(
+							coord[0],
+							leftHand1[1],
+							coord[1],
+							leftHand1[2],
+							60
+						) &&
+						checkBodyCoordinate(
+							coord[0],
+							leftHand2[1],
+							coord[1],
+							leftHand2[2],
+							60
+						)
+					) {
+						// console.log("leftHand");
+						for (let i = 0; i < ballArrayA.length; i++) {
+							ballArrayA[i].notYetKilled = false;
+						}
+					} else if (
+						checkBodyCoordinate(
+							coord[0],
+							rightHand1[1],
+							coord[1],
+							rightHand1[2],
+							60
+						) &&
+						checkBodyCoordinate(
+							coord[0],
+							rightHand2[1],
+							coord[1],
+							rightHand2[2],
+							60
+						)
+					) {
+						// console.log("rightHand");
+						for (let i = 0; i < ballArrayA.length; i++) {
+							ballArrayA[i].notYetKilled = false;
+						}
+					}
+					// else if (
+					// 	checkBodyCoordinate(
+					// 		coord[0],
+					// 		leftFoot[1],
+					// 		coord[1],
+					// 		leftFoot[2],
+					// 		60
+					// 	)
+					// ) {
+					// 	// console.log("leftFoot");
+					// 	for (let i = 0; i < ballArrayA.length; i++) {
+					// 		ballArrayA[i].notYetKilled = false;
+					// 	}
+					// } else if (
+					// 	checkBodyCoordinate(
+					// 		coord[0],
+					// 		rightFoot[1],
+					// 		coord[1],
+					// 		rightFoot[2],
+					// 		60
+					// 	)
+					// ) {
+					// 	// console.log("rightFoot");
+					// 	for (let i = 0; i < ballArrayA.length; i++) {
+					// 		ballArrayA[i].notYetKilled = false;
+					// 	}
+					// }
+				}
+			}
 
-      for (let coord of arrayOfBallBallB) {
-        if (arraySaveBodyCoordinate.length >= 2) {
-          let leftHand1 = arraySaveBodyCoordinate[0];
-          let leftHand2 = arraySaveBodyCoordinate[2];
-          let rightHand1 = arraySaveBodyCoordinate[1];
-          let rightHand2 = arraySaveBodyCoordinate[3];
-          let leftFoot = arraySaveBodyCoordinate[4];
-          let rightFoot = arraySaveBodyCoordinate[5];
+			for (let coord of arrayOfBallBallB) {
+				if (arraySaveBodyCoordinate.length == 4) {
+					let leftHand1 = arraySaveBodyCoordinate[0];
+					let leftHand2 = arraySaveBodyCoordinate[2];
+					let rightHand1 = arraySaveBodyCoordinate[1];
+					let rightHand2 = arraySaveBodyCoordinate[3];
+					let leftFoot = arraySaveBodyCoordinate[4];
+					let rightFoot = arraySaveBodyCoordinate[5];
 
-          if (
-            checkBodyCoordinate(coord[0], leftHand1[1], coord[1], leftHand1[2], 60) &&
-            checkBodyCoordinate(coord[0], leftHand2[1], coord[1], leftHand2[2], 60)
-          ) {
-            // console.log("leftHand");
-            for (let i = 0; i < ballArrayB.length; i++) {
-              ballArrayB[i].notYetKilled = false;
-            }
-          } else if (
-            checkBodyCoordinate(coord[0], rightHand1[1], coord[1], rightHand1[2], 60) &&
-            checkBodyCoordinate(coord[0], rightHand2[1], coord[1], rightHand2[2], 60)
-          ) {
-            // console.log("rightHand");
-            for (let i = 0; i < ballArrayB.length; i++) {
-              ballArrayB[i].notYetKilled = false;
-            }
-          } 
-          // else if (checkBodyCoordinate(coord[0], leftFoot[1], coord[1], leftFoot[2], 60)) {
-          //   // console.log("leftFoot");
-          //   for (let i = 0; i < ballArrayB.length; i++) {
-          //     ballArrayB[i].notYetKilled = false;
-          //   }
-          // } 
-          // else if (checkBodyCoordinate(coord[0], rightFoot[1], coord[1], rightFoot[2], 60)) {
-          //   // console.log("rightFoot");
-          //   for (let i = 0; i < ballArrayB.length; i++) {
-          //     ballArrayB[i].notYetKilled = false;
-          //   }
-          // }
-        }
-      }
+					if (
+						checkBodyCoordinate(
+							coord[0],
+							leftHand1[1],
+							coord[1],
+							leftHand1[2],
+							60
+						) &&
+						checkBodyCoordinate(
+							coord[0],
+							leftHand2[1],
+							coord[1],
+							leftHand2[2],
+							60
+						)
+					) {
+						// console.log("leftHand");
+						for (let i = 0; i < ballArrayB.length; i++) {
+							ballArrayB[i].notYetKilled = false;
+						}
+					} else if (
+						checkBodyCoordinate(
+							coord[0],
+							rightHand1[1],
+							coord[1],
+							rightHand1[2],
+							60
+						) &&
+						checkBodyCoordinate(
+							coord[0],
+							rightHand2[1],
+							coord[1],
+							rightHand2[2],
+							60
+						)
+					) {
+						// console.log("rightHand");
+						for (let i = 0; i < ballArrayB.length; i++) {
+							ballArrayB[i].notYetKilled = false;
+						}
+					}
+					// else if (
+					// 	checkBodyCoordinate(
+					// 		coord[0],
+					// 		leftFoot[1],
+					// 		coord[1],
+					// 		leftFoot[2],
+					// 		60
+					// 	)
+					// ) {
+					// 	// console.log("leftFoot");
+					// 	for (let i = 0; i < ballArrayB.length; i++) {
+					// 		ballArrayB[i].notYetKilled = false;
+					// 	}
+					// } else if (
+					// 	checkBodyCoordinate(
+					// 		coord[0],
+					// 		rightFoot[1],
+					// 		coord[1],
+					// 		rightFoot[2],
+					// 		60
+					// 	)
+					// ) {
+					// 	// console.log("rightFoot");
+					// 	for (let i = 0; i < ballArrayB.length; i++) {
+					// 		ballArrayB[i].notYetKilled = false;
+					// 	}
+					// }
+				}
+			}
 
-      for (let coord of arrayOfBallBallC) {
-        if (arraySaveBodyCoordinate.length >= 2) {
-          let leftHand1 = arraySaveBodyCoordinate[0];
-          let leftHand2 = arraySaveBodyCoordinate[2];
-          let rightHand1 = arraySaveBodyCoordinate[1];
-          let rightHand2 = arraySaveBodyCoordinate[3];
-          let leftFoot = arraySaveBodyCoordinate[4];
-          let rightFoot = arraySaveBodyCoordinate[5];
+			for (let coord of arrayOfBallBallC) {
+				if (arraySaveBodyCoordinate.length == 4) {
+					let leftHand1 = arraySaveBodyCoordinate[0];
+					let leftHand2 = arraySaveBodyCoordinate[2];
+					let rightHand1 = arraySaveBodyCoordinate[1];
+					let rightHand2 = arraySaveBodyCoordinate[3];
+					let leftFoot = arraySaveBodyCoordinate[4];
+					let rightFoot = arraySaveBodyCoordinate[5];
 
-          if (
-            checkBodyCoordinate(coord[0], leftHand1[1], coord[1], leftHand1[2], 60) &&
-            checkBodyCoordinate(coord[0], leftHand2[1], coord[1], leftHand2[2], 60)
-          ) {
-            // console.log("leftHand");
-            for (let i = 0; i < ballArrayC.length; i++) {
-              ballArrayC[i].notYetKilled = false;
-            }
-          } else if (
-            checkBodyCoordinate(coord[0], rightHand1[1], coord[1], rightHand1[2], 60) &&
-            checkBodyCoordinate(coord[0], rightHand2[1], coord[1], rightHand2[2], 60)
-          ) {
-            // console.log("rightHand");
-            for (let i = 0; i < ballArrayC.length; i++) {
-              ballArrayC[i].notYetKilled = false;
-            }
-          } 
-          // else if (checkBodyCoordinate(coord[0], leftFoot[1], coord[1], leftFoot[2], 60)) {
-          //   // console.log("leftFoot");
-          //   for (let i = 0; i < ballArrayC.length; i++) {
-          //     ballArrayC[i].notYetKilled = false;
-          //   }
-          // } 
-          // else if (checkBodyCoordinate(coord[0], rightFoot[1], coord[1], rightFoot[2], 60)) {
-          //   // console.log("rightFoot");
-          //   for (let i = 0; i < ballArrayC.length; i++) {
-          //     ballArrayC[i].notYetKilled = false;
-          //   }
-          // }
-        }
-      }
-    }
-  }
-  // Detect唔到足夠body parts就會暫停倒數 & BGM & Show Pause
-  else if (arraySaveBodyCoordinate.length < 2 && bigTimer < 1815 && bigTimer > 15) {
-    audioPlayer.pause();
-    p.lineWidth = 10;
-    p.arc(200, 200, 180, 0, 2 * Math.PI);
-    p.fillStyle = "white";
-    p.fillRect(140, 115, 30, 180);
-    p.fillRect(240, 115, 30, 180);
-    p.strokeStyle = "white";
-    p.stroke();
-  }
-  canvasCtx.restore();
+					if (
+						checkBodyCoordinate(
+							coord[0],
+							leftHand1[1],
+							coord[1],
+							leftHand1[2],
+							60
+						) &&
+						checkBodyCoordinate(
+							coord[0],
+							leftHand2[1],
+							coord[1],
+							leftHand2[2],
+							60
+						)
+					) {
+						// console.log("leftHand");
+						for (let i = 0; i < ballArrayC.length; i++) {
+							ballArrayC[i].notYetKilled = false;
+						}
+					} else if (
+						checkBodyCoordinate(
+							coord[0],
+							rightHand1[1],
+							coord[1],
+							rightHand1[2],
+							60
+						) &&
+						checkBodyCoordinate(
+							coord[0],
+							rightHand2[1],
+							coord[1],
+							rightHand2[2],
+							60
+						)
+					) {
+						// console.log("rightHand");
+						for (let i = 0; i < ballArrayC.length; i++) {
+							ballArrayC[i].notYetKilled = false;
+						}
+					}
+					// else if (
+					// 	checkBodyCoordinate(
+					// 		coord[0],
+					// 		leftFoot[1],
+					// 		coord[1],
+					// 		leftFoot[2],
+					// 		60
+					// 	)
+					// ) {
+					// 	// console.log("leftFoot");
+					// 	for (let i = 0; i < ballArrayC.length; i++) {
+					// 		ballArrayC[i].notYetKilled = false;
+					// 	}
+					// } else if (
+					// 	checkBodyCoordinate(
+					// 		coord[0],
+					// 		rightFoot[1],
+					// 		coord[1],
+					// 		rightFoot[2],
+					// 		60
+					// 	)
+					// ) {
+					// 	// console.log("rightFoot");
+					// 	for (let i = 0; i < ballArrayC.length; i++) {
+					// 		ballArrayC[i].notYetKilled = false;
+					// 	}
+					// }
+				}
+			}
+		}
+	}
+	// Detect唔到足夠body parts就會暫停倒數 & BGM & Show Pause
+	else if (
+		arraySaveBodyCoordinate.length < 2 &&
+		bigTimer < 1815 &&
+		bigTimer > 15
+	) {
+		audioPlayer.pause();
+		p.lineWidth = 10;
+		p.arc(200, 200, 180, 0, 2 * Math.PI);
+		p.fillStyle = "white";
+		p.fillRect(140, 115, 30, 180);
+		p.fillRect(240, 115, 30, 180);
+		p.strokeStyle = "white";
+		p.stroke();
+	}
+	canvasCtx.restore();
 }
 
 // Load model
@@ -505,3 +632,14 @@ calculateXCoordinate(50);
 function calculateYCoordinate(y) {
 	return (y = parseInt(y * 720));
 }
+
+//////////////////////////////////   React with Database   //////////////////////////////////
+// for (let ballInfo of ballArrayA) {
+// 	let i = 0;
+// 	if (ballInfo.notYetKilled) {
+// 		i++;
+// 		console.log(i);
+// 		return i;
+// 	}
+// }
+//////////////////////////////////   React with Database   //////////////////////////////////
