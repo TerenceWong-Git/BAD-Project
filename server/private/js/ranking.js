@@ -1,4 +1,5 @@
 loadAllRank();
+loadSelfRank();
 
 const start = document.querySelector("body");
 
@@ -23,4 +24,20 @@ async function loadAllRank() {
 	}
 
 	document.querySelector("#all").innerHTML += htmlStr;
+}
+
+async function loadSelfRank() {
+	const resp = await fetch("/players/my_ranking");
+	const ranks = await resp.json();
+	console.log(ranks);
+	let htmlStr = ``;
+	for (const rank of ranks) {
+		htmlStr += /*html*/ `
+        <tr>
+        <td style="text-align: center;">${rank.points}
+        </tr>
+        `;
+	}
+
+	document.querySelector("#own").innerHTML += htmlStr;
 }
