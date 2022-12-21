@@ -122,8 +122,6 @@ function onResults(results) {
 		countDown(calculateCountdown, 4000, 5000, "1");
 
 		if (calculateCountdown >= 2000 && calculateCountdown < 3000) {
-			console.log("calculateCountdown");
-			console.log(calculateCountdown);
 			s.font = "300px Verdana";
 			s.fillStyle = "white";
 			s.fillText("3", 5, 240);
@@ -159,8 +157,15 @@ function onResults(results) {
 
 			// Display Timer (60s countdown)
 			b.clearRect(0, 0, innerWidth, innerHeight);
-			b.fillStyle = "#fcba03";
-			b.fillRect(0, 0, innerWidth, (innerHeight / 1200) * timerHeight);
+			const grd = b.createLinearGradient(0, 0, 0, innerHeight);
+			grd.addColorStop(0, "#F8FE29");
+			grd.addColorStop(0.2, "#C8F424");
+			grd.addColorStop(0.4, "#5bab3c");
+			grd.addColorStop(0.6, "#4B713F");
+			grd.addColorStop(0.8, "#244E30");
+			b.fillStyle = grd;
+			// b.fillRect(0, 0, innerWidth, (innerHeight / 1200) * timerHeight);
+			b.fillRect(0, 0, innerWidth, innerHeight);
 
 			// Pause
 			p.clearRect(0, 0, 400, 400);
@@ -184,8 +189,6 @@ function onResults(results) {
 					lineWidth: 7
 				};
 				ballArrayA.push(ballObjectTemplate);
-				console.log("-- ballArrayA --");
-				console.log(ballArrayA);
 			}
 
 			// B組
