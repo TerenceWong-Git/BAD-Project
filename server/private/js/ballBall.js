@@ -100,7 +100,7 @@ function onResults(results) {
 
 			// 遊戲時間1800秒 = 現實60秒
 			// 遊戲時間每30秒 = 現實1秒
-			if (bigTimer % 1.5 === 0) {
+			if (bigTimer % 3 === 0) {
 				timerHeight += 1;
 			}
 
@@ -112,7 +112,7 @@ function onResults(results) {
 			// Display Timer (60s countdown)
 			b.clearRect(0, 0, innerWidth, innerHeight);
 			b.fillStyle = "#fcba03";
-			b.fillRect(0, 0, innerWidth, (innerHeight / 1200) * timerHeight);
+			b.fillRect(0, 0, innerWidth, (innerHeight / 600) * timerHeight);
 
 			// Pause
 			p.clearRect(0, 0, 400, 400);
