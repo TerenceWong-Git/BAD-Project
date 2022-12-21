@@ -33,7 +33,7 @@ export interface MatchesRecord {
 	players_id: number;
 	points: number;
 	matches_live_id: number;
-	played_at: string;
+	played_at?: string;
 	// Maybe Date
 }
 
