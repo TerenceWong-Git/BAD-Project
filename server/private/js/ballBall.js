@@ -62,8 +62,8 @@ function onResults(results) {
 		// 再將個粒點點代表既部位, x-coordinate, y-coordinate dum 落 modelOutputArrWithBodyParts
 		for (let output of modelOutputArr) {
 			if (output.visibility > 0.6) {
-				// canvasCtx.globalCompositeOperation = "destination-over";
-				canvasCtx.globalCompositeOperation = "source-over";
+				canvasCtx.globalCompositeOperation = "destination-over";
+				// canvasCtx.globalCompositeOperation = "source-over";
 				drawLandmarks(canvasCtx, results.poseLandmarks);
 				modelOutputArrWithBodyParts.push([
 					{ body: output.body, x: output.x, y: output.y }
@@ -85,7 +85,7 @@ function onResults(results) {
 	}
 
 	// 遊戲開始條件 -> 要Detect到足夠既body parts
-	if (arraySaveBodyCoordinate.length === 6 && bigTimer >= 15) {
+	if (arraySaveBodyCoordinate.length === 2 && bigTimer >= 15) {
 		// 遊戲開始前有5秒準備時間
 		// startingCountdown第一個數就係開始準備既時間
 		startingCountdown.push(Date.now());
@@ -138,7 +138,7 @@ function onResults(results) {
 
 			// Display Timer (60s countdown)
 			b.clearRect(0, 0, innerWidth, innerHeight);
-			b.fillStyle = "#fcba03";
+			b.fillStyle = "#5bab3c";
 			b.fillRect(0, 0, innerWidth, (innerHeight / 600) * timerHeight);
 
 			// Pause
