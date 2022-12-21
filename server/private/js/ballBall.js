@@ -127,8 +127,13 @@ function onResults(results) {
 
 			// 遊戲時間1800秒 = 現實60秒
 			// 遊戲時間每30秒 = 現實1秒
-			if (bigTimer % 3 === 0) {
+			if (bigTimer % 1.5 === 0) {
 				timerHeight += 1;
+			}
+
+			if (bigTimer == 14) {
+				let smallTimer = bigTimer;
+				return smallTimer;
 			}
 
 			// Display Timer (60s countdown)
