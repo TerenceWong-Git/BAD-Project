@@ -24,4 +24,6 @@ function duo() {
 		e.preventDefault();
 		alert("$500/monthly to unlock");
 	});
+
+	
 }

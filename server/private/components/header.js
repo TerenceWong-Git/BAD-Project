@@ -1,7 +1,4 @@
-window.onload = async () => {
-	await loadInfo();
-};
-
+loadInfo();
 
 async function loadInfo() {
 	const resp = await fetch("/players/profile");
@@ -53,12 +50,7 @@ document.querySelector("#logout").addEventListener("click", async () => {
 	}
 });
 
-
-	
-	document.querySelector(".players").addEventListener("click", async (e) => {
-		e.preventDefault();
-		window.location.href= "/playerProfile.html";
-		
-	});
-
-
+document.querySelector(".players").addEventListener("click", async (e) => {
+	e.preventDefault();
+	window.location.href = "/playerProfile.html";
+});
