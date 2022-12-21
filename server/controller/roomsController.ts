@@ -1,14 +1,9 @@
 import type { Request, Response } from "express";
-// import { Room } from "../service/model";
 import { RoomsService } from "../service/roomsService";
 import { logger } from "../utils/logger";
 
 export class RoomsController {
 	constructor(private roomsService: RoomsService) {}
-	dummy = async (req: Request, res: Response) => {
-		const data = await this.roomsService.dummy();
-		res.json(data);
-	};
 	createRoom = async (req: Request, res: Response) => {
 		const gameMode = req.params.game;
 		console.log(gameMode);
@@ -36,11 +31,11 @@ export class RoomsController {
 		await this.roomsService.updateRoom(roomId, roomName, roomPass, gameMode);
 		res.status(200).json({ message: "update success" });
 	};
-	checkPlayerNum = async (req: Request, res: Response) => {
+	checkPlayerNum = async (_req: Request, _res: Response) => {
 		// select * from matchlive where room id
 		// if row count >2 => is spectator = true
 	};
-	joinRoom = async (req: Request, res: Response) => {};
-	deleteRoom = async (req: Request, res: Response) => {};
-	roleChange = async (req: Request, res: Response) => {};
+	joinRoom = async (_req: Request, _res: Response) => {};
+	deleteRoom = async (_req: Request, _res: Response) => {};
+	roleChange = async (_req: Request, _res: Response) => {};
 }
