@@ -19,18 +19,9 @@ function solo() {
 	});
 }
 
-// function duo() {
-// 	document.querySelector("#DUO").addEventListener("click", async (e) => {
-// 		e.preventDefault();
-// 		const res = await fetch("/rooms/game/1", {
-// 			method: "POST",
-// 			headers: {
-// 				"Content-Type": "application/json; charset=utf-8"
-// 			}
-// 		});
-// 		if (res.status === 200) {
-// 			window.location.href = `/PreStart.html?matchId=${result.matches_live_id}`;
-// 			console.log("window location:", window.location.search);
-// 		}
-// 	});
-// }
+function duo() {
+	document.querySelector("#DUO").addEventListener("click", async (e) => {
+		e.preventDefault();
+		alert("$500/monthly to unlock");
+	});
+}

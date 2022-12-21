@@ -1,15 +1,15 @@
-window.onload() = () => {
-    loadProfile();
-}
+loadProfile();
+updateProfile();
+
 
 async function loadProfile() {
 	const data = await fetch("/players/profile");
 	const infos = await data.json();
-	let htmlStr = /*html*/ `<div class="box-content">
+	let htmlStr = /*html*/ `<div class="box-content">My Profile
     <form id="form-profile">
-    <box-icon name='rename' ></box-icon>
+    
         <div class="input-box">
-            <box-icon name='rename' ></box-icon>
+        <div>Name :</div>
             <input
                 id="profile_name"
                 value=${infos.name}
@@ -18,7 +18,7 @@ async function loadProfile() {
             />
         </div>
         <div class="input-box">
-            <i class="bx bx-envelope"></i>
+            <div>Email :</div>
             <input
                 type="email"
                 id="login_email"
@@ -28,7 +28,7 @@ async function loadProfile() {
             />
         </div>
         <div class="input-box">
-            <p>Age</p>
+            <div>Age :</div>
             <input
                 type="number"
                 id="profile_age"
@@ -37,14 +37,23 @@ async function loadProfile() {
             />
         </div>
         <div class="input-box" id="input-box-gender">
-            <box-icon name='male-female'></box-icon>
-            <<input type="radio" id="male" name="gender" value="Male">
-            <label for="male">Male</label><br>
-            <<input type="radio" id="female" name="gender" value="Female">
-            <label for="female">Female</label><br>
+            <div>Gender :</div>
+            
+            <label for="male"><input type="radio" id="male" name="gender" value="Male">Male</label>
+            
+            <label for="female"><input type="radio" id="female" name="gender" value="Female">Female</label>
         </div>
         <div id="login-error-msg" class="error-msg"></div>
-        <input type="submit" class="dark-btn" value="login" />
+        <input type="submit" class="dark-btn" value="Update" />
     </form>`;
 	document.querySelector(".box-content").innerHTML = htmlStr;
 }
+
+async function updateProfile() {
+    const data = await fetch("/players/profile");
+	const infos = await data.json();
+    console.log(infos);
+    
+}
+
+

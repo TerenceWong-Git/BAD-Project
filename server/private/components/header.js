@@ -2,6 +2,7 @@ window.onload = async () => {
 	await loadInfo();
 };
 
+
 async function loadInfo() {
 	const resp = await fetch("/players/profile");
 	const infos = await resp.json();
@@ -51,3 +52,13 @@ document.querySelector("#logout").addEventListener("click", async () => {
 		window.location.reload("/");
 	}
 });
+
+
+	
+	document.querySelector(".players").addEventListener("click", async (e) => {
+		e.preventDefault();
+		window.location.href= "/playerProfile.html";
+		
+	});
+
+
