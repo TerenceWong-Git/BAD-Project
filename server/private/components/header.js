@@ -1,9 +1,9 @@
-window.onload = async () => {
-	await loadInfo();
-};
+// window.onload = async () => {
+// 	await loadInfo();
+// };
 
 
-async function loadInfo() {
+export async function loadInfo() {
 	const resp = await fetch("/players/profile");
 	const infos = await resp.json();
 	console.log("hi");
@@ -12,8 +12,8 @@ async function loadInfo() {
 	let htmlStr = /*html*/ `<ul style="color: white;">Hello, ${infos.name}</ul>`;
 	document.querySelector("#player-name").innerHTML = htmlStr;
 }
-
-class Header extends HTMLElement {
+   
+export class Header extends HTMLElement {
 	constructor() {
 		super();
 	}
@@ -53,12 +53,10 @@ document.querySelector("#logout").addEventListener("click", async () => {
 	}
 });
 
-
-	
-	document.querySelector(".players").addEventListener("click", async (e) => {
-		e.preventDefault();
-		window.location.href= "/playerProfile.html";
+document.querySelector(".players").addEventListener("click", async (e) => {
+	e.preventDefault();
+	window.location.href= "/playerProfile.html";
 		
-	});
+});
 
 
