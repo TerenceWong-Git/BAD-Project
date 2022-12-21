@@ -1,6 +1,6 @@
 import express from "express";
 import { ballBallController } from "../routes";
-import { isLoggedInAPI, isMatchIdAPI } from "../utils/guard";
+import { isLoggedInAPI } from "../utils/guard";
 import { asyncWrapper } from "../utils/wrapper";
 
 export const ballBallRoutes = express.Router();
@@ -8,12 +8,10 @@ export const ballBallRoutes = express.Router();
 ballBallRoutes.post(
 	"/reaction",
 	isLoggedInAPI,
-	isMatchIdAPI,
 	asyncWrapper(ballBallController.providePoints)
 );
 ballBallRoutes.get(
 	"/reaction",
 	isLoggedInAPI,
-	isMatchIdAPI,
 	asyncWrapper(ballBallController.getPoints)
 );
