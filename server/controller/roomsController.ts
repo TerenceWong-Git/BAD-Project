@@ -8,11 +8,11 @@ export class RoomsController {
 		const gameMode = req.params.game;
 		console.log(gameMode);
 		const roomName = Math.random().toString(32).slice(2, 12);
-		logger.info("Room Name = ", roomName);
-		logger.info("Length = ", roomName.length);
+		// logger.info("Room Name = ", roomName);
+		// logger.info("Length = ", roomName.length);
 		const roomPass = Math.random().toString().slice(2, 10);
-		logger.info("Room Pass = ", roomPass);
-		logger.info("Length = ", roomPass.length);
+		// logger.info("Room Pass = ", roomPass);
+		// logger.info("Length = ", roomPass.length);
 		const result = await this.roomsService.createRoom(
 			req.session.playerId,
 			roomName,
