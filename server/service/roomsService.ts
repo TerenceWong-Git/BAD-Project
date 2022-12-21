@@ -6,11 +6,6 @@ import { MatchesLive, Room, RoomMatch } from "./model";
 export class RoomsService {
 	constructor(private knex: Knex) {}
 
-	async dummy() {
-		const result = await this.knex();
-		return result;
-	}
-
 	async createRoom(
 		playerId: number | undefined,
 		name: string,
