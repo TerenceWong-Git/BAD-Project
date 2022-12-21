@@ -16,6 +16,7 @@ let ballArrayC = [];
 let gameResult = [];
 let turnOn = true;
 let points = 0;
+let timer;
 
 /////////////////////////////////////   Run in each frame   /////////////////////////////////////
 function onResults(results) {
@@ -116,26 +117,29 @@ function onResults(results) {
 		// 開始前3秒會有提示
 		let calculateCountdown = Date.now() - startingCountdown[0];
 
-		if (calculateCountdown >= 2000 && calculateCountdown < 3000) {
-			s.font = "300px Verdana";
-			s.fillStyle = "white";
-			s.fillText("3", 5, 240);
-		}
-		if (calculateCountdown >= 3000 && calculateCountdown < 4000) {
-			s.clearRect(0, 0, 200, 300);
-			s.font = "300px Verdana";
-			s.fillStyle = "white";
-			s.fillText("2", 5, 240);
-		}
-		if (calculateCountdown >= 4000 && calculateCountdown < 5000) {
-			s.clearRect(0, 0, 200, 300);
-			s.font = "300px Verdana";
-			s.fillStyle = "white";
-			s.fillText("1", 5, 240);
-		}
+		countDown(calculateCountdown, 2000, 3000, "3");
+		countDown(calculateCountdown, 3000, 4000, "2");
+		countDown(calculateCountdown, 4000, 5000, "1");
+		// if (calculateCountdown >= 2000 && calculateCountdown < 3000) {
+		// 	s.font = "300px Verdana";
+		// 	s.fillStyle = "white";
+		// 	s.fillText("3", 5, 240);
+		// }
+		// if (calculateCountdown >= 3000 && calculateCountdown < 4000) {
+		// 	s.clearRect(0, 0, 200, 300);
+		// 	s.font = "300px Verdana";
+		// 	s.fillStyle = "white";
+		// 	s.fillText("2", 5, 240);
+		// }
+		// if (calculateCountdown >= 4000 && calculateCountdown < 5000) {
+		// 	s.clearRect(0, 0, 200, 300);
+		// 	s.font = "300px Verdana";
+		// 	s.fillStyle = "white";
+		// 	s.fillText("1", 5, 240);
+		// }
 
 		// 5秒之後開始遊戲
-		if (Date.now() - startingCountdown[0] > 5000 && bigTimer >= 15) {
+		if (calculateCountdown > 5000 && bigTimer >= 15) {
 			// 清除準備時間倒數提示
 			s.clearRect(0, 0, 200, 300);
 
@@ -309,9 +313,7 @@ function onResults(results) {
 							60
 						)
 					) {
-						for (let i = 0; i < ballArrayA.length; i++) {
-							ballArrayA[ballArrayA.length - 1].notYetKilled = false;
-						}
+						ballArrayA[ballArrayA.length - 1].notYetKilled = false;
 					} else if (
 						checkBodyCoordinate(
 							coord[0],
@@ -328,9 +330,7 @@ function onResults(results) {
 							60
 						)
 					) {
-						for (let i = 0; i < ballArrayA.length; i++) {
-							ballArrayA[ballArrayA.length - 1].notYetKilled = false;
-						}
+						ballArrayA[ballArrayA.length - 1].notYetKilled = false;
 					}
 					// else if (
 					// 	checkBodyCoordinate(
@@ -387,10 +387,7 @@ function onResults(results) {
 							60
 						)
 					) {
-						// console.log("leftHand");
-						for (let i = 0; i < ballArrayB.length; i++) {
-							ballArrayB[ballArrayB.length - 1].notYetKilled = false;
-						}
+						ballArrayB[ballArrayB.length - 1].notYetKilled = false;
 					} else if (
 						checkBodyCoordinate(
 							coord[0],
@@ -407,9 +404,7 @@ function onResults(results) {
 							60
 						)
 					) {
-						for (let i = 0; i < ballArrayB.length; i++) {
-							ballArrayB[ballArrayB.length - 1].notYetKilled = false;
-						}
+						ballArrayB[ballArrayB.length - 1].notYetKilled = false;
 					}
 					// else if (
 					// 	checkBodyCoordinate(
@@ -466,9 +461,7 @@ function onResults(results) {
 							60
 						)
 					) {
-						for (let i = 0; i < ballArrayC.length; i++) {
-							ballArrayC[ballArrayC.length - 1].notYetKilled = false;
-						}
+						ballArrayC[ballArrayC.length - 1].notYetKilled = false;
 					} else if (
 						checkBodyCoordinate(
 							coord[0],
@@ -485,9 +478,7 @@ function onResults(results) {
 							60
 						)
 					) {
-						for (let i = 0; i < ballArrayC.length; i++) {
-							ballArrayC[ballArrayC.length - 1].notYetKilled = false;
-						}
+						ballArrayC[ballArrayC.length - 1].notYetKilled = false;
 					}
 					// else if (
 					// 	checkBodyCoordinate(
@@ -617,15 +608,11 @@ function randomRadius() {
 
 // Check wether body part coordinate in ball ball
 function checkBodyCoordinate(circleX, bodyX, circleY, bodyY, radius) {
-	if (
+	return (
 		(circleX - bodyX) * (circleX - bodyX) +
 			(circleY - bodyY) * (circleY - bodyY) <
 		radius * radius
-	) {
-		return true;
-	} else {
-		return false;
-	}
+	);
 }
 
 // Find body part coordinate
@@ -635,6 +622,14 @@ function calculateXCoordinate(x) {
 calculateXCoordinate(50);
 function calculateYCoordinate(y) {
 	return parseInt(y * 720);
+}
+
+function countDown(timer, a, b, text) {
+	if (timer >= a && timer < b) {
+		s.font = "300px Verdana";
+		s.fillStyle = "white";
+		s.fillText(text, 5, 240);
+	}
 }
 
 //////////////////////////////////   React with Database   //////////////////////////////////
