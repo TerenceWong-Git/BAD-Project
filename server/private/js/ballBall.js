@@ -505,6 +505,9 @@ function onResults(results) {
 				if (pointsC < 0) {
 					pointsC = 0;
 				}
+				if (points < 0) {
+					points = 0;
+				}
 			}
 			console.log(pointsC);
 
@@ -546,9 +549,7 @@ pose.onResults(onResults);
 const camera = new Camera(videoElement, {
 	onFrame: async () => {
 		await pose.send({ image: videoElement });
-	},
-	width: 1280,
-	height: 720
+	}
 });
 camera.start();
 
