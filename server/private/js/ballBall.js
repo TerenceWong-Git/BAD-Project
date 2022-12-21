@@ -158,8 +158,6 @@ function onResults(results) {
 					lineWidth: 7
 				};
 				ballArrayA.push(ballObjectTemplate);
-				console.log("-- ballArrayA --");
-				console.log(ballArrayA);
 			}
 
 			// B組
