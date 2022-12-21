@@ -21,15 +21,4 @@ export class BallBallService {
 			.where("matches_live_id", id);
 		return data;
 	}
-	async providePoints(
-		points: number,
-		players_id: number | undefined,
-		matches_live_id: number
-	) {
-		const importResult = { points, players_id, matches_live_id };
-		const resultOfTheGame = await this.knex(table.MATCHES_RECORD).insert(
-			importResult,"points"
-		);
-		return resultOfTheGame;
-	}
 }
