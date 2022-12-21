@@ -15,7 +15,9 @@ let ballArrayB = [];
 let ballArrayC = [];
 let gameResult = [];
 let turnOn = true;
-let points = 0;
+let pointsA = 0;
+let pointsB = 0;
+let pointsC = 0;
 let timer;
 
 /////////////////////////////////////   Run in each frame   /////////////////////////////////////
@@ -75,41 +77,11 @@ function onResults(results) {
 				calculateXCoordinate(a[1]),
 				calculateYCoordinate(a[2])
 			]);
-			// } else if (a[0] == 19) {
-			// 	arraySaveBodyCoordinate.push([
-			// 		a[0],
-			// 		calculateXCoordinate(a[1]),
-			// 		calculateYCoordinate(a[2])
-			// 	]);
-			// } else if (a[0] == 18) {
-			// 	arraySaveBodyCoordinate.push([
-			// 		a[0],
-			// 		calculateXCoordinate(a[1]),
-			// 		calculateYCoordinate(a[2])
-			// 	]);
-			// } else if (a[0] == 20) {
-			// 	arraySaveBodyCoordinate.push([
-			// 		a[0],
-			// 		calculateXCoordinate(a[1]),
-			// 		calculateYCoordinate(a[2])
-			// 	]);
-			// } else if (a[0] == 27) {
-			// 	arraySaveBodyCoordinate.push([
-			// 		a[0],
-			// 		calculateXCoordinate(a[1]),
-			// 		calculateYCoordinate(a[2])
-			// 	]);
-			// } else if (a[0] == 28) {
-			// 	arraySaveBodyCoordinate.push([
-			// 		a[0],
-			// 		calculateXCoordinate(a[1]),
-			// 		calculateYCoordinate(a[2])
-			// 	]);
 		}
 	}
 
 	// 遊戲開始條件 -> 要Detect到足夠既body parts
-	if (arraySaveBodyCoordinate.length >= 2 && bigTimer >= 15) {
+	if (arraySaveBodyCoordinate.length === 6 && bigTimer >= 15) {
 		// 遊戲開始前有5秒準備時間
 		// startingCountdown第一個數就係開始準備既時間
 		startingCountdown.push(Date.now());
@@ -146,7 +118,7 @@ function onResults(results) {
 
 			// 遊戲時間1800秒 = 現實60秒
 			// 遊戲時間每30秒 = 現實1秒
-			if (bigTimer % 1.5 === 0) {
+			if (bigTimer % 3 === 0) {
 				timerHeight += 1;
 			}
 
@@ -157,15 +129,9 @@ function onResults(results) {
 
 			// Display Timer (60s countdown)
 			b.clearRect(0, 0, innerWidth, innerHeight);
-			const grd = b.createLinearGradient(0, 0, 0, innerHeight);
-			grd.addColorStop(0, "#F8FE29");
-			grd.addColorStop(0.2, "#C8F424");
-			grd.addColorStop(0.4, "#5bab3c");
-			grd.addColorStop(0.6, "#4B713F");
-			grd.addColorStop(0.8, "#244E30");
-			b.fillStyle = grd;
-			// b.fillRect(0, 0, innerWidth, (innerHeight / 1200) * timerHeight);
-			b.fillRect(0, 0, innerWidth, innerHeight);
+			b.fillStyle = "#f8fe29";
+			b.fillRect(0, 0, innerWidth, (innerHeight / 600) * timerHeight);
+			// b.fillRect(0, 0, innerWidth, innerHeight);
 
 			// Pause
 			p.clearRect(0, 0, 400, 400);
@@ -189,6 +155,7 @@ function onResults(results) {
 					lineWidth: 7
 				};
 				ballArrayA.push(ballObjectTemplate);
+				console.log(ballArrayA);
 			}
 
 			// B組
@@ -598,38 +565,11 @@ function onResults(results) {
 							ballArrayA[i].notYetKilled = false;
 						}
 					}
-					// else if (
-					// 	checkBodyCoordinate(
-					// 		coord[0],
-					// 		leftFoot[1],
-					// 		coord[1],
-					// 		leftFoot[2],
-					// 		60
-					// 	)
-					// ) {
-					// 	// console.log("leftFoot");
-					// 	for (let i = 0; i < ballArrayA.length; i++) {
-					// ballArrayA[ballArrayA.length - 1].notYetKilled = false;
-					// 	}
-					// } else if (
-					// 	checkBodyCoordinate(
-					// 		coord[0],
-					// 		rightFoot[1],
-					// 		coord[1],
-					// 		rightFoot[2],
-					// 		60
-					// 	)
-					// ) {
-					// 	// console.log("rightFoot");
-					// 	for (let i = 0; i < ballArrayA.length; i++) {
-					// ballArrayA[ballArrayA.length - 1].notYetKilled = false;
-					// 	}
-					// }
 				}
 			}
 
 			for (let coord of arrayOfBallBallB) {
-				if (arraySaveBodyCoordinate.length == 4) {
+				if (arraySaveBodyCoordinate.length === 6) {
 					let leftHand1 = arraySaveBodyCoordinate[0];
 					let leftHand2 = arraySaveBodyCoordinate[2];
 					let rightHand1 = arraySaveBodyCoordinate[1];
@@ -671,39 +611,32 @@ function onResults(results) {
 						)
 					) {
 						ballArrayB[ballArrayB.length - 1].notYetKilled = false;
+					} else if (
+						checkBodyCoordinate(
+							coord[0],
+							leftFoot[1],
+							coord[1],
+							leftFoot[2],
+							60
+						)
+					) {
+						ballArrayB[ballArrayB.length - 1].notYetKilled = false;
+					} else if (
+						checkBodyCoordinate(
+							coord[0],
+							rightFoot[1],
+							coord[1],
+							rightFoot[2],
+							60
+						)
+					) {
+						ballArrayB[ballArrayB.length - 1].notYetKilled = false;
 					}
-					// else if (
-					// 	checkBodyCoordinate(
-					// 		coord[0],
-					// 		leftFoot[1],
-					// 		coord[1],
-					// 		leftFoot[2],
-					// 		60
-					// 	)
-					// ) {
-					// 	// console.log("leftFoot");
-					// 	for (let i = 0; i < ballArrayB.length; i++) {
-					// 		ballArrayB[ballArrayB.length - 1].notYetKilled = false;
-					// 	}
-					// } else if (
-					// 	checkBodyCoordinate(
-					// 		coord[0],
-					// 		rightFoot[1],
-					// 		coord[1],
-					// 		rightFoot[2],
-					// 		60
-					// 	)
-					// ) {
-					// 	// console.log("rightFoot");
-					// 	for (let i = 0; i < ballArrayB.length; i++) {
-					// 		ballArrayB[ballArrayB.length - 1].notYetKilled = false;
-					// 	}
-					// }
 				}
 			}
 
 			for (let coord of arrayOfBallBallC) {
-				if (arraySaveBodyCoordinate.length == 4) {
+				if (arraySaveBodyCoordinate.length === 6) {
 					let leftHand1 = arraySaveBodyCoordinate[0];
 					let leftHand2 = arraySaveBodyCoordinate[2];
 					let rightHand1 = arraySaveBodyCoordinate[1];
@@ -745,41 +678,34 @@ function onResults(results) {
 						)
 					) {
 						ballArrayC[ballArrayC.length - 1].notYetKilled = false;
+					} else if (
+						checkBodyCoordinate(
+							coord[0],
+							leftFoot[1],
+							coord[1],
+							leftFoot[2],
+							60
+						)
+					) {
+						ballArrayC[ballArrayC.length - 1].notYetKilled = false;
+					} else if (
+						checkBodyCoordinate(
+							coord[0],
+							rightFoot[1],
+							coord[1],
+							rightFoot[2],
+							60
+						)
+					) {
+						ballArrayC[ballArrayC.length - 1].notYetKilled = false;
 					}
-					// else if (
-					// 	checkBodyCoordinate(
-					// 		coord[0],
-					// 		leftFoot[1],
-					// 		coord[1],
-					// 		leftFoot[2],
-					// 		60
-					// 	)
-					// ) {
-					// 	// console.log("leftFoot");
-					// 	for (let i = 0; i < ballArrayC.length; i++) {
-					// 		ballArrayC[ballArrayC.length - 1].notYetKilled = false;
-					// 	}
-					// } else if (
-					// 	checkBodyCoordinate(
-					// 		coord[0],
-					// 		rightFoot[1],
-					// 		coord[1],
-					// 		rightFoot[2],
-					// 		60
-					// 	)
-					// ) {
-					// 	// console.log("rightFoot");
-					// 	for (let i = 0; i < ballArrayC.length; i++) {
-					// 		ballArrayC[ballArrayC.length - 1].notYetKilled = false;
-					// 	}
-					// }
 				}
 			}
 		}
 	}
 	// Detect唔到足夠body parts就會暫停倒數 & BGM & Show Pause
 	else if (
-		arraySaveBodyCoordinate.length < 2 &&
+		arraySaveBodyCoordinate.length < 6 &&
 		bigTimer < 1815 &&
 		bigTimer > 15
 	) {
@@ -793,28 +719,62 @@ function onResults(results) {
 		p.stroke();
 	} else if (bigTimer === 14) {
 		if (turnOn) {
-			for (let killedOrNot of ballArrayA) {
+			for (let killedOrNotA of ballArrayA) {
 				let plus = 0;
 				let minus = 0;
-				gameResult.push(killedOrNot.notYetKilled);
+				gameResult.push(killedOrNotA.notYetKilled);
 				for (let trueOrFalse of gameResult) {
 					if (trueOrFalse === true) {
 						minus++;
 					} else {
 						plus++;
 					}
-					points = 10 * plus - 10 * minus;
+					pointsA = 10 * plus - 10 * minus;
 				}
-				if (points < 0) {
-					points = 0;
+				if (pointsA < 0) {
+					pointsA = 0;
 				}
 			}
+			for (let killedOrNotB of ballArrayB) {
+				let plus = 0;
+				let minus = 0;
+				gameResult.push(killedOrNotB.notYetKilled);
+				for (let trueOrFalse of gameResult) {
+					if (trueOrFalse === true) {
+						minus++;
+					} else {
+						plus++;
+					}
+					pointsB = 10 * plus - 10 * minus;
+				}
+				if (pointsB < 0) {
+					pointsB = 0;
+				}
+			}
+			for (let killedOrNotC of ballArrayA) {
+				let plus = 0;
+				let minus = 0;
+				gameResult.push(killedOrNotC.notYetKilled);
+				for (let trueOrFalse of gameResult) {
+					if (trueOrFalse === true) {
+						minus++;
+					} else {
+						plus++;
+					}
+					pointsC = 10 * plus - 10 * minus;
+				}
+				if (pointsC < 0) {
+					pointsC = 0;
+				}
+			}
+			let total = pointsA + pointsB + pointsC;
+			console.log(total);
 			audioPlayer.pause();
 			audioPlayer.currentTime = 0;
 			arraySaveBodyCoordinate.length = 0;
 			turnOn = false;
 			/////////////////////////////////   Provide points of the game to database   /////////////////////////////////
-			providePointsOfTheGame(points);
+			providePointsOfTheGame(total);
 			const queryString = window.location.search;
 			const urlParams = new URLSearchParams(queryString);
 			const params = urlParams.get("matchId");
