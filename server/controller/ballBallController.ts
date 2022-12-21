@@ -14,6 +14,8 @@ export class BallBallController {
 			player,
 			matches_live_id
 		);
-		res.status(201).json( result );
+		delete req.session.matchLiveId;
+		logger.info(matches_live_id);
+		res.status(201).json(result);
 	};
 }

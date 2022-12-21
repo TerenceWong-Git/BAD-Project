@@ -20,8 +20,9 @@ export class RoomsController {
 			Number(gameMode)
 		);
 		console.log(result);
-		logger.info(result?.rooms_id);
-		logger.info(result?.matches_live_id);
+		logger.info("this is room id 1", result?.rooms_id);
+		logger.info("this is match room id 2", result?.matches_live_id);
+		req.session.matchLiveId = result.matches_live_id;
 		res.status(200).json(result);
 	};
 	updateRoom = async (req: Request, res: Response) => {
