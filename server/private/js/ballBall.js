@@ -24,24 +24,24 @@ let timer;
 function onResults(results) {
 	canvasCtx.save();
 
-    ////////////////////////   Display input image on <canvas class="output_canvas"></canvas>   ////////////////////////
-    canvasCtx.drawImage(
-        results.image,
-        0,
-        0,
-        canvasElement.width,
-        canvasElement.height
-    );
-    ////////////////////////   Display input image on <canvas class="output_canvas"></canvas>   ////////////////////////
+	////////////////////////   Display input image on <canvas class="output_canvas"></canvas>   ////////////////////////
+	canvasCtx.drawImage(
+		results.image,
+		0,
+		0,
+		canvasElement.width,
+		canvasElement.height
+	);
+	////////////////////////   Display input image on <canvas class="output_canvas"></canvas>   ////////////////////////
 
-    // 連埋D點點
-    // drawConnectors(canvasCtx, results.poseLandmarks, POSE_CONNECTIONS, { color: "#00FF00", lineWidth: 4 });
+	// 連埋D點點
+	// drawConnectors(canvasCtx, results.poseLandmarks, POSE_CONNECTIONS, { color: "#00FF00", lineWidth: 4 });
 
-    // 遊戲前準備
-    // Detect body parts -> Display body parts -> Save body parts
-    let modelOutputArr = [];
-    let modelOutputArrWithBodyParts = [];
-    let arraySaveBodyCoordinate = [];
+	// 遊戲前準備
+	// Detect body parts -> Display body parts -> Save body parts
+	let modelOutputArr = [];
+	let modelOutputArrWithBodyParts = [];
+	let arraySaveBodyCoordinate = [];
 
 	// 將(x, y, z)coordinate & 可見度 dum落 modelOutputArr
 	if ("poseLandmarks" in results) {
@@ -54,61 +54,31 @@ function onResults(results) {
 			});
 		}
 
-        // 當可見度大過60%就畫點點
-        // 再將個粒點點代表既部位, x-coordinate, y-coordinate dum 落 modelOutputArrWithBodyParts
-        for (let output of modelOutputArr) {
-            if (output.visibility > 0.6) {
-                // canvasCtx.globalCompositeOperation = "destination-over";
-                canvasCtx.globalCompositeOperation = "source-over";
-                drawLandmarks(canvasCtx, results.poseLandmarks);
-                modelOutputArrWithBodyParts.push([
-                    { body: output.body, x: output.x, y: output.y }
-                ]);
-            }
-        }
-    }
-    // 如果有左右手既點點出現就計翻粒點點既位置
-    for (let outputForKillBall of modelOutputArrWithBodyParts) {
-        let a = Object.values(outputForKillBall[0]);
-        const array = [17, 18, 19, 20, 27, 28];
-        if (array.includes(a[0])) {
-            arraySaveBodyCoordinate.push([
-                a[0],
-                calculateXCoordinate(a[1]),
-                calculateYCoordinate(a[2])
-            ]);
-            // } else if (a[0] == 19) {
-            //  arraySaveBodyCoordinate.push([
-            //      a[0],
-            //      calculateXCoordinate(a[1]),
-            //      calculateYCoordinate(a[2])
-            //  ]);
-            // } else if (a[0] == 18) {
-            //  arraySaveBodyCoordinate.push([
-            //      a[0],
-            //      calculateXCoordinate(a[1]),
-            //      calculateYCoordinate(a[2])
-            //  ]);
-            // } else if (a[0] == 20) {
-            //  arraySaveBodyCoordinate.push([
-            //      a[0],
-            //      calculateXCoordinate(a[1]),
-            //      calculateYCoordinate(a[2])
-            //  ]);
-            // } else if (a[0] == 27) {
-            //  arraySaveBodyCoordinate.push([
-            //      a[0],
-            //      calculateXCoordinate(a[1]),
-            //      calculateYCoordinate(a[2])
-            //  ]);
-            // } else if (a[0] == 28) {
-            //  arraySaveBodyCoordinate.push([
-            //      a[0],
-            //      calculateXCoordinate(a[1]),
-            //      calculateYCoordinate(a[2])
-            //  ]);
-        }
-    }
+		// 當可見度大過60%就畫點點
+		// 再將個粒點點代表既部位, x-coordinate, y-coordinate dum 落 modelOutputArrWithBodyParts
+		for (let output of modelOutputArr) {
+			if (output.visibility > 0.6) {
+				// canvasCtx.globalCompositeOperation = "destination-over";
+				canvasCtx.globalCompositeOperation = "source-over";
+				drawLandmarks(canvasCtx, results.poseLandmarks);
+				modelOutputArrWithBodyParts.push([
+					{ body: output.body, x: output.x, y: output.y }
+				]);
+			}
+		}
+	}
+	// 如果有左右手既點點出現就計翻粒點點既位置
+	for (let outputForKillBall of modelOutputArrWithBodyParts) {
+		let a = Object.values(outputForKillBall[0]);
+		const array = [17, 18, 19, 20, 27, 28];
+		if (array.includes(a[0])) {
+			arraySaveBodyCoordinate.push([
+				a[0],
+				calculateXCoordinate(a[1]),
+				calculateYCoordinate(a[2])
+			]);
+		}
+	}
 
 	// 遊戲開始條件 -> 要Detect到足夠既body parts
 	if (arraySaveBodyCoordinate.length === 6 && bigTimer >= 15) {
