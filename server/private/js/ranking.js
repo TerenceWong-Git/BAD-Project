@@ -1,5 +1,15 @@
 loadAllRank();
-// loadResult();
+
+
+const start = document.querySelector("body");
+
+start.addEventListener("keypress", (e) => {
+	e.preventDefault();
+	console.log("active");
+	window.location.href= "/playerMainPage.html" ;
+});
+
+
 
 
 async function loadAllRank() {
@@ -14,8 +24,7 @@ async function loadAllRank() {
         <td>${rank.points}
         </tr>
         `;
-
     };
     
-	document.querySelector("table").innerHTML = htmlStr;
+	document.querySelector("#all").innerHTML += htmlStr;
 };

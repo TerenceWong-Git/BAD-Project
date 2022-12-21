@@ -16,6 +16,11 @@
     font-size: x-large;
   }
 
+
+  #exit, p {
+    margin: 5vh;
+  }
+
   section#headline {
     margin: 50px 0 10px 0;
 }
@@ -48,6 +53,12 @@
     padding: 16px;
     font-size: x-large;
   }
+
+  th {
+    height: 100%;
+    background-color: #c8f424;
+    color: black;
+}
   
   tr:nth-child(even) {
     background-color: #0B2918;

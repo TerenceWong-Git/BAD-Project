@@ -14,8 +14,12 @@ export class BallBallController {
 			player,
 			matches_live_id
 		);
-		delete req.session.matchLiveId;
-		logger.info(matches_live_id);
 		res.status(201).json(result);
+	};
+	getPoints = async (req: Request, res: Response) => {
+		const result = await this.ballBallService.getPoints(
+			req.session.matchLiveId
+		);
+		res.status(200).json(result);
 	};
 }

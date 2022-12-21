@@ -11,3 +11,9 @@ ballBallRoutes.post(
 	isMatchIdAPI,
 	asyncWrapper(ballBallController.providePoints)
 );
+ballBallRoutes.get(
+	"/reaction",
+	isLoggedInAPI,
+	isMatchIdAPI,
+	asyncWrapper(ballBallController.getPoints)
+);
