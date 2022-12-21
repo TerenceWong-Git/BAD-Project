@@ -38,6 +38,7 @@ declare module "express-session" {
 	interface SessionData {
 		// To save more items along with cookie
 		playerId?: number;
+		matchLiveId?: number;
 	}
 }
 
@@ -50,31 +51,31 @@ io.use((socket, next) => {
 	sessionMiddleware(req, res, next as express.NextFunction);
 });
 
-app.use((req, res, next) => {
+app.use((req, _res, next) => {
 	logger.debug(`Path: ${req.path},,, Method: ${req.method}`);
 	next();
 });
 
 import { routes } from "./routes";
 import { ApplicationError } from "./utils/error";
-import { isLoggedInStatic } from "./utils/guard";
+import { isLoggedInStatic, isMatchIdStatic } from "./utils/guard";
 app.use(routes);
 
 app.use(express.static(path.join(__dirname, "public")));
 app.use(isLoggedInStatic, express.static(path.join(__dirname, "private")));
+app.use(
+	isLoggedInStatic,
+	isMatchIdStatic,
+	express.static(path.join(__dirname, "resource"))
+);
 
 // 404 Not Found
-app.use((req, res) => {
+app.use((_req, res) => {
 	res.sendFile(path.join(__dirname, "public", "404.html"));
 });
 
 app.use(
-	(
-		err: ApplicationError,
-		req: express.Request,
-		res: express.Response,
-		next: express.NextFunction
-	) => {
+	(err: ApplicationError, _req: express.Request, res: express.Response) => {
 		logger.error(err.message);
 		res.status(err.httpStatus).json({ message: err.message });
 	}

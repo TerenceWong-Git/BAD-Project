@@ -23,3 +23,25 @@ export const isLoggedInStatic = (
 	}
 	next();
 };
+
+export const isMatchIdAPI = (
+	req: Request,
+	_res: Response,
+	next: NextFunction
+) => {
+	if (req.session.matchLiveId !== req.query.matchId) {
+		throw new UnauthorizedError();
+	}
+	next();
+};
+
+export const isMatchIdStatic = (
+	req: Request,
+	res: Response,
+	next: NextFunction
+) => {
+	if (req.session.matchLiveId !== req.query.matchId) {
+		res.redirect("/playerMainPage.html");
+	}
+	next();
+};
