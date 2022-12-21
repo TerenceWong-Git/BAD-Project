@@ -40,8 +40,8 @@ export const isMatchIdStatic = (
 	res: Response,
 	next: NextFunction
 ) => {
-	console.log("this is match 1 ", typeof req.session.matchLiveId);
-	console.log("this is match 2 ", typeof req.query.matchId);
+	// console.log("this is match 1 ", typeof req.session.matchLiveId);
+	// console.log("this is match 2 ", typeof req.query.matchId);
 	if (req.session.matchLiveId !== Number(req.query.matchId)) {
 		res.redirect("/playerMainPage.html");
 		return;
