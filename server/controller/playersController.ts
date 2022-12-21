@@ -32,14 +32,12 @@ export class PlayersController {
 		res.status(200).json(data);
 	};
 	updateProfile = async (req: Request, res: Response) => {
-		const { name, email, image, age, gender } = req.body;
+		const { name, email, age } = req.body;
 		const result = await this.playersService.updateProfile(
 			req.session.playerId,
 			name,
 			email,
-			image,
-			Number(age),
-			Number(gender)
+			Number(age)
 		);
 		if (!result) {
 			throw new InternalServerError();

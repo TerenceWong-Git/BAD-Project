@@ -41,9 +41,7 @@ export class PlayersService {
 		id: number | undefined,
 		name: string,
 		email: string,
-		image: string,
-		age: number,
-		gender: number
+		age: number
 	) {
 		const player = await this.knex<{ id: number }[] | { id: number } | Player>(
 			table.PLAYERS
@@ -53,9 +51,7 @@ export class PlayersService {
 				{
 					name: name,
 					email: email,
-					image: image,
-					age: age,
-					gender: gender
+					age: age
 				},
 				"id"
 			);
