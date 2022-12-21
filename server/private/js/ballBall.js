@@ -138,7 +138,7 @@ function onResults(results) {
 
 			// Display Timer (60s countdown)
 			b.clearRect(0, 0, innerWidth, innerHeight);
-			b.fillStyle = "#5bab3c";
+			b.fillStyle = "black";
 			b.fillRect(0, 0, innerWidth, (innerHeight / 600) * timerHeight);
 
 			// Pause

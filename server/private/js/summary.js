@@ -1,5 +1,8 @@
 loadName();
 loadResult();
+main();
+profile();
+ranking();
 
 async function loadName() {
 	const resp = await fetch("/players/profile");
@@ -18,4 +21,22 @@ async function loadResult() {
 	document.querySelector("#td2").innerHTML = CurrentPointHtmlStr;
 	let HighestPointHtmlStr = /*html*/ `<div class="right">${highestResults[0].points}</div>`;
 	document.querySelector("#td3").innerHTML = HighestPointHtmlStr;
+}
+function profile() {
+	document.querySelector("#toProfile").addEventListener("click", async (e) => {
+		e.preventDefault();
+		window.location.href = `/playerProfile.html`;
+	});
+}
+function ranking() {
+	document.querySelector("#toRanking").addEventListener("click", async (e) => {
+		e.preventDefault();
+		window.location.href = `/ranking.html`;
+	});
+}
+function main() {
+	document.querySelector("#toMainPage").addEventListener("click", async (e) => {
+		e.preventDefault();
+		window.location.href = `/playerMainPage.html`;
+	});
 }
