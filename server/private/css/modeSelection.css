@@ -3,6 +3,10 @@
 
 @import url("https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css");
 
+section {
+    margin: 10%;
+}
+
 button#DUO {
 	position: relative;
 	width: 20vw;
@@ -12,6 +16,12 @@ button#DUO {
 	font-family: "Orbitron";
 	font-size: xx-large;
 	font-weight: bold;
+	cursor: pointer;
+	transition: transform .2s;
+}
+
+#DUO:hover{
+	transform: scale(1.5);
 }
 
 button#SOLO {
@@ -23,6 +33,12 @@ button#SOLO {
 	font-family: "Orbitron";
 	font-size: xx-large;
 	font-weight: bold;
+	cursor: pointer;
+	transition: transform .2s;
+}
+
+#SOLO:hover{
+	transform: scale(1.5);
 }
 
 .container {
