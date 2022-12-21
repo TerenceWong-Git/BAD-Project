@@ -1,5 +1,14 @@
-loadProfile();
-updateProfile();
+import { loadInfo } from "../components/header";
+
+window.onload = async () => {
+    await loadInfo();
+	await loadProfile();
+    await updateProfile();
+};
+
+
+
+
 
 
 async function loadProfile() {
@@ -11,17 +20,18 @@ async function loadProfile() {
         <div class="input-box">
         <div>Name :</div>
             <input
+                type="text"
                 id="profile_name"
                 value=${infos.name}
-                id="profile_name"
-                type="text"
+                name="profile_name"
+                
             />
         </div>
         <div class="input-box">
             <div>Email :</div>
             <input
                 type="email"
-                id="login_email"
+                id="profile_email"
                 value=${infos.email}
                 name="profile_email"
                 readonly
@@ -50,10 +60,20 @@ async function loadProfile() {
 }
 
 async function updateProfile() {
-    const data = await fetch("/players/profile");
-	const infos = await data.json();
-    console.log(infos);
     
+    document.querySelector("#form-profile").addEventListener("submit", async (e) => {
+        e.preventDefault();
+        const form = e.target;
+        // const email = form.profile_email.value;
+		const username = form.profile_name.value;
+		const age = form.profile_age.placeholder;
+		const gender = form.male.value;
+        console.log(username, age, gender);
+
+        // const data = await fetch("/players/profile");
+        // const infos = await data.json();
+        // console.log(infos);
+    });
 }
 
 
