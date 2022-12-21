@@ -120,23 +120,26 @@ function onResults(results) {
 		countDown(calculateCountdown, 2000, 3000, "3");
 		countDown(calculateCountdown, 3000, 4000, "2");
 		countDown(calculateCountdown, 4000, 5000, "1");
-		// if (calculateCountdown >= 2000 && calculateCountdown < 3000) {
-		// 	s.font = "300px Verdana";
-		// 	s.fillStyle = "white";
-		// 	s.fillText("3", 5, 240);
-		// }
-		// if (calculateCountdown >= 3000 && calculateCountdown < 4000) {
-		// 	s.clearRect(0, 0, 200, 300);
-		// 	s.font = "300px Verdana";
-		// 	s.fillStyle = "white";
-		// 	s.fillText("2", 5, 240);
-		// }
-		// if (calculateCountdown >= 4000 && calculateCountdown < 5000) {
-		// 	s.clearRect(0, 0, 200, 300);
-		// 	s.font = "300px Verdana";
-		// 	s.fillStyle = "white";
-		// 	s.fillText("1", 5, 240);
-		// }
+
+		if (calculateCountdown >= 2000 && calculateCountdown < 3000) {
+			console.log("calculateCountdown");
+			console.log(calculateCountdown);
+			s.font = "300px Verdana";
+			s.fillStyle = "white";
+			s.fillText("3", 5, 240);
+		}
+		if (calculateCountdown >= 3000 && calculateCountdown < 4000) {
+			s.clearRect(0, 0, 200, 300);
+			s.font = "300px Verdana";
+			s.fillStyle = "white";
+			s.fillText("2", 5, 240);
+		}
+		if (calculateCountdown >= 4000 && calculateCountdown < 5000) {
+			s.clearRect(0, 0, 200, 300);
+			s.font = "300px Verdana";
+			s.fillStyle = "white";
+			s.fillText("1", 5, 240);
+		}
 
 		// 5秒之後開始遊戲
 		if (calculateCountdown > 5000 && bigTimer >= 15) {
@@ -289,7 +292,7 @@ function onResults(results) {
 			// 判斷body parts有冇掂到波波
 			// 整走Type A Ball Ball
 			for (let coord of arrayOfBallBallA) {
-				if (arraySaveBodyCoordinate.length == 4) {
+				if (arraySaveBodyCoordinate.length >= 4) {
 					let leftHand1 = arraySaveBodyCoordinate[0];
 					let leftHand2 = arraySaveBodyCoordinate[2];
 					let rightHand1 = arraySaveBodyCoordinate[1];
@@ -331,6 +334,7 @@ function onResults(results) {
 						)
 					) {
 						ballArrayA[ballArrayA.length - 1].notYetKilled = false;
+						console.log(ballArrayA);
 					}
 					// else if (
 					// 	checkBodyCoordinate(
@@ -525,7 +529,7 @@ function onResults(results) {
 		p.fillRect(240, 115, 30, 180);
 		p.strokeStyle = "white";
 		p.stroke();
-	} else if (bigTimer == 14) {
+	} else if (bigTimer === 14) {
 		if (turnOn) {
 			for (let killedOrNot of ballArrayA) {
 				let plus = 0;
@@ -545,8 +549,8 @@ function onResults(results) {
 			}
 			audioPlayer.pause();
 			audioPlayer.currentTime = 0;
-
 			arraySaveBodyCoordinate.length = 0;
+			turnOn = false;
 			/////////////////////////////////   Provide points of the game to database   /////////////////////////////////
 			providePointsOfTheGame(points);
 			const queryString = window.location.search;
@@ -554,7 +558,6 @@ function onResults(results) {
 			const params = urlParams.get("matchId");
 
 			window.location = `/summary.html?matchId=${params}`;
-			turnOn = false;
 		}
 	}
 	canvasCtx.restore();
