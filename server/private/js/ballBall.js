@@ -62,52 +62,49 @@ function onResults(results) {
 					{ body: output.body, x: output.x, y: output.y }
 				]);
 			}
-			// console.log(modelOutputArrWithBodyParts);
 		}
 	}
 	// 如果有左右手既點點出現就計翻粒點點既位置
 	for (let outputForKillBall of modelOutputArrWithBodyParts) {
 		let a = Object.values(outputForKillBall[0]);
-		if (a[0] == 17) {
+		const array = [17, 18, 19, 20, 27, 28];
+		if (array.contains(a[0])) {
 			arraySaveBodyCoordinate.push([
 				a[0],
 				calculateXCoordinate(a[1]),
 				calculateYCoordinate(a[2])
 			]);
-		} else if (a[0] == 19) {
-			arraySaveBodyCoordinate.push([
-				a[0],
-				calculateXCoordinate(a[1]),
-				calculateYCoordinate(a[2])
-			]);
-		} else if (a[0] == 18) {
-			arraySaveBodyCoordinate.push([
-				a[0],
-				calculateXCoordinate(a[1]),
-				calculateYCoordinate(a[2])
-			]);
-		} else if (a[0] == 20) {
-			arraySaveBodyCoordinate.push([
-				a[0],
-				calculateXCoordinate(a[1]),
-				calculateYCoordinate(a[2])
-			]);
-		} else if (a[0] == 27) {
-			arraySaveBodyCoordinate.push([
-				a[0],
-				calculateXCoordinate(a[1]),
-				calculateYCoordinate(a[2])
-			]);
-		} else if (a[0] == 28) {
-			arraySaveBodyCoordinate.push([
-				a[0],
-				calculateXCoordinate(a[1]),
-				calculateYCoordinate(a[2])
-			]);
+			// } else if (a[0] == 19) {
+			// 	arraySaveBodyCoordinate.push([
+			// 		a[0],
+			// 		calculateXCoordinate(a[1]),
+			// 		calculateYCoordinate(a[2])
+			// 	]);
+			// } else if (a[0] == 18) {
+			// 	arraySaveBodyCoordinate.push([
+			// 		a[0],
+			// 		calculateXCoordinate(a[1]),
+			// 		calculateYCoordinate(a[2])
+			// 	]);
+			// } else if (a[0] == 20) {
+			// 	arraySaveBodyCoordinate.push([
+			// 		a[0],
+			// 		calculateXCoordinate(a[1]),
+			// 		calculateYCoordinate(a[2])
+			// 	]);
+			// } else if (a[0] == 27) {
+			// 	arraySaveBodyCoordinate.push([
+			// 		a[0],
+			// 		calculateXCoordinate(a[1]),
+			// 		calculateYCoordinate(a[2])
+			// 	]);
+			// } else if (a[0] == 28) {
+			// 	arraySaveBodyCoordinate.push([
+			// 		a[0],
+			// 		calculateXCoordinate(a[1]),
+			// 		calculateYCoordinate(a[2])
+			// 	]);
 		}
-		// console.log("-- arraySaveBodyCoordinate --");
-		// console.log(arraySaveBodyCoordinate);
-		// console.log(modelOutputArrWithBodyParts);
 	}
 
 	// 遊戲開始條件 -> 要Detect到足夠既body parts
@@ -120,23 +117,17 @@ function onResults(results) {
 		let calculateCountdown = Date.now() - startingCountdown[0];
 
 		if (calculateCountdown >= 2000 && calculateCountdown < 3000) {
-			// console.log("3");
-			// console.log(Date.now());
 			s.font = "300px Verdana";
 			s.fillStyle = "white";
 			s.fillText("3", 5, 240);
 		}
 		if (calculateCountdown >= 3000 && calculateCountdown < 4000) {
-			// console.log("2");
-			// console.log(Date.now());
 			s.clearRect(0, 0, 200, 300);
 			s.font = "300px Verdana";
 			s.fillStyle = "white";
 			s.fillText("2", 5, 240);
 		}
 		if (calculateCountdown >= 4000 && calculateCountdown < 5000) {
-			// console.log("1");
-			// console.log(Date.now());
 			s.clearRect(0, 0, 200, 300);
 			s.font = "300px Verdana";
 			s.fillStyle = "white";
@@ -152,7 +143,6 @@ function onResults(results) {
 			// 遊戲時間每30秒 = 現實1秒
 			if (bigTimer % 15 === 0) {
 				timerWidth += 1;
-				// console.log(timerWidth);
 			}
 
 			if (bigTimer == 14) {
@@ -190,7 +180,6 @@ function onResults(results) {
 				ballArrayA.push(ballObjectTemplate);
 				console.log("-- ballArrayA --");
 				console.log(ballArrayA);
-				// console.log(ballObjectTemplate.radius);
 			}
 
 			// B組
@@ -207,9 +196,6 @@ function onResults(results) {
 					lineWidth: 7
 				};
 				ballArrayB.push(ballObjectTemplate);
-				// console.log("-- ballArrayB --");
-				// console.log(ballArrayB);
-				// console.log(ballObjectTemplate.radius);
 			}
 
 			// C組
@@ -226,9 +212,6 @@ function onResults(results) {
 					lineWidth: 7
 				};
 				ballArrayC.push(ballObjectTemplate);
-				// console.log("-- ballArrayC --");
-				// console.log(ballArrayC);
-				// console.log(ballObjectTemplate.radius);
 			}
 
 			bigTimer -= 1;
@@ -254,8 +237,6 @@ function onResults(results) {
 						canvasCtx.strokeStyle = ball.color;
 						canvasCtx.stroke();
 						arrayOfBallBallA.push([ball.xCoordinate, ball.yCoordinate]);
-						// console.log("ballA");
-						// console.log(arrayOfBallBallA);
 					}
 				}
 			}
@@ -277,8 +258,6 @@ function onResults(results) {
 						canvasCtx.strokeStyle = ball.color;
 						canvasCtx.stroke();
 						arrayOfBallBallB.push([ball.xCoordinate, ball.yCoordinate]);
-						// console.log("ballB");
-						// console.log(arrayOfBallBallB);
 					}
 				}
 			}
@@ -300,8 +279,6 @@ function onResults(results) {
 						canvasCtx.strokeStyle = ball.color;
 						canvasCtx.stroke();
 						arrayOfBallBallC.push([ball.xCoordinate, ball.yCoordinate]);
-						// console.log("ballC");
-						// console.log(arrayOfBallBallC);
 					}
 				}
 			}
@@ -333,7 +310,6 @@ function onResults(results) {
 							60
 						)
 					) {
-						// console.log("leftHand");
 						for (let i = 0; i < ballArrayA.length; i++) {
 							ballArrayA[ballArrayA.length - 1].notYetKilled = false;
 						}
@@ -353,7 +329,6 @@ function onResults(results) {
 							60
 						)
 					) {
-						// console.log("rightHand");
 						for (let i = 0; i < ballArrayA.length; i++) {
 							ballArrayA[ballArrayA.length - 1].notYetKilled = false;
 						}
@@ -433,7 +408,6 @@ function onResults(results) {
 							60
 						)
 					) {
-						// console.log("rightHand");
 						for (let i = 0; i < ballArrayB.length; i++) {
 							ballArrayB[ballArrayB.length - 1].notYetKilled = false;
 						}
@@ -493,7 +467,6 @@ function onResults(results) {
 							60
 						)
 					) {
-						// console.log("leftHand");
 						for (let i = 0; i < ballArrayC.length; i++) {
 							ballArrayC[ballArrayC.length - 1].notYetKilled = false;
 						}
@@ -513,7 +486,6 @@ function onResults(results) {
 							60
 						)
 					) {
-						// console.log("rightHand");
 						for (let i = 0; i < ballArrayC.length; i++) {
 							ballArrayC[ballArrayC.length - 1].notYetKilled = false;
 						}
@@ -657,11 +629,11 @@ function checkBodyCoordinate(circleX, bodyX, circleY, bodyY, radius) {
 
 // Find body part coordinate
 function calculateXCoordinate(x) {
-	return (x = parseInt(x * 1280));
+	return parseInt(x * 1280);
 }
 calculateXCoordinate(50);
 function calculateYCoordinate(y) {
-	return (y = parseInt(y * 720));
+	return parseInt(y * 720);
 }
 
 //////////////////////////////////   React with Database   //////////////////////////////////
@@ -674,7 +646,7 @@ async function providePointsOfTheGame(numberP) {
 		points: numberP,
 		matches_live_id: params
 	};
-	const resp = await fetch("/ballBall/reaction", {
+	await fetch("/ballBall/reaction", {
 		method: "POST",
 		headers: {
 			"content-type": "application/json; charset=utf-8"
