@@ -111,7 +111,7 @@ function onResults(results) {
 	}
 
 	// 遊戲開始條件 -> 要Detect到足夠既body parts
-	if (arraySaveBodyCoordinate.length >= 2) {
+	if (arraySaveBodyCoordinate.length >= 2 && bigTimer >= 15) {
 		// 遊戲開始前有5秒準備時間
 		// startingCountdown第一個數就係開始準備既時間
 		startingCountdown.push(Date.now());
@@ -577,13 +577,21 @@ function onResults(results) {
 					}
 					points = 10 * plus - 10 * minus;
 				}
+				if (points < 0) {
+					points = 0;
+				}
 			}
-			console.log(gameResult);
-			console.log(points);
+			audioPlayer.pause();
+			audioPlayer.currentTime = 0;
 
+			arraySaveBodyCoordinate.length = 0;
 			/////////////////////////////////   Provide points of the game to database   /////////////////////////////////
 			providePointsOfTheGame(points);
+			const queryString = window.location.search;
+			const urlParams = new URLSearchParams(queryString);
+			const params = urlParams.get("matchId");
 
+			window.location = `/summary.html?matchId=${params}`;
 			turnOn = false;
 		}
 	}
@@ -609,9 +617,7 @@ pose.onResults(onResults);
 const camera = new Camera(videoElement, {
 	onFrame: async () => {
 		await pose.send({ image: videoElement });
-	},
-	width: 1280,
-	height: 720
+	}
 });
 camera.start();
 
@@ -660,10 +666,13 @@ function calculateYCoordinate(y) {
 
 //////////////////////////////////   React with Database   //////////////////////////////////
 async function providePointsOfTheGame(numberP) {
-	// const pointsOfTheGame = line 578;
+	const queryString = window.location.search;
+	const urlParams = new URLSearchParams(queryString);
+	const params = urlParams.get("matchId");
+
 	const formBody = {
 		points: numberP,
-		matches_live_id: 1
+		matches_live_id: params
 	};
 	const resp = await fetch("/ballBall/reaction", {
 		method: "POST",
