@@ -9,7 +9,7 @@ const p = document.getElementById("pause").getContext("2d");
 // Build global setting
 let bigTimer = 1815;
 let startingCountdown = [];
-let timerWidth = 0;
+let timerHeight = 0;
 let ballArrayA = [];
 let ballArrayB = [];
 let ballArrayC = [];
@@ -55,8 +55,8 @@ function onResults(results) {
 		// 再將個粒點點代表既部位, x-coordinate, y-coordinate dum 落 modelOutputArrWithBodyParts
 		for (let output of modelOutputArr) {
 			if (output.visibility > 0.6) {
-				canvasCtx.globalCompositeOperation = "destination-over";
-				// canvasCtx.globalCompositeOperation = "source-over";
+				// canvasCtx.globalCompositeOperation = "destination-over";
+				canvasCtx.globalCompositeOperation = "source-over";
 				drawLandmarks(canvasCtx, results.poseLandmarks);
 				modelOutputArrWithBodyParts.push([
 					{ body: output.body, x: output.x, y: output.y }
@@ -141,8 +141,8 @@ function onResults(results) {
 
 			// 遊戲時間1800秒 = 現實60秒
 			// 遊戲時間每30秒 = 現實1秒
-			if (bigTimer % 15 === 0) {
-				timerWidth += 1;
+			if (bigTimer % 1.5 === 0) {
+				timerHeight += 1;
 			}
 
 			if (bigTimer == 14) {
@@ -151,10 +151,9 @@ function onResults(results) {
 			}
 
 			// Display Timer (60s countdown)
-			b.clearRect(0, 0, 1534, 746);
+			b.clearRect(0, 0, innerWidth, innerHeight);
 			b.fillStyle = "#fcba03";
-			// b.setTransform(1, 0, 0, -1, 0, 6.2 * timerWidth);
-			b.fillRect(0, 0, 1534, 6.225 * timerWidth);
+			b.fillRect(0, 0, innerWidth, (innerHeight / 1200) * timerHeight);
 
 			// Pause
 			p.clearRect(0, 0, 400, 400);
