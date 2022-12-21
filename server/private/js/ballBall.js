@@ -13,9 +13,6 @@ let timerHeight = 0;
 let ballArrayA = [];
 let ballArrayB = [];
 let ballArrayC = [];
-let arrayOfBallBallA = [];
-let arrayOfBallBallB = [];
-let arrayOfBallBallC = [];
 let gameResult = [];
 let turnOn = true;
 let pointsA = 0;
@@ -36,6 +33,10 @@ function onResults(results) {
 		canvasElement.height
 	);
 	////////////////////////   Display input image on <canvas class="output_canvas"></canvas>   ////////////////////////
+
+	// 連埋D點點
+	// drawConnectors(canvasCtx, results.poseLandmarks, POSE_CONNECTIONS, { color: "#00FF00", lineWidth: 4 });
+
 	// 遊戲前準備
 	// Detect body parts -> Display body parts -> Save body parts
 	let modelOutputArr = [];
@@ -76,12 +77,11 @@ function onResults(results) {
 				calculateXCoordinate(a[1]),
 				calculateYCoordinate(a[2])
 			]);
-			console.log(arraySaveBodyCoordinate);
 		}
 	}
 
 	// 遊戲開始條件 -> 要Detect到足夠既body parts
-	if (arraySaveBodyCoordinate.length >= 2 && bigTimer >= 15) {
+	if (arraySaveBodyCoordinate.length === 6 && bigTimer >= 15) {
 		// 遊戲開始前有5秒準備時間
 		// startingCountdown第一個數就係開始準備既時間
 		startingCountdown.push(Date.now());
@@ -100,20 +100,19 @@ function onResults(results) {
 
 			// 遊戲時間1800秒 = 現實60秒
 			// 遊戲時間每30秒 = 現實1秒
-			if (bigTimer % 3 === 0) {
+			if (bigTimer % 1.5 === 0) {
 				timerHeight += 1;
+			}
+
+			if (bigTimer == 14) {
+				let smallTimer = bigTimer;
+				return smallTimer;
 			}
 
 			// Display Timer (60s countdown)
 			b.clearRect(0, 0, innerWidth, innerHeight);
-			const grd = b.createLinearGradient(0, 0, 0, innerHeight);
-			grd.addColorStop(0, "#F8FE29");
-			grd.addColorStop(0.2, "#C8F424");
-			grd.addColorStop(0.4, "#5bab3c");
-			grd.addColorStop(0.6, "#4B713F");
-			grd.addColorStop(0.8, "#244E30");
-			b.fillStyle = grd;
-			b.fillRect(0, 0, innerWidth, (innerHeight / 600) * timerHeight);
+			b.fillStyle = "#fcba03";
+			b.fillRect(0, 0, innerWidth, (innerHeight / 1200) * timerHeight);
 
 			// Pause
 			p.clearRect(0, 0, 400, 400);
@@ -123,18 +122,127 @@ function onResults(results) {
 			audioPlayer.play();
 
 			// 控制幾時出波波
-			genBallBall(45, 0);
-			genBallBall(60, 1);
-			genBallBall(75, 2);
+			// A組
+			if (bigTimer >= 15 && bigTimer % 45 === 0) {
+				// 45
+				let ballObjectTemplate = {
+					startTime: Date.now(),
+					isAlive: true,
+					notYetKilled: true,
+					xCoordinate: xCoordinate(),
+					yCoordinate: yCoordinate(),
+					radius: randomRadius(),
+					color: "#fcd703",
+					lineWidth: 7
+				};
+				ballArrayA.push(ballObjectTemplate);
+				console.log("-- ballArrayA --");
+				console.log(ballArrayA);
+			}
+
+			// B組
+			if (bigTimer >= 15 && bigTimer % 60 === 0) {
+				// 60
+				let ballObjectTemplate = {
+					startTime: Date.now(),
+					isAlive: true,
+					notYetKilled: true,
+					xCoordinate: xCoordinate(),
+					yCoordinate: yCoordinate(),
+					radius: randomRadius(),
+					color: "#03dbfc",
+					lineWidth: 7
+				};
+				ballArrayB.push(ballObjectTemplate);
+			}
+
+			// C組
+			if (bigTimer >= 15 && bigTimer % 75 === 0) {
+				// 75
+				let ballObjectTemplate = {
+					startTime: Date.now(),
+					isAlive: true,
+					notYetKilled: true,
+					xCoordinate: xCoordinate(),
+					yCoordinate: yCoordinate(),
+					radius: randomRadius(),
+					color: "#fc036b",
+					lineWidth: 7
+				};
+				ballArrayC.push(ballObjectTemplate);
+			}
 
 			bigTimer -= 1;
 
 			// 一到出波波時間就畫個波波出黎
-			drawBallBall(1300, 0);
-			drawBallBall(1800, 1);
-			drawBallBall(2300, 2);
+			let arrayOfBallBallA = [];
+			let arrayOfBallBallB = [];
+			let arrayOfBallBallC = [];
+			for (let ball of ballArrayA) {
+				if (Date.now() - ball.startTime < 1300) {
+					// 1000
+					if (ball.isAlive && ball.notYetKilled) {
+						canvasCtx.beginPath();
+						canvasCtx.lineWidth = ball.lineWidth;
+						canvasCtx.globalCompositeOperation = "source-over";
+						canvasCtx.arc(
+							ball.xCoordinate,
+							ball.yCoordinate,
+							ball.radius,
+							0,
+							2 * Math.PI
+						);
+						canvasCtx.strokeStyle = ball.color;
+						canvasCtx.stroke();
+						arrayOfBallBallA.push([ball.xCoordinate, ball.yCoordinate]);
+					}
+				}
+			}
+
+			for (let ball of ballArrayB) {
+				if (Date.now() - ball.startTime < 1800) {
+					// 1400
+					if (ball.isAlive && ball.notYetKilled) {
+						canvasCtx.beginPath();
+						canvasCtx.lineWidth = ball.lineWidth;
+						canvasCtx.globalCompositeOperation = "source-over";
+						canvasCtx.arc(
+							ball.xCoordinate,
+							ball.yCoordinate,
+							ball.radius,
+							0,
+							2 * Math.PI
+						);
+						canvasCtx.strokeStyle = ball.color;
+						canvasCtx.stroke();
+						arrayOfBallBallB.push([ball.xCoordinate, ball.yCoordinate]);
+					}
+				}
+			}
+
+			for (let ball of ballArrayC) {
+				if (Date.now() - ball.startTime < 2300) {
+					// 1900
+					if (ball.isAlive && ball.notYetKilled) {
+						canvasCtx.beginPath();
+						canvasCtx.lineWidth = ball.lineWidth;
+						canvasCtx.globalCompositeOperation = "source-over";
+						canvasCtx.arc(
+							ball.xCoordinate,
+							ball.yCoordinate,
+							ball.radius,
+							0,
+							2 * Math.PI
+						);
+						canvasCtx.strokeStyle = ball.color;
+						canvasCtx.stroke();
+						arrayOfBallBallC.push([ball.xCoordinate, ball.yCoordinate]);
+					}
+				}
+			}
 
 			// 判斷body parts有冇掂到波波
+			// 整走Type A Ball Ball
 			for (let coord of arrayOfBallBallA) {
 				if (arraySaveBodyCoordinate.length === 6) {
 					let leftHand1 = arraySaveBodyCoordinate[0];
@@ -353,17 +461,64 @@ function onResults(results) {
 		p.stroke();
 	} else if (bigTimer === 14) {
 		if (turnOn) {
-			calculateTotalPoints(0);
-			calculateTotalPoints(1);
-			calculateTotalPoints(2);
+			for (let killedOrNot of ballArrayA) {
+				let plus = 0;
+				let minus = 0;
+				gameResult.push(killedOrNot.notYetKilled);
+				for (let trueOrFalse of gameResult) {
+					if (trueOrFalse === true) {
+						minus++;
+					} else {
+						plus++;
+					}
+					pointsA = 10 * plus - 10 * minus;
+				}
+				if (pointsA < 0) {
+					pointsA = 0;
+				}
+			}
+			console.log(pointsA);
+			for (let killedOrNot of ballArrayB) {
+				let plus = 0;
+				let minus = 0;
+				gameResult.push(killedOrNot.notYetKilled);
+				for (let trueOrFalse of gameResult) {
+					if (trueOrFalse === true) {
+						minus++;
+					} else {
+						plus++;
+					}
+					pointsB = 10 * plus - 10 * minus;
+				}
+				if (pointsB < 0) {
+					pointsB = 0;
+				}
+			}
+			console.log(pointsB);
+			for (let killedOrNot of ballArrayC) {
+				let plus = 0;
+				let minus = 0;
+				gameResult.push(killedOrNot.notYetKilled);
+				for (let trueOrFalse of gameResult) {
+					if (trueOrFalse === true) {
+						minus++;
+					} else {
+						plus++;
+					}
+					pointsC = 10 * plus - 10 * minus;
+				}
+				if (pointsC < 0) {
+					pointsC = 0;
+				}
+			}
+			console.log(pointsC);
 
 			let total = pointsA + pointsB + pointsC;
+			console.log(total);
 
 			audioPlayer.pause();
 			audioPlayer.currentTime = 0;
-
 			arraySaveBodyCoordinate.length = 0;
-
 			turnOn = false;
 			/////////////////////////////////   Provide points of the game to database   /////////////////////////////////
 			providePointsOfTheGame(total);
@@ -448,76 +603,12 @@ function firstCountDown(timer, a, b, text) {
 		s.fillText(text, 5, 240);
 	}
 }
-
 function countDown(timer, a, b, text) {
 	if (timer >= a && timer < b) {
 		s.clearRect(0, 0, 200, 300);
 		s.font = "300px Verdana";
 		s.fillStyle = "white";
 		s.fillText(text, 5, 240);
-	}
-}
-
-function genBallBall(number, index) {
-	let group = [ballArrayA, ballArrayB, ballArrayC];
-	let ballColor = ["#fcd703", "#03dbfc", "#fc036b"];
-	let ballObjectTemplate = {
-		startTime: Date.now(),
-		isAlive: true,
-		notYetKilled: true,
-		xCoordinate: xCoordinate(),
-		yCoordinate: yCoordinate(),
-		radius: 60,
-		color: ballColor[index],
-		lineWidth: 7
-	};
-	if (bigTimer >= 15 && bigTimer % number === 0) {
-		group[index].push(ballObjectTemplate);
-	}
-}
-
-function drawBallBall(number, index) {
-	let group = [ballArrayA, ballArrayB, ballArrayC];
-	let group2 = [arrayOfBallBallA, arrayOfBallBallB, arrayOfBallBallC];
-	for (let ball of group[index]) {
-		if (Date.now() - ball.startTime < number) {
-			// 1400
-			if (ball.isAlive && ball.notYetKilled) {
-				canvasCtx.beginPath();
-				canvasCtx.lineWidth = ball.lineWidth;
-				canvasCtx.globalCompositeOperation = "source-over";
-				canvasCtx.arc(
-					ball.xCoordinate,
-					ball.yCoordinate,
-					ball.radius,
-					0,
-					2 * Math.PI
-				);
-				canvasCtx.strokeStyle = ball.color;
-				canvasCtx.stroke();
-				group2[index].push([ball.xCoordinate, ball.yCoordinate]);
-			}
-		}
-	}
-}
-
-function calculateTotalPoints(index) {
-	let group = [ballArrayA, ballArrayB, ballArrayC];
-	for (let killedOrNotA of group[index]) {
-		let plus = 0;
-		let minus = 0;
-		gameResult.push(killedOrNotA.notYetKilled);
-		for (let trueOrFalse of gameResult) {
-			if (trueOrFalse === true) {
-				minus++;
-			} else {
-				plus++;
-			}
-			pointsA = 10 * plus - 10 * minus;
-		}
-		if (pointsA < 0) {
-			pointsA = 0;
-		}
 	}
 }
 
