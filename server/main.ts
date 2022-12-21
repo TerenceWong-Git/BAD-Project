@@ -58,7 +58,7 @@ app.use((req, _res, next) => {
 
 import { routes } from "./routes";
 import { ApplicationError } from "./utils/error";
-import { isLoggedInStatic, isMatchIdStatic } from "./utils/guard";
+import { isLoggedInStatic } from "./utils/guard";
 app.use(routes);
 
 app.use(express.static(path.join(__dirname, "public")));
