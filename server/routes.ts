@@ -18,12 +18,10 @@ const roomsService = new RoomsService(knex);
 export const roomsController = new RoomsController(roomsService);
 
 import { ballBallRoutes } from "./router/ballBallRoutes";
-import { laserRoutes } from "./router/laserRoutes";
 import { playersRoutes } from "./router/playersRoutes";
 import { roomsRoutes } from "./router/roomsRoutes";
 
 export const routes = express.Router();
 routes.use("/ballBall", ballBallRoutes);
-routes.use("/laser", laserRoutes);
 routes.use("/players", playersRoutes);
 routes.use("/rooms", roomsRoutes);

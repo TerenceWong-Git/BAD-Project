@@ -68,7 +68,7 @@ function onResults(results) {
 	for (let outputForKillBall of modelOutputArrWithBodyParts) {
 		let a = Object.values(outputForKillBall[0]);
 		const array = [17, 18, 19, 20, 27, 28];
-		if (array.contains(a[0])) {
+		if (array.includes(a[0])) {
 			arraySaveBodyCoordinate.push([
 				a[0],
 				calculateXCoordinate(a[1]),
