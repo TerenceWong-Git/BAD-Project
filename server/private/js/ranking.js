@@ -14,8 +14,7 @@ async function loadAllRank() {
         <td>${rank.points}
         </tr>
         `;
-
     };
     
-	document.querySelector("table").innerHTML = htmlStr;
+	document.querySelector("#all").innerHTML += htmlStr;
 };
