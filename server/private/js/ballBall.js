@@ -15,12 +15,14 @@ let ballArrayB = [];
 let ballArrayC = [];
 let gameResult = [];
 let turnOn = true;
-let points = 0;
+let pointsA = 0;
+let pointsB = 0;
+let pointsC = 0;
 let timer;
 
 /////////////////////////////////////   Run in each frame   /////////////////////////////////////
 function onResults(results) {
-    canvasCtx.save();
+	canvasCtx.save();
 
     ////////////////////////   Display input image on <canvas class="output_canvas"></canvas>   ////////////////////////
     canvasCtx.drawImage(
@@ -41,16 +43,16 @@ function onResults(results) {
     let modelOutputArrWithBodyParts = [];
     let arraySaveBodyCoordinate = [];
 
-    // 將(x, y, z)coordinate & 可見度 dum落 modelOutputArr
-    if ("poseLandmarks" in results) {
-        for (let i = 0; i < 33; i++) {
-            modelOutputArr.push({
-                body: i,
-                x: results.poseLandmarks[i].x,
-                y: results.poseLandmarks[i].y,
-                visibility: results.poseLandmarks[i].visibility
-            });
-        }
+	// 將(x, y, z)coordinate & 可見度 dum落 modelOutputArr
+	if ("poseLandmarks" in results) {
+		for (let i = 0; i < 33; i++) {
+			modelOutputArr.push({
+				body: i,
+				x: results.poseLandmarks[i].x,
+				y: results.poseLandmarks[i].y,
+				visibility: results.poseLandmarks[i].visibility
+			});
+		}
 
         // 當可見度大過60%就畫點點
         // 再將個粒點點代表既部位, x-coordinate, y-coordinate dum 落 modelOutputArrWithBodyParts
@@ -114,47 +116,35 @@ function onResults(results) {
 		// startingCountdown第一個數就係開始準備既時間
 		startingCountdown.push(Date.now());
 
-        // 開始前3秒會有提示
-        let calculateCountdown = Date.now() - startingCountdown[0];
+		// 開始前3秒會有提示
+		let calculateCountdown = Date.now() - startingCountdown[0];
 
-        firstCountDown(calculateCountdown, 2000, 3000, "3");
-        countDown(calculateCountdown, 3000, 4000, "2");
-        countDown(calculateCountdown, 4000, 5000, "1");
+		firstCountDown(calculateCountdown, 2000, 3000, "3");
+		countDown(calculateCountdown, 3000, 4000, "2");
+		countDown(calculateCountdown, 4000, 5000, "1");
 
-        // 5秒之後開始遊戲
-        if (calculateCountdown > 5000 && bigTimer >= 15) {
-            // 清除準備時間倒數提示
-            s.clearRect(0, 0, 200, 300);
+		// 5秒之後開始遊戲
+		if (calculateCountdown > 5000 && bigTimer >= 15) {
+			// 清除準備時間倒數提示
+			s.clearRect(0, 0, 200, 300);
 
-            // 遊戲時間1800秒 = 現實60秒
-            // 遊戲時間每30秒 = 現實1秒
-            if (bigTimer % 3 === 0) {
-                timerHeight += 1;
-            }
+			// 遊戲時間1800秒 = 現實60秒
+			// 遊戲時間每30秒 = 現實1秒
+			if (bigTimer % 3 === 0) {
+				timerHeight += 1;
+			}
 
-            if (bigTimer == 14) {
-                let smallTimer = bigTimer;
-                return smallTimer;
-            }
+			// Display Timer (60s countdown)
+			b.clearRect(0, 0, innerWidth, innerHeight);
+			b.fillStyle = "#fcba03";
+			b.fillRect(0, 0, innerWidth, (innerHeight / 600) * timerHeight);
 
-            console.log(ballArrayA);
-            // Display Timer (60s countdown)
-            b.clearRect(0, 0, innerWidth, innerHeight);
-            const grd = b.createLinearGradient(0, 0, 0, innerHeight);
-            grd.addColorStop(0, "#F8FE29");
-            grd.addColorStop(0.2, "#C8F424");
-            grd.addColorStop(0.4, "#5bab3c");
-            grd.addColorStop(0.6, "#4B713F");
-            grd.addColorStop(0.8, "#244E30");
-            b.fillStyle = grd;
-            b.fillRect(0, 0, innerWidth, (innerHeight / 600) * timerHeight);
+			// Pause
+			p.clearRect(0, 0, 400, 400);
 
-            // Pause
-            p.clearRect(0, 0, 400, 400);
-
-            // 播BGM
-            audioPlayer.volume = 0.1;
-            audioPlayer.play();
+			// 播BGM
+			audioPlayer.volume = 0.1;
+			audioPlayer.play();
 
 			// 控制幾時出波波
 			// A組
@@ -207,7 +197,7 @@ function onResults(results) {
 				ballArrayC.push(ballObjectTemplate);
 			}
 
-            bigTimer -= 1;
+			bigTimer -= 1;
 
 			// 一到出波波時間就畫個波波出黎
 			let arrayOfBallBallA = [];
@@ -287,89 +277,139 @@ function onResults(results) {
 					let leftFoot = arraySaveBodyCoordinate[4];
 					let rightFoot = arraySaveBodyCoordinate[5];
 
+					if (
+						checkBodyCoordinate(
+							coord[0],
+							leftHand1[1],
+							coord[1],
+							leftHand1[2],
+							60
+						) &&
+						checkBodyCoordinate(
+							coord[0],
+							leftHand2[1],
+							coord[1],
+							leftHand2[2],
+							60
+						)
+					) {
+						ballArrayA[ballArrayA.length - 1].notYetKilled = false;
+					} else if (
+						checkBodyCoordinate(
+							coord[0],
+							rightHand1[1],
+							coord[1],
+							rightHand1[2],
+							60
+						) &&
+						checkBodyCoordinate(
+							coord[0],
+							rightHand2[1],
+							coord[1],
+							rightHand2[2],
+							60
+						)
+					) {
+						ballArrayA[ballArrayA.length - 1].notYetKilled = false;
+					} else if (
+						checkBodyCoordinate(
+							coord[0],
+							leftFoot[1],
+							coord[1],
+							leftFoot[2],
+							60
+						)
+					) {
+						ballArrayA[ballArrayA.length - 1].notYetKilled = false;
+					} else if (
+						checkBodyCoordinate(
+							coord[0],
+							rightFoot[1],
+							coord[1],
+							rightFoot[2],
+							60
+						)
+					) {
+						ballArrayA[ballArrayA.length - 1].notYetKilled = false;
+					}
+				}
+			}
 
-            for (let coord of arrayOfBallBallB) {
-                if (arraySaveBodyCoordinate.length == 4) {
-                    let leftHand1 = arraySaveBodyCoordinate[0];
-                    let leftHand2 = arraySaveBodyCoordinate[2];
-                    let rightHand1 = arraySaveBodyCoordinate[1];
-                    let rightHand2 = arraySaveBodyCoordinate[3];
-                    let leftFoot = arraySaveBodyCoordinate[4];
-                    let rightFoot = arraySaveBodyCoordinate[5];
+			for (let coord of arrayOfBallBallB) {
+				if (arraySaveBodyCoordinate.length === 6) {
+					let leftHand1 = arraySaveBodyCoordinate[0];
+					let leftHand2 = arraySaveBodyCoordinate[2];
+					let rightHand1 = arraySaveBodyCoordinate[1];
+					let rightHand2 = arraySaveBodyCoordinate[3];
+					let leftFoot = arraySaveBodyCoordinate[4];
+					let rightFoot = arraySaveBodyCoordinate[5];
 
-                    if (
-                        checkBodyCoordinate(
-                            coord[0],
-                            leftHand1[1],
-                            coord[1],
-                            leftHand1[2],
-                            60
-                        ) &&
-                        checkBodyCoordinate(
-                            coord[0],
-                            leftHand2[1],
-                            coord[1],
-                            leftHand2[2],
-                            60
-                        )
-                    ) {
-                        ballArrayB[ballArrayB.length - 1].notYetKilled = false;
-                    } else if (
-                        checkBodyCoordinate(
-                            coord[0],
-                            rightHand1[1],
-                            coord[1],
-                            rightHand1[2],
-                            60
-                        ) &&
-                        checkBodyCoordinate(
-                            coord[0],
-                            rightHand2[1],
-                            coord[1],
-                            rightHand2[2],
-                            60
-                        )
-                    ) {
-                        ballArrayB[ballArrayB.length - 1].notYetKilled = false;
-                    }
-                    // else if (
-                    //  checkBodyCoordinate(
-                    //      coord[0],
-                    //      leftFoot[1],
-                    //      coord[1],
-                    //      leftFoot[2],
-                    //      60
-                    //  )
-                    // ) {
-                    //  // console.log("leftFoot");
-                    //  for (let i = 0; i < ballArrayB.length; i++) {
-                    //      ballArrayB[ballArrayB.length - 1].notYetKilled = false;
-                    //  }
-                    // } else if (
-                    //  checkBodyCoordinate(
-                    //      coord[0],
-                    //      rightFoot[1],
-                    //      coord[1],
-                    //      rightFoot[2],
-                    //      60
-                    //  )
-                    // ) {
-                    //  // console.log("rightFoot");
-                    //  for (let i = 0; i < ballArrayB.length; i++) {
-                    //      ballArrayB[ballArrayB.length - 1].notYetKilled = false;
-                    //  }
-                    // }
-                }
-            }
+					if (
+						checkBodyCoordinate(
+							coord[0],
+							leftHand1[1],
+							coord[1],
+							leftHand1[2],
+							60
+						) &&
+						checkBodyCoordinate(
+							coord[0],
+							leftHand2[1],
+							coord[1],
+							leftHand2[2],
+							60
+						)
+					) {
+						ballArrayB[ballArrayB.length - 1].notYetKilled = false;
+					} else if (
+						checkBodyCoordinate(
+							coord[0],
+							rightHand1[1],
+							coord[1],
+							rightHand1[2],
+							60
+						) &&
+						checkBodyCoordinate(
+							coord[0],
+							rightHand2[1],
+							coord[1],
+							rightHand2[2],
+							60
+						)
+					) {
+						ballArrayB[ballArrayB.length - 1].notYetKilled = false;
+					} else if (
+						checkBodyCoordinate(
+							coord[0],
+							leftFoot[1],
+							coord[1],
+							leftFoot[2],
+							60
+						)
+					) {
+						ballArrayB[ballArrayB.length - 1].notYetKilled = false;
+					} else if (
+						checkBodyCoordinate(
+							coord[0],
+							rightFoot[1],
+							coord[1],
+							rightFoot[2],
+							60
+						)
+					) {
+						ballArrayB[ballArrayB.length - 1].notYetKilled = false;
+					}
+				}
+			}
 
-            for (let coord of arrayOfBallBallC) {
-                if (arraySaveBodyCoordinate.length == 4) {
-                    let leftHand1 = arraySaveBodyCoordinate[0];
-                    let leftHand2 = arraySaveBodyCoordinate[2];
-                    let rightHand1 = arraySaveBodyCoordinate[1];
-                    let rightHand2 = arraySaveBodyCoordinate[3];
-                    let leftFoot = arraySaveBodyCoordinate[4];
-                    let rightFoot = arraySaveBodyCoordinate[5];
+			for (let coord of arrayOfBallBallC) {
+				if (arraySaveBodyCoordinate.length === 6) {
+					let leftHand1 = arraySaveBodyCoordinate[0];
+					let leftHand2 = arraySaveBodyCoordinate[2];
+					let rightHand1 = arraySaveBodyCoordinate[1];
+					let rightHand2 = arraySaveBodyCoordinate[3];
+					let leftFoot = arraySaveBodyCoordinate[4];
+					let rightFoot = arraySaveBodyCoordinate[5];
 
 					if (
 						checkBodyCoordinate(
@@ -511,108 +551,108 @@ function onResults(results) {
 			const urlParams = new URLSearchParams(queryString);
 			const params = urlParams.get("matchId");
 
-            window.location = `/summary.html?matchId=${params}`;
-        }
-    }
-    canvasCtx.restore();
+			window.location = `/summary.html?matchId=${params}`;
+		}
+	}
+	canvasCtx.restore();
 }
 
 // Load model
 const pose = new Pose({
-    locateFile: (file) => {
-        return `https://cdn.jsdelivr.net/npm/@mediapipe/pose/${file}`;
-    }
+	locateFile: (file) => {
+		return `https://cdn.jsdelivr.net/npm/@mediapipe/pose/${file}`;
+	}
 });
 pose.setOptions({
-    modelComplexity: 1,
-    smoothLandmarks: true,
-    enableSegmentation: true,
-    smoothSegmentation: true,
-    minDetectionConfidence: 0.6,
-    minTrackingConfidence: 0.6
+	modelComplexity: 1,
+	smoothLandmarks: true,
+	enableSegmentation: true,
+	smoothSegmentation: true,
+	minDetectionConfidence: 0.6,
+	minTrackingConfidence: 0.6
 });
 pose.onResults(onResults);
 
 const camera = new Camera(videoElement, {
-    onFrame: async () => {
-        await pose.send({ image: videoElement });
-    },
-    width: 1280,
-    height: 720
+	onFrame: async () => {
+		await pose.send({ image: videoElement });
+	},
+	width: 1280,
+	height: 720
 });
 camera.start();
 
 // Generate random coordinate for ball ball
 function getRandomIntInclusive(min, max) {
-    min = Math.ceil(min);
-    max = Math.floor(max);
-    return Math.floor(Math.random() * (max - min + 1) + min);
+	min = Math.ceil(min);
+	max = Math.floor(max);
+	return Math.floor(Math.random() * (max - min + 1) + min);
 }
 
 function xCoordinate() {
-    let x = getRandomIntInclusive(200, 1080);
-    return x;
+	let x = getRandomIntInclusive(200, 1080);
+	return x;
 }
 function yCoordinate() {
-    let y = getRandomIntInclusive(200, 600);
-    return y;
+	let y = getRandomIntInclusive(200, 600);
+	return y;
 }
 
 function randomRadius() {
-    let r = getRandomIntInclusive(40, 80);
-    return r;
+	let r = getRandomIntInclusive(40, 80);
+	return r;
 }
 
 // Check wether body part coordinate in ball ball
 function checkBodyCoordinate(circleX, bodyX, circleY, bodyY, radius) {
-    return (
-        (circleX - bodyX) * (circleX - bodyX) +
-            (circleY - bodyY) * (circleY - bodyY) <
-        radius * radius
-    );
+	return (
+		(circleX - bodyX) * (circleX - bodyX) +
+			(circleY - bodyY) * (circleY - bodyY) <
+		radius * radius
+	);
 }
 
 // Find body part coordinate
 function calculateXCoordinate(x) {
-    return parseInt(x * 1280);
+	return parseInt(x * 1280);
 }
 calculateXCoordinate(50);
 function calculateYCoordinate(y) {
-    return parseInt(y * 720);
+	return parseInt(y * 720);
 }
 
 function firstCountDown(timer, a, b, text) {
-    if (timer >= a && timer < b) {
-        s.font = "300px Verdana";
-        s.fillStyle = "white";
-        s.fillText(text, 5, 240);
-    }
+	if (timer >= a && timer < b) {
+		s.font = "300px Verdana";
+		s.fillStyle = "white";
+		s.fillText(text, 5, 240);
+	}
 }
 function countDown(timer, a, b, text) {
-    if (timer >= a && timer < b) {
-        s.clearRect(0, 0, 200, 300);
-        s.font = "300px Verdana";
-        s.fillStyle = "white";
-        s.fillText(text, 5, 240);
-    }
+	if (timer >= a && timer < b) {
+		s.clearRect(0, 0, 200, 300);
+		s.font = "300px Verdana";
+		s.fillStyle = "white";
+		s.fillText(text, 5, 240);
+	}
 }
 
 //////////////////////////////////   React with Database   //////////////////////////////////
 async function providePointsOfTheGame(numberP) {
-    const queryString = window.location.search;
-    const urlParams = new URLSearchParams(queryString);
-    const params = urlParams.get("matchId");
+	const queryString = window.location.search;
+	const urlParams = new URLSearchParams(queryString);
+	const params = urlParams.get("matchId");
 
-    const formBody = {
-        points: numberP,
-        matches_live_id: params
-    };
-    await fetch("/ballBall/reaction", {
-        method: "POST",
-        headers: {
-            "content-type": "application/json; charset=utf-8"
-        },
-        body: JSON.stringify(formBody)
-    });
+	const formBody = {
+		points: numberP,
+		matches_live_id: params
+	};
+	await fetch("/ballBall/reaction", {
+		method: "POST",
+		headers: {
+			"content-type": "application/json; charset=utf-8"
+		},
+		body: JSON.stringify(formBody)
+	});
 }
 //////////////////////////////////   React with Database   //////////////////////////////////
