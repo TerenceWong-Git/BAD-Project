@@ -1,34 +1,22 @@
 import { Knex } from "knex";
 import { InvalidInfoError } from "../utils/error";
 import { checkPassword, hashPassword } from "../utils/hash";
-// import { logger } from "../utils/logger";
 import { table } from "../utils/table";
 import { MatchesRecord, Player } from "./model";
 
 export class PlayersService {
 	constructor(private knex: Knex) {}
 
-	async dummy() {
-		const result = await this.knex();
-		return result;
-	}
-
 	async checkRegister(name: string, email: string, password: string) {
-		// logger.info(`This is email from service ${email}`);
-		// logger.info(`This is password from service ${password}`);
-		// logger.info(`This is table ${table.PLAYERS}`);
 		const player = await this.knex<Player>(table.PLAYERS)
 			.where("email", "=", email)
 			.first(["id", "name", "email", "password"]);
 		if (!player) {
 			password = await hashPassword(password);
-			// logger.info(`hashed = ${password}`);
 			const insertData = { name, email, password };
 			const result = await this.knex(table.PLAYERS)
 				.insert(insertData)
 				.returning("id");
-			// logger.info(result instanceof Array);
-			// logger.info(Object.keys(result[0]));
 			return result[0].id;
 		}
 	}
@@ -75,13 +63,7 @@ export class PlayersService {
 	}
 	async individualRanking(id: number | undefined) {
 		const result = await this.knex<MatchesRecord>(table.MATCHES_RECORD)
-			.select([
-				"id",
-				"players_id",
-				"points",
-				"matches_live_id",
-				"played_at"
-			])
+			.select(["id", "players_id", "points", "matches_live_id", "played_at"])
 			.where("players_id", id)
 			.orderBy("points", "desc")
 			.limit(5);

@@ -4,10 +4,6 @@ import { logger } from "../utils/logger";
 
 export class BallBallController {
 	constructor(private ballBallService: BallBallService) {}
-	dummy = async (_req: Request, res: Response) => {
-		const data = await this.ballBallService.dummy();
-		res.json(data);
-	};
 	providePoints = async (req: Request, res: Response) => {
 		const { points, matches_live_id } = req.body;
 		const player = req.session.playerId;
