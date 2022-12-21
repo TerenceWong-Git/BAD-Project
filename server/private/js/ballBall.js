@@ -158,6 +158,7 @@ function onResults(results) {
 					lineWidth: 7
 				};
 				ballArrayA.push(ballObjectTemplate);
+				console.log(ballArrayA);
 			}
 
 			// B組
@@ -376,6 +377,26 @@ function onResults(results) {
 						)
 					) {
 						ballArrayB[ballArrayB.length - 1].notYetKilled = false;
+					} else if (
+						checkBodyCoordinate(
+							coord[0],
+							leftFoot[1],
+							coord[1],
+							leftFoot[2],
+							60
+						)
+					) {
+						ballArrayB[ballArrayB.length - 1].notYetKilled = false;
+					} else if (
+						checkBodyCoordinate(
+							coord[0],
+							rightFoot[1],
+							coord[1],
+							rightFoot[2],
+							60
+						)
+					) {
+						ballArrayB[ballArrayB.length - 1].notYetKilled = false;
 <<<<<<< HEAD
 					} else if (
 						checkBodyCoordinate(
@@ -446,6 +467,26 @@ function onResults(results) {
 						)
 					) {
 						ballArrayC[ballArrayC.length - 1].notYetKilled = false;
+					} else if (
+						checkBodyCoordinate(
+							coord[0],
+							leftFoot[1],
+							coord[1],
+							leftFoot[2],
+							60
+						)
+					) {
+						ballArrayC[ballArrayC.length - 1].notYetKilled = false;
+					} else if (
+						checkBodyCoordinate(
+							coord[0],
+							rightFoot[1],
+							coord[1],
+							rightFoot[2],
+							60
+						)
+					) {
+						ballArrayC[ballArrayC.length - 1].notYetKilled = false;
 <<<<<<< HEAD
 					} else if (
 						checkBodyCoordinate(
@@ -476,7 +517,7 @@ function onResults(results) {
 	}
 	// Detect唔到足夠body parts就會暫停倒數 & BGM & Show Pause
 	else if (
-		arraySaveBodyCoordinate.length < 2 &&
+		arraySaveBodyCoordinate.length < 6 &&
 		bigTimer < 1815 &&
 		bigTimer > 15
 	) {
@@ -490,10 +531,42 @@ function onResults(results) {
 		p.stroke();
 	} else if (bigTimer === 14) {
 		if (turnOn) {
-			for (let killedOrNot of ballArrayA) {
+			for (let killedOrNotA of ballArrayA) {
 				let plus = 0;
 				let minus = 0;
-				gameResult.push(killedOrNot.notYetKilled);
+				gameResult.push(killedOrNotA.notYetKilled);
+				for (let trueOrFalse of gameResult) {
+					if (trueOrFalse === true) {
+						minus++;
+					} else {
+						plus++;
+					}
+					pointsA = 10 * plus - 10 * minus;
+				}
+				if (pointsA < 0) {
+					pointsA = 0;
+				}
+			}
+			for (let killedOrNotB of ballArrayB) {
+				let plus = 0;
+				let minus = 0;
+				gameResult.push(killedOrNotB.notYetKilled);
+				for (let trueOrFalse of gameResult) {
+					if (trueOrFalse === true) {
+						minus++;
+					} else {
+						plus++;
+					}
+					pointsB = 10 * plus - 10 * minus;
+				}
+				if (pointsB < 0) {
+					pointsB = 0;
+				}
+			}
+			for (let killedOrNotC of ballArrayA) {
+				let plus = 0;
+				let minus = 0;
+				gameResult.push(killedOrNotC.notYetKilled);
 				for (let trueOrFalse of gameResult) {
 					if (trueOrFalse === true) {
 						minus++;
@@ -539,8 +612,8 @@ function onResults(results) {
 				if (pointsC < 0) {
 					pointsC = 0;
 				}
-				if (points < 0) {
-					points = 0;
+				if (pointsC < 0) {
+					pointsC = 0;
 				}
 			}
 			console.log(pointsC);
