@@ -10,11 +10,12 @@ export class BallBallController {
 	};
 	providePoints = async (req: Request, res: Response) => {
 		const { points, matches_live_id } = req.body;
+		const player = req.session.playerId;
 		logger.info(points);
 		logger.info(matches_live_id);
 		const id = await this.ballBallService.providePoints(
 			points,
-			req.session.playerId,
+			player,
 			matches_live_id
 		);
 		res.status(201).json({ id });
