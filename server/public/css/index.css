@@ -51,3 +51,11 @@ h4 {
 	font-size: x-large;
 	color: white;
 }
+
+#Disclaimer {
+	color: aliceblue;
+	font-size: 0.5vw;
+	font-family: "Orbitron", serif;
+	margin: 15vh 20vh;
+	text-align: center;
+}
