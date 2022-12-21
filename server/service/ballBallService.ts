@@ -28,7 +28,7 @@ export class BallBallService {
 	) {
 		const importResult = { points, players_id, matches_live_id };
 		const resultOfTheGame = await this.knex(table.MATCHES_RECORD).insert(
-			importResult
+			importResult,"points"
 		);
 		return resultOfTheGame;
 	}
