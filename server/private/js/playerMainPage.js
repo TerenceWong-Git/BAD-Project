@@ -1,6 +1,7 @@
 reaction();
 laser();
 profile();
+ranking();
 
 function reaction() {
 	document.querySelector("#reaction").addEventListener("click", async (e) => {
@@ -19,5 +20,11 @@ function profile() {
 	document.querySelector("#profile").addEventListener("click", async (e) => {
 		e.preventDefault();
 		window.location.href = `/playerProfile.html`;
+	});
+}
+function ranking() {
+	document.querySelector("#ranking").addEventListener("click", async (e) => {
+		e.preventDefault();
+		window.location.href = `/ranking.html`;
 	});
 }
