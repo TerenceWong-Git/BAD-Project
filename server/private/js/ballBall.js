@@ -635,7 +635,7 @@ function onResults(results) {
 			const urlParams = new URLSearchParams(queryString);
 			const params = urlParams.get("matchId");
 
-			// window.location = `/summary.html?matchId=${params}`;
+			window.location = `/summary.html?matchId=${params}`;
 		}
 	}
 	canvasCtx.restore();
