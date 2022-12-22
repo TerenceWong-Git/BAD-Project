@@ -58,8 +58,8 @@ function onResults(results) {
 		// 再將個粒點點代表既部位, x-coordinate, y-coordinate dum 落 modelOutputArrWithBodyParts
 		for (let output of modelOutputArr) {
 			if (output.visibility > 0.6) {
-				// canvasCtx.globalCompositeOperation = "destination-over";
-				canvasCtx.globalCompositeOperation = "source-over";
+				canvasCtx.globalCompositeOperation = "destination-over";
+				// canvasCtx.globalCompositeOperation = "source-over";
 				drawLandmarks(canvasCtx, results.poseLandmarks);
 				modelOutputArrWithBodyParts.push([
 					{ body: output.body, x: output.x, y: output.y }
@@ -106,7 +106,7 @@ function onResults(results) {
 
 			// Display Timer (60s countdown)
 			b.clearRect(0, 0, innerWidth, innerHeight);
-			b.fillStyle = "#fcba03";
+			b.fillStyle = "black";
 			b.fillRect(0, 0, innerWidth, (innerHeight / 600) * timerHeight);
 
 			// Pause
@@ -131,8 +131,6 @@ function onResults(results) {
 					lineWidth: 7
 				};
 				ballArrayA.push(ballObjectTemplate);
-				console.log("-- ballArrayA --");
-				console.log(ballArrayA);
 			}
 
 			// B組
@@ -174,7 +172,7 @@ function onResults(results) {
 			let arrayOfBallBallB = [];
 			let arrayOfBallBallC = [];
 			for (let ball of ballArrayA) {
-				if (Date.now() - ball.startTime < 1300) {
+				if (Date.now() - ball.startTime < 1400) {
 					// 1000
 					if (ball.isAlive && ball.notYetKilled) {
 						canvasCtx.beginPath();
@@ -195,7 +193,7 @@ function onResults(results) {
 			}
 
 			for (let ball of ballArrayB) {
-				if (Date.now() - ball.startTime < 1800) {
+				if (Date.now() - ball.startTime < 1900) {
 					// 1400
 					if (ball.isAlive && ball.notYetKilled) {
 						canvasCtx.beginPath();
@@ -216,7 +214,7 @@ function onResults(results) {
 			}
 
 			for (let ball of ballArrayC) {
-				if (Date.now() - ball.startTime < 2300) {
+				if (Date.now() - ball.startTime < 2400) {
 					// 1900
 					if (ball.isAlive && ball.notYetKilled) {
 						canvasCtx.beginPath();
@@ -442,7 +440,7 @@ function onResults(results) {
 	}
 	// Detect唔到足夠body parts就會暫停倒數 & BGM & Show Pause
 	else if (
-		arraySaveBodyCoordinate.length < 2 &&
+		arraySaveBodyCoordinate.length < 6 &&
 		bigTimer < 1815 &&
 		bigTimer > 15
 	) {
