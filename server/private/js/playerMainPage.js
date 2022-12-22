@@ -1,15 +1,8 @@
 reaction();
 laser();
 profile();
-<<<<<<< HEAD
-<<<<<<< HEAD
-ranking();
-=======
->>>>>>> b835112 (update match record seed for id issue)
-=======
 ranking();
 achievement();
->>>>>>> main
 
 function reaction() {
 	document.querySelector("#reaction").addEventListener("click", async (e) => {
