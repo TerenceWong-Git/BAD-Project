@@ -1,7 +1,7 @@
 const videoElement = document.getElementsByClassName("input_video")[0];
 const canvasElement = document.getElementsByClassName("output_canvas")[0];
 const canvasCtx = canvasElement.getContext("2d");
-const audioPlayer = new Audio("./bgm/bgm.mp3");
+const audioPlayer = new Audio("./audio/bgm.mp3");
 const s = document.getElementById("seconds").getContext("2d");
 const b = document.getElementById("backgroundTimer").getContext("2d");
 const p = document.getElementById("pause").getContext("2d");
@@ -16,12 +16,18 @@ let ballArrayC = [];
 let gameResult = [];
 let turnOn = true;
 <<<<<<< HEAD
+<<<<<<< HEAD
 let pointsA = 0;
 let pointsB = 0;
 let pointsC = 0;
 =======
 let points = 0;
 >>>>>>> a0229fe (minor update ball ball js 3rd)
+=======
+let pointsA = 0;
+let pointsB = 0;
+let pointsC = 0;
+>>>>>>> main
 let timer;
 
 /////////////////////////////////////   Run in each frame   /////////////////////////////////////
@@ -94,6 +100,7 @@ function onResults(results) {
 		let calculateCountdown = Date.now() - startingCountdown[0];
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		firstCountDown(calculateCountdown, 2000, 3000, "3");
 		countDown(calculateCountdown, 3000, 4000, "2");
 		countDown(calculateCountdown, 4000, 5000, "1");
@@ -119,6 +126,11 @@ function onResults(results) {
 		// 	s.fillText("1", 5, 240);
 		// }
 >>>>>>> a0229fe (minor update ball ball js 3rd)
+=======
+		firstCountDown(calculateCountdown, 2000, 3000, "3");
+		countDown(calculateCountdown, 3000, 4000, "2");
+		countDown(calculateCountdown, 4000, 5000, "1");
+>>>>>>> main
 
 		// 5秒之後開始遊戲
 		if (calculateCountdown > 5000 && bigTimer >= 15) {
@@ -131,11 +143,14 @@ function onResults(results) {
 				timerHeight += 1;
 			}
 
+<<<<<<< HEAD
 			if (bigTimer == 14) {
 				let smallTimer = bigTimer;
 				return smallTimer;
 			}
 
+=======
+>>>>>>> main
 			// Display Timer (60s countdown)
 			b.clearRect(0, 0, innerWidth, innerHeight);
 			b.fillStyle = "black";
@@ -312,6 +327,9 @@ function onResults(results) {
 					) {
 						ballArrayA[ballArrayA.length - 1].notYetKilled = false;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> main
 					} else if (
 						checkBodyCoordinate(
 							coord[0],
@@ -332,8 +350,11 @@ function onResults(results) {
 						)
 					) {
 						ballArrayA[ballArrayA.length - 1].notYetKilled = false;
+<<<<<<< HEAD
 =======
 >>>>>>> a0229fe (minor update ball ball js 3rd)
+=======
+>>>>>>> main
 					}
 				}
 			}
@@ -402,6 +423,7 @@ function onResults(results) {
 					) {
 						ballArrayB[ballArrayB.length - 1].notYetKilled = false;
 <<<<<<< HEAD
+<<<<<<< HEAD
 					} else if (
 						checkBodyCoordinate(
 							coord[0],
@@ -424,6 +446,8 @@ function onResults(results) {
 						ballArrayB[ballArrayB.length - 1].notYetKilled = false;
 =======
 >>>>>>> a0229fe (minor update ball ball js 3rd)
+=======
+>>>>>>> main
 					}
 				}
 			}
@@ -492,6 +516,7 @@ function onResults(results) {
 					) {
 						ballArrayC[ballArrayC.length - 1].notYetKilled = false;
 <<<<<<< HEAD
+<<<<<<< HEAD
 					} else if (
 						checkBodyCoordinate(
 							coord[0],
@@ -514,6 +539,8 @@ function onResults(results) {
 						ballArrayC[ballArrayC.length - 1].notYetKilled = false;
 =======
 >>>>>>> a0229fe (minor update ball ball js 3rd)
+=======
+>>>>>>> main
 					}
 				}
 			}
@@ -535,6 +562,7 @@ function onResults(results) {
 		p.stroke();
 	} else if (bigTimer === 14) {
 		if (turnOn) {
+<<<<<<< HEAD
 			for (let killedOrNotA of ballArrayA) {
 				let plus = 0;
 				let minus = 0;
@@ -571,6 +599,12 @@ function onResults(results) {
 				let plus = 0;
 				let minus = 0;
 				gameResult.push(killedOrNotC.notYetKilled);
+=======
+			for (let killedOrNot of ballArrayA) {
+				let plus = 0;
+				let minus = 0;
+				gameResult.push(killedOrNot.notYetKilled);
+>>>>>>> main
 				for (let trueOrFalse of gameResult) {
 					if (trueOrFalse === true) {
 						minus++;
@@ -616,9 +650,12 @@ function onResults(results) {
 				if (pointsC < 0) {
 					pointsC = 0;
 				}
+<<<<<<< HEAD
 				if (pointsC < 0) {
 					pointsC = 0;
 				}
+=======
+>>>>>>> main
 			}
 			console.log(pointsC);
 
@@ -706,6 +743,9 @@ function calculateYCoordinate(y) {
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> main
 function firstCountDown(timer, a, b, text) {
 	if (timer >= a && timer < b) {
 		s.font = "300px Verdana";
@@ -716,10 +756,13 @@ function firstCountDown(timer, a, b, text) {
 function countDown(timer, a, b, text) {
 	if (timer >= a && timer < b) {
 		s.clearRect(0, 0, 200, 300);
+<<<<<<< HEAD
 =======
 function countDown(timer, a, b, text) {
 	if (timer >= a && timer < b) {
 >>>>>>> a0229fe (minor update ball ball js 3rd)
+=======
+>>>>>>> main
 		s.font = "300px Verdana";
 		s.fillStyle = "white";
 		s.fillText(text, 5, 240);

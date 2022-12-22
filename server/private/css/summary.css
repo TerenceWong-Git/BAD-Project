@@ -39,6 +39,7 @@ td {
 	text-align: center;
 }
 
+<<<<<<< HEAD
 @import url("https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css");
 
 .score-board {
@@ -78,6 +79,8 @@ td {
 	text-align: center;
 }
 
+=======
+>>>>>>> main
 .buttonArea {
 	margin-top: 10%;
 }
