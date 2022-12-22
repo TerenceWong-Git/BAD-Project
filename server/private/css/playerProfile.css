@@ -2,32 +2,30 @@
 @import url("playerMainPage.css");
 @import url("https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css");
 
-
 .box-content {
-    width: 60%;
-    margin: 5% 20%;
-    font-size: xx-large;
+	width: 60%;
+	margin: 5% 20%;
+	font-size: xx-large;
 }
 
 form#form-profile {
-    border: solid;
+	border: solid;
 }
 
-
 .input-box {
-    margin: 20px;
-    font-size: xx-large;
+	margin: 20px;
+	font-size: xx-large;
 }
 
 input.dark-btn {
-    background-color: black;
-    color: white;
-    font-size: smaller;
-    cursor: pointer;
+	background-color: black;
+	color: white;
+	font-size: smaller;
+	cursor: pointer;
 }
 
 input {
-    border-radius: 5px;
-    font-size: large;
-    font-family:'Orbitron';
+	border-radius: 5px;
+	font-size: large;
+	font-family: "Orbitron";
 }
