@@ -81,7 +81,7 @@ function onResults(results) {
 	}
 
 	// 遊戲開始條件 -> 要Detect到足夠既body parts
-	if (arraySaveBodyCoordinate.length === 2 && bigTimer >= 15) {
+	if (arraySaveBodyCoordinate.length === 6 && bigTimer >= 15) {
 		// 遊戲開始前有5秒準備時間
 		// startingCountdown第一個數就係開始準備既時間
 		startingCountdown.push(Date.now());
@@ -131,8 +131,6 @@ function onResults(results) {
 					lineWidth: 7
 				};
 				ballArrayA.push(ballObjectTemplate);
-				console.log("-- ballArrayA --");
-				console.log(ballArrayA);
 			}
 
 			// B組
@@ -174,7 +172,7 @@ function onResults(results) {
 			let arrayOfBallBallB = [];
 			let arrayOfBallBallC = [];
 			for (let ball of ballArrayA) {
-				if (Date.now() - ball.startTime < 1300) {
+				if (Date.now() - ball.startTime < 1400) {
 					// 1000
 					if (ball.isAlive && ball.notYetKilled) {
 						canvasCtx.beginPath();
@@ -195,7 +193,7 @@ function onResults(results) {
 			}
 
 			for (let ball of ballArrayB) {
-				if (Date.now() - ball.startTime < 1800) {
+				if (Date.now() - ball.startTime < 1900) {
 					// 1400
 					if (ball.isAlive && ball.notYetKilled) {
 						canvasCtx.beginPath();
@@ -216,7 +214,7 @@ function onResults(results) {
 			}
 
 			for (let ball of ballArrayC) {
-				if (Date.now() - ball.startTime < 2300) {
+				if (Date.now() - ball.startTime < 2400) {
 					// 1900
 					if (ball.isAlive && ball.notYetKilled) {
 						canvasCtx.beginPath();
@@ -442,7 +440,7 @@ function onResults(results) {
 	}
 	// Detect唔到足夠body parts就會暫停倒數 & BGM & Show Pause
 	else if (
-		arraySaveBodyCoordinate.length < 2 &&
+		arraySaveBodyCoordinate.length < 6 &&
 		bigTimer < 1815 &&
 		bigTimer > 15
 	) {
@@ -521,7 +519,7 @@ function onResults(results) {
 			const urlParams = new URLSearchParams(queryString);
 			const params = urlParams.get("matchId");
 
-			window.location = `/summary.html?matchId=${params}`;
+			// window.location = `/summary.html?matchId=${params}`;
 		}
 	}
 	canvasCtx.restore();
