@@ -3,7 +3,17 @@ duo();
 
 function solo() {
 	document.querySelector("#SOLO").addEventListener("click", async (e) => {
+function solo() {
+	document.querySelector("#SOLO").addEventListener("click", async (e) => {
 		e.preventDefault();
+		const res = await fetch(`/rooms/game/1`, {
+			method: "POST",
+			headers: {
+				"Content-Type": "application/json; charset=utf-8"
+			}
+		});
+		const result = await res.json();
+		console.log("res.status: ", res.status);
 		const res = await fetch(`/rooms/game/1`, {
 			method: "POST",
 			headers: {
@@ -17,6 +27,7 @@ function solo() {
 			console.log("window location:", window.location.search);
 		}
 	});
+}
 }
 
 function duo() {

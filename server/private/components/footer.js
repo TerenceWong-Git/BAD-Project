@@ -4,7 +4,12 @@ class Footer extends HTMLElement {
 	constructor() {
 		super();
 	}
+	constructor() {
+		super();
+	}
 
+	connectedCallback() {
+		this.innerHTML = /*html*/ `
 	connectedCallback() {
 		this.innerHTML = /*html*/ `
         <footer>
@@ -24,6 +29,7 @@ class Footer extends HTMLElement {
  
         </footer>
         `;
+	}
 	}
 }
 
