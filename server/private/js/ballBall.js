@@ -1,7 +1,7 @@
 const videoElement = document.getElementsByClassName("input_video")[0];
 const canvasElement = document.getElementsByClassName("output_canvas")[0];
 const canvasCtx = canvasElement.getContext("2d");
-const audioPlayer = new Audio("./bgm/bgm.mp3");
+const audioPlayer = new Audio("./audio/bgm.mp3");
 const s = document.getElementById("seconds").getContext("2d");
 const b = document.getElementById("backgroundTimer").getContext("2d");
 const p = document.getElementById("pause").getContext("2d");
