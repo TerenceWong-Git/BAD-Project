@@ -4,15 +4,10 @@ class Footer extends HTMLElement {
 	constructor() {
 		super();
 	}
-	constructor() {
-		super();
-	}
 
 	connectedCallback() {
 		this.innerHTML = /*html*/ `
-	connectedCallback() {
-		this.innerHTML = /*html*/ `
-        <footer>
+        <Footer>
             <div class="footer-container">
                 <div class="footer-left">
                     <div class="setting">
@@ -22,14 +17,13 @@ class Footer extends HTMLElement {
                 </div>
                 <div class="footer-right">
                     <div class="statement">
-                        <h4>PRODUCED BY J.A.T @TECKY<h4>
+                        <h4>PRODUCED BY J.A.T @TECKY</h4>
                     </div>
                 </div>
             </div>
  
-        </footer>
+        </Footer>
         `;
-	}
 	}
 }
 
@@ -51,13 +45,13 @@ function setting() {
 			if (result.isConfirmed) {
 				Swal.fire(
 					"Thanks for your support!!!",
-					"We need your donation ($1000) to develop new function :)",
+					"We need your donation ($1000) to develop new function :",
 					"error"
 				);
 			} else if (result.dismiss === Swal.DismissReason.cancel) {
 				Swal.fire(
 					"著（雀）仔",
-					"We need your donation ($500) to develop new function :)",
+					"We need your donation ($500) to develop new function :",
 					"error"
 				);
 			}

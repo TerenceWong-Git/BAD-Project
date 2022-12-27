@@ -6,23 +6,18 @@ export class RoomsController {
 	constructor(private roomsService: RoomsService) {}
 	createRoom = async (req: Request, res: Response) => {
 		const gameMode = req.params.game;
-		console.log(gameMode);
 		const roomName = Math.random().toString(32).slice(2, 12);
-		// logger.info("Room Name = ", roomName);
-		// logger.info("Length = ", roomName.length);
+		logger.info(roomName);
 		const roomPass = Math.random().toString().slice(2, 10);
-		// logger.info("Room Pass = ", roomPass);
-		// logger.info("Length = ", roomPass.length);
+		logger.info(roomPass);
 		const result = await this.roomsService.createRoom(
 			req.session.playerId,
 			roomName,
 			roomPass,
 			Number(gameMode)
 		);
-		console.log(result);
-		logger.info("this is room id 1", result?.rooms_id);
-		logger.info("this is match room id 2", result?.matches_live_id);
 		req.session.matchLiveId = result.matches_live_id;
+		logger.info(req.session.matchLiveId);
 		res.status(200).json(result);
 	};
 	updateRoom = async (req: Request, res: Response) => {
