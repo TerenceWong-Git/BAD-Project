@@ -1,5 +1,6 @@
 import { ApplicationError, InternalServerError } from "./error";
 import type { Request, Response, NextFunction } from "express";
+import { logger } from "./logger";
 
 export type AsyncRouterHandler = (req: Request, res: Response) => Promise<void>;
 
@@ -9,8 +10,8 @@ export const asyncWrapper =
 		try {
 			await routeHandler(req, res);
 		} catch (err) {
-			console.log("wrapper");
-			console.log((err as any).message);
+			logger.info("wrapper");
+			logger.info((err as any).message);
 			if (err instanceof ApplicationError) {
 				next(err);
 			}

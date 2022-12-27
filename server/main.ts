@@ -36,7 +36,6 @@ const sessionMiddleware = expressSession({
 });
 declare module "express-session" {
 	interface SessionData {
-		// To save more items along with cookie
 		playerId?: number;
 		matchLiveId?: number;
 	}
@@ -63,7 +62,6 @@ app.use(routes);
 
 app.use(express.static(path.join(__dirname, "public")));
 app.use(isLoggedInStatic, express.static(path.join(__dirname, "private")));
-app.use(isLoggedInStatic, express.static(path.join(__dirname, "resource")));
 
 // 404 Not Found
 app.use((_req, res) => {

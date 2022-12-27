@@ -42,9 +42,4 @@ export class RoomsService {
 			throw e;
 		}
 	}
-	async updateRoom(id: number, name: string, pass: string, mode: number) {
-		await this.knex<Room>(table.ROOMS)
-			.update({ id: id, name: name, password: pass, game_mode_id: mode })
-			.where("id", id);
-	}
 }

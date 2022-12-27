@@ -16,7 +16,7 @@ export class BallBallService {
 		return resultOfTheGame;
 	}
 	async getPoints(id: number | undefined) {
-		const data = await this.knex(table.MATCHES_RECORD)
+		const data = await this.knex<MatchesRecord>(table.MATCHES_RECORD)
 			.first("points")
 			.where("matches_live_id", id);
 		return data;

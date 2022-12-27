@@ -2,7 +2,7 @@
 @import url("https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css");
 
 * {
-	font-family: "Orbitron", serif;
+	font-family: "Orbitron", sans-serif;
 }
 
 body {
@@ -52,12 +52,6 @@ body {
 .tabs-radio:checked + .tabs-label {
 	color: var(--main-color);
 }
-
-/* .section-box {
-    display: none;
-    width: 100%;
-    order: 1;
-} */
 
 .bx-envelope:before {
 	content: "\eac1";

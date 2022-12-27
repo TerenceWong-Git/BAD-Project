@@ -7,9 +7,6 @@ window.onload = async () => {
 async function loadInfo() {
 	const resp = await fetch("/players/profile");
 	const infos = await resp.json();
-	console.log("hi");
-	console.log(infos.name);
-	console.log(typeof infos.name);
 	let htmlStr = /*html*/ `<ul style="color: white;">Hello, ${infos.name}</ul>`;
 	document.querySelector("#player-name").innerHTML = htmlStr;
 }
@@ -67,7 +64,6 @@ async function updateProfile() {
 			const username = form.profile_name.value;
 			const age = form.profile_age.value;
 			const formBody = { name: username, email: email, age: age };
-			console.log(username, age);
 			const resp = await fetch("/players/profile", {
 				method: "PATCH",
 				headers: { "Content-Type": "application/json; charset=utf-8" },

@@ -9,8 +9,3 @@ roomsRoutes.post(
 	isLoggedInAPI,
 	asyncWrapper(roomsController.createRoom)
 );
-roomsRoutes.patch(
-	"/game/:game/room/:room",
-	isLoggedInAPI,
-	asyncWrapper(roomsController.updateRoom)
-);
