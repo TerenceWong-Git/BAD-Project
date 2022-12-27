@@ -1,6 +1,5 @@
 import type { Request, Response } from "express";
 import { RoomsService } from "../service/roomsService";
-import { logger } from "../utils/logger";
 
 export class RoomsController {
 	constructor(private roomsService: RoomsService) {}

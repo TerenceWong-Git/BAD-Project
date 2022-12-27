@@ -1,6 +1,6 @@
 export class ApplicationError extends Error {
 	constructor(message: string, public httpStatus: number) {
-		super(message); // new Error(message)
+		super(message);
 		Object.setPrototypeOf(this, ApplicationError.prototype);
 	}
 }

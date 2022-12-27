@@ -3,14 +3,12 @@ import { GameMode, MatchesRecord } from "../service/model";
 import { table } from "../utils/table";
 
 export async function seed(knex: Knex): Promise<void> {
-	// Deletes ALL existing entries
 	await knex(table.MATCHES_RECORD).del();
 	await knex(table.MATCHES_LIVE).del();
 	await knex(table.PLAYERS).del();
 	await knex(table.ROOMS).del();
 	await knex(table.GAME_MODE).del();
 
-	// Inserts seed entries
 	const trx = await knex.transaction();
 	try {
 		const GameModeId = (
@@ -135,7 +133,7 @@ export async function seed(knex: Knex): Promise<void> {
 						age: 20,
 						gender: 0
 					},
-					// alex plain pass: alex
+
 					{
 						name: "abc",
 						email: "abc@tecky.io",
@@ -144,7 +142,7 @@ export async function seed(knex: Knex): Promise<void> {
 						age: 17,
 						gender: 1
 					},
-					// abc plain pass: abcabc
+
 					{
 						name: "david",
 						email: "david@abc.io",
@@ -153,7 +151,6 @@ export async function seed(knex: Knex): Promise<void> {
 						age: 30,
 						gender: 0
 					}
-					// david plain pass: david
 				])
 				.returning("id")
 				.transacting(trx)

@@ -6,15 +6,10 @@
 	box-sizing: border-box;
 }
 
-h7 {
+#headline {
 	font-size: xx-large;
 }
-h8 {
-	font-size: x-large;
-}
-h9 {
-	font-size: x-large;
-}
+
 caption {
 	font-size: x-large;
 }

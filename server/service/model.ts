@@ -34,7 +34,6 @@ export interface MatchesRecord {
 	points: number;
 	matches_live_id: number;
 	played_at?: string;
-	// Maybe Date
 }
 
 export interface GameMode {

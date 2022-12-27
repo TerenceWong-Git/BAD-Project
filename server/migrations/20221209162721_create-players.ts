@@ -10,7 +10,7 @@ export async function up(knex: Knex): Promise<void> {
 		table.string("image");
 		table.integer("age");
 		table.integer("gender");
-		// 0 for male, 1 for female
+
 		table.timestamps(true, true);
 	});
 }
