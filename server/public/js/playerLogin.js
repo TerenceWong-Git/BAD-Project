@@ -52,8 +52,8 @@ function playerRegister() {
 				document.querySelector(
 					"#register-error-msg"
 				).innerHTML = `please input value`;
-			}else if (!/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email)){
-				alert("You have entered an invalid email address!")
+			} else if (!/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email)) {
+				alert("You have entered an invalid email address!");
 			} else if (password !== confirm_password) {
 				document.querySelector(
 					"#register-error-msg"

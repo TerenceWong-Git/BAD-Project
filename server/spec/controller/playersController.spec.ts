@@ -18,6 +18,7 @@ describe("playersController Test Case", () => {
 		{ id: 3, email: "david@abc.io", password: "david" }
 	];
 	let i: number = parseInt((Math.random() * accounts.length).toString());
+
 	beforeEach(() => {
 		service = new PlayersService({} as any);
 		service.checkRegister = jest.fn(() => Promise.resolve(accounts.length + 1));
@@ -31,7 +32,9 @@ describe("playersController Test Case", () => {
 				gender: accounts[i].gender
 			})
 		);
-		service.updateProfile = jest.fn(() => Promise.resolve(accounts[i].id));
+		service.updateProfile = jest.fn(() =>
+			Promise.resolve({ id: accounts[i].id })
+		);
 		req = getMockRequest();
 		res = getMockResponse();
 		controller = new PlayersController(service);
@@ -188,7 +191,6 @@ describe("playersController Test Case", () => {
 		await controller.login(req, res);
 		await controller.logout(req, res);
 
-		expect(service.checkLogin).toBeCalledWith(inputEmail, inputPassword);
 		expect(req.session.playerId).not.toEqual(accounts[i].id);
 		expect(res.status).toHaveBeenCalledWith(200);
 		expect(res.json).toHaveBeenCalledWith({ message: "success" });

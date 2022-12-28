@@ -4,9 +4,9 @@ import { table } from "../utils/table";
 export async function up(knex: Knex): Promise<void> {
 	await knex.schema.createTable(table.MATCHES_RECORD, (table) => {
 		table.increments();
-		table.integer("players_id").unsigned();
+		table.integer("players_id").unsigned(); // No need
 		table.foreign("players_id").references("players.id");
-		table.integer("points").notNullable();
+		table.integer("points").unsigned().defaultTo(0);
 		table.integer("game_mode_id").unsigned();
 		table.foreign("game_mode_id").references("game_mode.id");
 		table.integer("matches_live_id").unsigned();

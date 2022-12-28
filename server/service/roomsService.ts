@@ -7,38 +7,38 @@ export class RoomsService {
 	constructor(private knex: Knex) {}
 
 	async createRoom(
-		playerId: number | undefined,
+		playerId: number,
 		name: string,
 		pass: string,
 		game_mode: number
 	) {
 		const newRoom = await this.knex.transaction();
 		try {
-			const rooms = await newRoom<Room>(table.ROOMS)
-				.insert({ name: name, password: pass, game_mode_id: game_mode }, "id")
-				.transacting(newRoom);
+			const rooms = await newRoom<Room>(table.ROOMS).insert(
+				{ name: name, password: pass, game_mode_id: game_mode },
+				"id"
+			);
 			logger.info(rooms[0].id);
 
-			const match = await newRoom<MatchesLive>(table.MATCHES_LIVE)
-				.insert(
-					{
-						rooms_id: rooms[0].id,
-						players_id: playerId,
-						is_spectator: false,
-						is_host: true
-					},
-					"id"
-				)
-				.transacting(newRoom);
+			const match = await newRoom<MatchesLive>(table.MATCHES_LIVE).insert(
+				{
+					rooms_id: rooms[0].id,
+					players_id: playerId,
+					is_spectator: false,
+					is_host: true
+				},
+				"id"
+			);
+
 			const result: RoomMatch = {
 				rooms_id: rooms[0].id,
 				matches_live_id: match[0].id
 			};
+
 			await newRoom.commit();
 			return result;
 		} catch (e) {
 			await newRoom.rollback();
-			console.log(e);
 			throw e;
 		}
 	}

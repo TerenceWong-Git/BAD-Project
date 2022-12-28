@@ -1,5 +1,5 @@
 import { Knex } from "knex";
-import { InvalidInfoError } from "../utils/error";
+import { ApplicationError, InvalidInfoError } from "../utils/error";
 import { checkPassword, hashPassword } from "../utils/hash";
 import { table } from "../utils/table";
 import { MatchesRecord, Player } from "./model";
@@ -19,6 +19,7 @@ export class PlayersService {
 				.returning("id");
 			return result[0].id;
 		}
+		throw new ApplicationError("Duplicated User", 400);
 	}
 
 	async checkLogin(email: string, password: string) {
@@ -31,33 +32,22 @@ export class PlayersService {
 		}
 		throw new InvalidInfoError();
 	}
+
 	async showProfile(id: number | undefined) {
 		const player = await this.knex<Player>(table.PLAYERS)
 			.where("id", id)
 			.first(["name", "email", "image", "age", "gender"]);
 		return player;
 	}
-	async updateProfile(
-		id: number | undefined,
-		name: string,
-		email: string,
-		age: number
-	) {
-		const player = await this.knex<{ id: number }[] | { id: number } | Player>(
-			table.PLAYERS
-		)
+
+	async updateProfile(id: number, name: string, age: number) {
+		const updatedPlayers = await this.knex<Player>(table.PLAYERS)
 			.where("id", id)
-			.update(
-				{
-					name: name,
-					email: email,
-					age: age
-				},
-				"id"
-			);
-		return player[0];
+			.update({ name: name, age: age }, "id");
+		return updatedPlayers[0];
 	}
-	async individualRanking(id: number | undefined) {
+
+	async individualRanking(id: number) {
 		const result = await this.knex<MatchesRecord>(table.MATCHES_RECORD)
 			.select(["id", "players_id", "points", "matches_live_id", "played_at"])
 			.where("players_id", id)
@@ -65,6 +55,7 @@ export class PlayersService {
 			.limit(5);
 		return result;
 	}
+
 	async getRanking() {
 		const result = await this.knex<MatchesRecord>(table.MATCHES_RECORD)
 			.select([
@@ -81,4 +72,3 @@ export class PlayersService {
 		return result;
 	}
 }
-

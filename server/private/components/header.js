@@ -1,11 +1,6 @@
-loadInfo();
-
-async function loadInfo() {
+export async function loadInfo() {
 	const resp = await fetch("/players/profile");
 	const infos = await resp.json();
-	console.log("hi");
-	console.log(infos.name);
-	console.log(typeof infos.name);
 	let htmlStr = /*html*/ `<ul style="color: white;">Hello, ${infos.name}</ul>`;
 	document.querySelector("#player-name").innerHTML = htmlStr;
 }

@@ -13,6 +13,7 @@ export const asyncWrapper =
 			console.log((err as any).message);
 			if (err instanceof ApplicationError) {
 				next(err);
+				return;
 			}
 			next(new InternalServerError());
 		}

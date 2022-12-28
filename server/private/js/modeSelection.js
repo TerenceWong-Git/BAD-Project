@@ -1,9 +1,13 @@
-solo();
-duo();
+window.onload = () => {
+	solo();
+	duo();
+};
 
 function solo() {
 	document.querySelector("#SOLO").addEventListener("click", async (e) => {
 		e.preventDefault();
+		// const paramSearch = new URLSearchParams(window.location.search)
+		// const gameId = paramSearch.get("game")
 		const res = await fetch(`/rooms/game/1`, {
 			method: "POST",
 			headers: {
@@ -28,29 +32,27 @@ function duo() {
 		// });
 
 		Swal.fire({
-			title: 'Make a guess!',
+			title: "Make a guess!",
 			text: "蘋果汁係蘋果味，橙汁係橙味，咁益力多係咩味？",
-			icon: 'info',
+			icon: "info",
 			showCancelButton: true,
-			confirmButtonText: 'Duo mode!!!',
-			cancelButtonText: 'Answer!!!',
+			confirmButtonText: "Duo mode!!!",
+			cancelButtonText: "Answer!!!",
 			reverseButtons: true
-		  }).then((result) => {
+		}).then((result) => {
 			if (result.isConfirmed) {
-			  Swal.fire(
-				'Thanks for your support!!!',
-				'We need your donation ($500) to develop new function :)',
-				'error'
-			  )
-			} else if (
-			  result.dismiss === Swal.DismissReason.cancel
-			) {
-			  Swal.fire(
-				'你今日飲咗未',
-				'We need your donation ($500) to develop new function :)',
-				'error'
-			  )
+				Swal.fire(
+					"Thanks for your support!!!",
+					"We need your donation ($500) to develop new function :)",
+					"error"
+				);
+			} else if (result.dismiss === Swal.DismissReason.cancel) {
+				Swal.fire(
+					"你今日飲咗未",
+					"We need your donation ($500) to develop new function :)",
+					"error"
+				);
 			}
-		  })
+		});
 	});
 }

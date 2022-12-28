@@ -1,7 +1,7 @@
 import dotenv from "dotenv";
 dotenv.config();
 
-import express from "express";
+import express, { NextFunction } from "express";
 import expressSession from "express-session";
 import http from "http";
 import { Server as SocketIO } from "socket.io";
@@ -18,7 +18,7 @@ const server = new http.Server(app);
 const io = new SocketIO(server);
 
 io.on("connection", function (socket) {
-	console.log(socket);
+	console.log(socket.id);
 });
 
 // ----- Need this for form submissions -----
@@ -36,7 +36,7 @@ const sessionMiddleware = expressSession({
 });
 declare module "express-session" {
 	interface SessionData {
-		// To save more items along with cookie
+		// cookie -> sessionId
 		playerId?: number;
 		matchLiveId?: number;
 	}
@@ -71,7 +71,12 @@ app.use((_req, res) => {
 });
 
 app.use(
-	(err: ApplicationError, _req: express.Request, res: express.Response) => {
+	(
+		err: ApplicationError,
+		_req: express.Request,
+		res: express.Response,
+		_next: NextFunction
+	) => {
 		logger.error(err.message);
 		res.status(err.httpStatus).json({ message: err.message });
 	}

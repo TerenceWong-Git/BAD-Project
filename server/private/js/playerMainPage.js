@@ -1,8 +1,12 @@
-reaction();
-laser();
-profile();
-ranking();
-achievement();
+import { loadInfo } from "../components/header.js";
+
+window.onload = () => {
+	loadInfo();
+	reaction();
+	laser();
+	ranking();
+	achievement();
+};
 
 function reaction() {
 	document.querySelector("#reaction").addEventListener("click", async (e) => {
@@ -40,6 +44,7 @@ function laser() {
 		});
 	});
 }
+
 function achievement() {
 	document
 		.querySelector("#achievement")
@@ -71,12 +76,7 @@ function achievement() {
 			});
 		});
 }
-function profile() {
-	document.querySelector("#profile").addEventListener("click", async (e) => {
-		e.preventDefault();
-		window.location.href = `/playerProfile.html`;
-	});
-}
+
 function ranking() {
 	document.querySelector("#ranking").addEventListener("click", async (e) => {
 		e.preventDefault();

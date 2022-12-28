@@ -6,7 +6,7 @@ export class BallBallService {
 	constructor(private knex: Knex) {}
 	async providePoints(
 		points: number,
-		players_id: number | undefined,
+		players_id: number,
 		matches_live_id: number
 	) {
 		const importResult = { points, players_id, matches_live_id };
@@ -15,7 +15,7 @@ export class BallBallService {
 		).insert(importResult, "points");
 		return resultOfTheGame;
 	}
-	async getPoints(id: number | undefined) {
+	async getPoints(id: number) {
 		const data = await this.knex(table.MATCHES_RECORD)
 			.first("points")
 			.where("matches_live_id", id);

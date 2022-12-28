@@ -10,7 +10,9 @@ export async function up(knex: Knex): Promise<void> {
 		table.foreign("players_id").references("players.id");
 		table.boolean("is_spectator").notNullable();
 		table.timestamps(true, true);
+		table.unique(["rooms_id", "players_id"]);
 	});
+
 	await knex.schema.alterTable(table.MATCHES_LIVE, (table) => {
 		table.renameColumn("updated_at", "ended_at");
 	});
